@@ -8,4 +8,12 @@
     <string name="your_name">Your Name</string>
     <string name="greetings_welcome_to_my_world_i_m_hephaestus_the_lord_of_all_this_please_tell_me_your_name">Greetings! Welcome to my World. I\'m Hephaestus, the Lord of all this. Please, tell me Your Name</string>
     <string name="set_your_name_here">Set your name here</string>
+    <string name="sw1">Изменить цвет</string>
+    <string name="sw2">Изменить кнопку</string>
+    <string name="check">Android Jedi?</string>
+    <string name="ok">OK</string>
+    <string name="confirm">Confirm</string>
+    <string name="choose">Now choose your side</string>
+    <string name="check2">Android Sith?</string>
+    <string name="tb_text">Finish Task №1</string>
 </resources>
