@@ -13,5 +13,10 @@
     <string name="choose">Now choose your side</string>
     <string name="check2">Android Sith?</string>
     <string name="tb_text">Finish Task №1</string>
-    <string name="ed_text">Set any Text</string>
+    <string name="ed_text">Set any text</string>
+    <string name="name">Person name</string>
+    <string name="phone">Set phone number</string>
+    <string name="number">Set any number value</string>
+    <string name="pw">Password here</string>
+    <string name="email">Your email</string>
 </resources>
