@@ -2,14 +2,20 @@ package Android_Intro.Lesson_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +37,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Switch switchLeft = findViewById(R.id.switchColorLeft);
+
+        Switch switchRight = findViewById(R.id.switchColorRight);
+
+        switchLeft.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    textViewTop.setBackgroundColor(Color.GRAY);
+                } else {
+                    textViewTop.setBackgroundColor(Color.MAGENTA);
+                }
+
+            }
+        });
+
+        switchRight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    buttonConfirm.setText(">>> OK <<<");
+                } else {
+                    buttonConfirm.setText("Don't do it!");
+                }
+            }
+        });
 
 
 
     }
+
+
 
 }
