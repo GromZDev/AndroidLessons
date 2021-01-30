@@ -11,8 +11,7 @@
         android:id="@+id/headText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:text="@string/greetings_welcome_to_my_world_i_m_hephaestus_the_lord_of_all_this_please_tell_me_your_name"
+        android:text="@string/welcome"
         android:textAlignment="center"
         android:textSize="20sp"
         android:visibility="visible" />
@@ -22,7 +21,6 @@
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="@string/set_your_name_here"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
