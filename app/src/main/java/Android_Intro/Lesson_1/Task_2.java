@@ -6,11 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+
 public class Task_2 extends AppCompatActivity {
+
 
     @SuppressLint({"UseSwitchCompatOrMaterialCode", "SetTextI18n"})
     @Override
@@ -21,6 +26,7 @@ public class Task_2 extends AppCompatActivity {
 
         Button button = findViewById(R.id.button);
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +34,8 @@ public class Task_2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
 
 
