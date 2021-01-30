@@ -30,16 +30,10 @@ public class Task_2 extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Task_2.this, MainActivity.class);
+                Intent intent = new Intent(Task_2.this, Task_3.class);
                 startActivity(intent);
             }
         });
-
-
-
-
-
-
 
 
     }

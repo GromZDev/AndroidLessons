@@ -23,5 +23,7 @@
     <string name="victory">Congratulations! You just completed your Task №1! Now Task №2 started</string>
     <string name="time">Current time</string>
     <string name="sign">Type to Sign</string>
-    <string name="back_to_task_1">Back to Task 1</string>
+    <string name="back_to_task_1">Back to Task №1</string>
+    <string name="calendar">Here is a calendar made with CalendarView</string>
+    <string name="task3">GO to Task №3</string>
 </resources>
