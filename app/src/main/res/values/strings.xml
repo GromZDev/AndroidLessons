@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Lesson_1</string>
+    <string name="type_your_name_here">Type your name Here</string>
+    <string name="your_name">Your Name</string>
+    <string name="welcome">Greetings! Welcome to my World. I\'m Hephaestus, the Lord of all this. Please, tell me Your Name</string>
+    <string name="set_your_name_here">Set your name here</string>
+    <string name="sw1">Change color</string>
+    <string name="sw2">Change button</string>
+    <string name="check">Android Jedi?</string>
+    <string name="ok">OK</string>
+    <string name="confirm">Confirm</string>
+    <string name="choose">Now choose your side</string>
+    <string name="check2">Android Sith?</string>
+    <string name="tb_text">Finish Task №1</string>
+    <string name="ed_text">Set any text</string>
+    <string name="name">Person name</string>
+    <string name="phone">Set phone number</string>
+    <string name="number">Set any number value</string>
+    <string name="pw">Password here</string>
+    <string name="email">Your email</string>
+    <string name="task_2">GO to Task №2</string>
+    <string name="victory">Congratulations! You just completed your Task №1! Now Task №2 started</string>
+    <string name="time">Current time</string>
+    <string name="sign">Type to Sign</string>
+    <string name="back_to_task_1">Back to Task №1</string>
+    <string name="calendar">Here is a calendar made with CalendarView</string>
+    <string name="task3">GO to Task №3</string>
 </resources>
