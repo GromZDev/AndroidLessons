@@ -3,6 +3,7 @@ package Android_Intro.Lesson_1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 if (isChecked) {
                     textViewTop.setBackgroundColor(Color.GRAY);
                 } else {
-                    textViewTop.setBackgroundColor(Color.argb(100,125,125,125));
+                    textViewTop.setBackgroundColor(Color.argb(100, 125, 125, 125));
                 }
 
             }
@@ -74,12 +75,17 @@ public class MainActivity extends AppCompatActivity {
                 EditText editTextName = findViewById(R.id.editTextName);
                 String userName = String.valueOf(editTextName.getText().toString());
                 TextView bottom = findViewById(R.id.pass);
-                if (isChecked){
+                if (isChecked) {
                     bottom.setText("Congratulations " + userName + "! You just completed your Task №1!");
+
+                    Intent intent = new Intent(MainActivity.this, Task_2.class);
+                    startActivity(intent);
+
                 } else {
                     bottom.setText(userName + "! Complete your Task №1!");
                 }
             }
+
         });
 
     }

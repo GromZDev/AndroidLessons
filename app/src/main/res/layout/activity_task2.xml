@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,81 +11,122 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="25sp"
+        android:text="@string/victory"
         android:textAlignment="center"
-        />
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/et_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:layout_gravity="center"
+        android:autofillHints="Any text"
         android:hint="@string/ed_text"
-        android:autofillHints="Any text" />
+        android:inputType="text" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
     <EditText
         android:id="@+id/et_personName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:layout_gravity="center"
+        android:autofillHints="Username"
         android:hint="@string/name"
-        android:autofillHints="Username" />
+        android:inputType="textPersonName" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
     <EditText
         android:id="@+id/et_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
         android:layout_gravity="center"
+        android:autofillHints="Your phone number"
         android:hint="@string/phone"
-        android:autofillHints="Your phone number" />
+        android:inputType="phone" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
     <EditText
         android:id="@+id/et_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:layout_gravity="center"
+        android:autofillHints="Any number"
         android:hint="@string/number"
-        android:autofillHints="Any number" />
+        android:inputType="number" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:layout_gravity="center"
-        android:hint="@string/pw"
         android:autofillHints="Your password"
+        android:hint="@string/pw"
+        android:inputType="textPassword"
         tools:ignore="TextFields" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
     <EditText
         android:id="@+id/et_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:layout_gravity="center"
-        android:hint="@string/email"
         android:autofillHints="Your email"
-        tools:ignore="TextFields" />
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
+    <EditText
+        android:id="@+id/et_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:autofillHints="Current time"
+        android:hint="@string/time"
+        android:inputType="time" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <EditText
+        android:id="@+id/et_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:autofillHints="Type to Sign"
+        android:hint="@string/sign"
+        android:inputType="numberSigned" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/back_to_task_1"
+
+        />
 
 </LinearLayout>
