@@ -1,133 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    android:orientation="vertical">
-
-
-    <TextView
-        android:id="@+id/headText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:visibility="visible" />
-
-
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/set_your_name_here"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/buttonConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/confirm" />
-
-
-    <TextView
-        android:id="@+id/textMiddle"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+    android:background="@android:color/darker_gray">
 
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/switchColorLeft"
+
+        <TextView
+            android:id="@+id/headText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/set_your_name_here"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/buttonConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:showText="false"
-            android:text="@string/sw1"
-            android:visibility="visible"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            android:text="@string/confirm" />
 
-        <Switch
-            android:id="@+id/switchColorRight"
+
+        <TextView
+            android:id="@+id/textMiddle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/switchColorLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="50dp"
+                android:showText="false"
+                android:text="@string/sw1"
+                android:visibility="visible"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <Switch
+                android:id="@+id/switchColorRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/sw2"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:visibility="visible" />
+
+
+        <CheckBox
+            android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/sw2"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            android:onClick="onCheckboxClicked"
+            android:text="@string/check" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onCheckboxClicked"
+            android:text="@string/check2" />
+
+        <TextView
+            android:id="@+id/jediAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:visibility="visible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <ToggleButton
+            android:id="@+id/tb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOff="@string/tb_text" />
+
+
+        <TextView
+            android:id="@+id/pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+
+
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/checkBoxText"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:visibility="visible" />
-
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onCheckboxClicked"
-        android:text="@string/check" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onCheckboxClicked"
-        android:text="@string/check2" />
-
-    <TextView
-        android:id="@+id/jediAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:visibility="visible" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <ToggleButton
-        android:id="@+id/tb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textOff="@string/tb_text" />
-
-
-    <TextView
-        android:id="@+id/pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:textAlignment="center"
-        android:textSize="25sp" />
-
-
-</LinearLayout>
-
+</ScrollView>

@@ -1,130 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    android:orientation="vertical">
+    android:background="@android:color/darker_gray">
 
-    <TextView
-        android:id="@+id/tw"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/victory"
-        android:textAlignment="center"
-        android:textSize="25sp" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Any text"
-        android:hint="@string/ed_text"
-        android:inputType="text" />
+        <TextView
+            android:id="@+id/tw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/victory"
+            android:textAlignment="center"
+            android:textSize="25sp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Any text"
+            android:hint="@string/ed_text"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/et_personName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Username"
-        android:hint="@string/name"
-        android:inputType="textPersonName" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_personName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Username"
+            android:hint="@string/name"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/et_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Your phone number"
-        android:hint="@string/phone"
-        android:inputType="phone" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Your phone number"
+            android:hint="@string/phone"
+            android:inputType="phone" />
 
-    <EditText
-        android:id="@+id/et_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Any number"
-        android:hint="@string/number"
-        android:inputType="number" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Any number"
+            android:hint="@string/number"
+            android:inputType="number" />
 
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Your password"
-        android:hint="@string/pw"
-        android:inputType="textPassword"
-        tools:ignore="TextFields" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Your password"
+            android:hint="@string/pw"
+            android:inputType="textPassword"
+            tools:ignore="TextFields" />
 
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Your email"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Your email"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/et_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Current time"
-        android:hint="@string/time"
-        android:inputType="time" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Current time"
+            android:hint="@string/time"
+            android:inputType="time" />
 
-    <EditText
-        android:id="@+id/et_sign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:autofillHints="Type to Sign"
-        android:hint="@string/sign"
-        android:inputType="numberSigned" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/et_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Type to Sign"
+            android:hint="@string/sign"
+            android:inputType="numberSigned" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/task3" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/task3" />
+
+    </LinearLayout>
+
+</ScrollView>
