@@ -2,6 +2,8 @@
 <resources>
 
     <dimen name="button_number_size">35sp</dimen>
+    <dimen name="margin_START_button">10dp</dimen>
+    <dimen name="margin_TOP_button">10dp</dimen>
 
 
 </resources>

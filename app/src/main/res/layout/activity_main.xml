@@ -11,29 +11,173 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/top_text"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="@string/_1"
-        android:textSize="@dimen/button_number_size"
+        android:id="@+id/button_1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@drawable/my_button"
+        android:text="@string/_1"
         android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.040"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.3"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-        />
-<!--        android:layout_marginBottom="340dp"-->
-<!--        android:layout_marginStart="100dp"-->
+    <Button
+        android:id="@+id/button_2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_2"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+
+        android:layout_marginStart="@dimen/margin_START_button"
+        app:layout_constraintStart_toEndOf="@+id/button_1"
+        app:layout_constraintTop_toTopOf="@id/button_1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_3"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginStart="@dimen/margin_START_button"
+        app:layout_constraintStart_toEndOf="@+id/button_2"
+        app:layout_constraintTop_toTopOf="@id/button_2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_4"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_4"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toStartOf="@id/button_1"
+        app:layout_constraintTop_toBottomOf="@id/button_1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_5"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_5"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginStart="@dimen/margin_START_button"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toEndOf="@+id/button_1"
+        app:layout_constraintTop_toBottomOf="@id/button_2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_6"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_6"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginStart="@dimen/margin_START_button"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toEndOf="@+id/button_2"
+        app:layout_constraintTop_toBottomOf="@id/button_3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_7"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_7"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toStartOf="@id/button_4"
+        app:layout_constraintTop_toBottomOf="@id/button_4"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_8"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_8"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginStart="@dimen/margin_START_button"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toEndOf="@+id/button_4"
+        app:layout_constraintTop_toBottomOf="@id/button_5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_9"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_9"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginStart="@dimen/margin_START_button"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toEndOf="@+id/button_5"
+        app:layout_constraintTop_toBottomOf="@id/button_6"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_0"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/_0"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginStart="@dimen/margin_START_button"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toEndOf="@+id/button_7"
+        app:layout_constraintTop_toBottomOf="@id/button_8"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_point"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/my_button"
+        android:text="@string/point"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_number_size"
+        android:layout_marginStart="@dimen/margin_START_button"
+        android:layout_marginTop="@dimen/margin_TOP_button"
+        app:layout_constraintStart_toEndOf="@+id/button_8"
+        app:layout_constraintTop_toBottomOf="@id/button_9"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

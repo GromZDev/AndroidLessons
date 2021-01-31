@@ -4,4 +4,6 @@
 
     <solid android:color="@color/button_numbers"/>
     <corners android:radius="555dp"/>
+    <stroke android:color="@color/purple_200"
+        android:width="3dp"/>
 </shape>
