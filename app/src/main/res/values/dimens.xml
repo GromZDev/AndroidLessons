@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="button_number_size">25sp</dimen>
+    <dimen name="button_number_size">35sp</dimen>
+
 
 </resources>
