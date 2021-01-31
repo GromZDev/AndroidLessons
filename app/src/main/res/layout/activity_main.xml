@@ -7,12 +7,11 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/top_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/margin_TOP_button"
         android:text="@string/top_text"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -26,14 +25,13 @@
         android:id="@+id/display"
         android:layout_width="330dp"
         android:layout_height="80dp"
-        android:background="@color/teal_200"
-        android:textSize="@dimen/button_number_size"
         android:layout_marginBottom="15dp"
+        android:background="@color/button_numbers"
+        android:textSize="@dimen/button_number_size"
+        app:layout_constraintBottom_toTopOf="@+id/button_back"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/button_back"
-        />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/button_1"
@@ -82,7 +80,6 @@
         android:text="@string/_4"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toStartOf="@id/button_1"
         app:layout_constraintTop_toBottomOf="@id/button_1" />
 
@@ -96,7 +93,6 @@
         android:text="@string/_5"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toEndOf="@+id/button_1"
         app:layout_constraintTop_toBottomOf="@id/button_2" />
 
@@ -110,7 +106,6 @@
         android:text="@string/_6"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toEndOf="@+id/button_2"
         app:layout_constraintTop_toBottomOf="@id/button_3" />
 
@@ -123,7 +118,6 @@
         android:text="@string/_7"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toStartOf="@id/button_4"
         app:layout_constraintTop_toBottomOf="@id/button_4" />
 
@@ -137,7 +131,6 @@
         android:text="@string/_8"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toEndOf="@+id/button_4"
         app:layout_constraintTop_toBottomOf="@id/button_5" />
 
@@ -151,7 +144,6 @@
         android:text="@string/_9"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toEndOf="@+id/button_5"
         app:layout_constraintTop_toBottomOf="@id/button_6" />
 
@@ -165,7 +157,6 @@
         android:text="@string/_0"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toEndOf="@+id/button_7"
         app:layout_constraintTop_toBottomOf="@id/button_8" />
 
@@ -179,7 +170,6 @@
         android:text="@string/point"
         android:textColor="@color/white"
         android:textSize="@dimen/button_number_size"
-
         app:layout_constraintStart_toEndOf="@+id/button_8"
         app:layout_constraintTop_toBottomOf="@id/button_9" />
 
@@ -188,7 +178,6 @@
         android:layout_width="10dp"
         android:layout_height="390dp"
         android:layout_marginStart="@dimen/margin_START_button"
-
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
         app:layout_constraintStart_toEndOf="@id/button_3"
@@ -260,7 +249,6 @@
         android:layout_width="@dimen/width_count_button"
         android:layout_height="@dimen/height_count_button"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
-
         android:background="@drawable/button_counting"
         android:text="@string/clear"
         android:textColor="@color/white"
@@ -303,9 +291,7 @@
         android:text="@string/plus_minus"
         android:textColor="@color/white"
         android:textSize="@dimen/button_counting_size"
-        app:layout_constraintTop_toTopOf="@id/button_equals"
-        app:layout_constraintEnd_toStartOf="@id/button_square" />
-
-
+        app:layout_constraintEnd_toStartOf="@id/button_square"
+        app:layout_constraintTop_toTopOf="@id/button_equals" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

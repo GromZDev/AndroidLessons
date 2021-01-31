@@ -7,6 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="button_numbers">#45f47a</color>
+    <color name="button_numbers">#60000000</color><!--    #80000000 прозрачный с обводкой-->
+    <color name="button_numbers_stroke">#71B184</color>
+    <color name="button_numbers_pressed">#326f43</color>
+    <color name="button_numbers_pressed_stroke">#2F4A37</color>
+
+    <color name="button_counting_gradient_start">#60000000</color>
+    <color name="button_counting_gradient_end">#4A7446</color>
     <color name="button_counting">#2dda2d</color>
+
 </resources>
