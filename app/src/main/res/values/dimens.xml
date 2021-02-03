@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="button_number_size">40sp</dimen>
+    <dimen name="button_counting_size">45sp</dimen>
+    <dimen name="margin_START_button">10dp</dimen>
+    <dimen name="margin_TOP_button">10dp</dimen>
+    <dimen name="margin_BOTTOM_button">10dp</dimen>
+    <dimen name="margin_END_button">10dp</dimen>
+
+    <dimen name="width_count_button">70dp</dimen>
+    <dimen name="height_count_button">70dp</dimen>
+
+
+</resources>
