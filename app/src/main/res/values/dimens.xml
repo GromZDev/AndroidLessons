@@ -3,6 +3,7 @@
 
     <dimen name="button_number_size">40sp</dimen>
     <dimen name="button_counting_size">45sp</dimen>
+    <dimen name="textView_size">25sp</dimen>
     <dimen name="margin_START_button">10dp</dimen>
     <dimen name="margin_TOP_button">10dp</dimen>
     <dimen name="margin_BOTTOM_button">10dp</dimen>
