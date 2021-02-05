@@ -11,28 +11,28 @@ public class CalculatorLogic implements Serializable {
 
     StringBuilder inputStr = new StringBuilder(); // Строка ввода
 
-    private State state;
+    private State status;
 
-    private int actionSelected;
+    private int userActionSelected;
 
     private enum State {
-        firstValueInput, operationSelected, secondValueInput, resultShow,
+        firstValueInput, actionSelected, secondValueInput, resultShow,
     }
 
     public CalculatorLogic() {
-        state = State.firstValueInput;
+        status = State.firstValueInput;
     }
 
     @SuppressLint("NonConstantResourceId")
     public void onNumberPressed(int buttonId) {
 
-        if (state == State.resultShow) {
-            state = State.firstValueInput;
+        if (status == State.resultShow) {
+            status = State.firstValueInput;
             inputStr.setLength(0);
         }
 
-        if (state == State.operationSelected) {
-            state = State.secondValueInput;
+        if (status == State.actionSelected) {
+            status = State.secondValueInput;
             inputStr.setLength(0);
         }
 
@@ -79,11 +79,11 @@ public class CalculatorLogic implements Serializable {
 
     @SuppressLint("NonConstantResourceId")
     public void onActionPressed(int actionId) {
-        if (actionId == R.id.button_equals && state == State.secondValueInput && inputStr.length() > 0) {
+        if (actionId == R.id.button_equals && status == State.secondValueInput && inputStr.length() > 0) {
             secondValue = Double.parseDouble(inputStr.toString());
-            state = State.resultShow;
+            status = State.resultShow;
             inputStr.setLength(0);
-            switch (actionSelected) {
+            switch (userActionSelected) {
                 case R.id.button_plus:
                     inputStr.append(firstValue + secondValue);
                     break;
@@ -102,18 +102,18 @@ public class CalculatorLogic implements Serializable {
             }
 
         } else if (actionId == R.id.button_square) {
-            state = State.operationSelected;
+            status = State.actionSelected;
             firstValue = Double.parseDouble(inputStr.toString());
             secondValue = firstValue;
             inputStr.setLength(0);
             inputStr.append(firstValue * firstValue);
-            actionSelected = actionId;
-            state = State.resultShow;
+            userActionSelected = actionId;
+            status = State.resultShow;
 
-        } else if (inputStr.length() > 0 && state == State.firstValueInput) {
+        } else if (inputStr.length() > 0 && status == State.firstValueInput) {
             firstValue = Double.parseDouble(inputStr.toString());
-            state = State.operationSelected;
-            actionSelected = actionId;
+            status = State.actionSelected;
+            userActionSelected = actionId;
         }
 
     }
@@ -121,10 +121,10 @@ public class CalculatorLogic implements Serializable {
 
     public String getText() {
         StringBuilder stringBuilder = new StringBuilder();
-        switch (state) {
+        switch (status) {
             default:
                 return inputStr.toString();
-            case operationSelected:
+            case actionSelected:
                 return stringBuilder.append(firstValue).append(' ')
                         .append(getOperationChar())
                         .toString();
@@ -147,7 +147,7 @@ public class CalculatorLogic implements Serializable {
 
     @SuppressLint("NonConstantResourceId")
     private char getOperationChar() {
-        switch (actionSelected) {
+        switch (userActionSelected) {
             case R.id.button_plus:
                 return '+';
             case R.id.button_minus:
@@ -165,7 +165,7 @@ public class CalculatorLogic implements Serializable {
     }
 
     public void reset() {
-        state = State.firstValueInput;
+        status = State.firstValueInput;
         inputStr.setLength(0);
     }
 
@@ -173,6 +173,10 @@ public class CalculatorLogic implements Serializable {
         if (inputStr.length() > 0) {
             inputStr.replace(inputStr.length() - 1, inputStr.length(), "");
         }
+    }
+
+    public void exit() {
+        System.exit(0);
     }
 
 

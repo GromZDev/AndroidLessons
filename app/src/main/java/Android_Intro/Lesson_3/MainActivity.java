@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
             calculator.backspace();
             display.setText(calculator.getText());
         });
+
+        findViewById(R.id.button_exit).setOnClickListener(v -> {
+            calculator.exit();
+        });
     }
 
     private void makeToast(String message) {

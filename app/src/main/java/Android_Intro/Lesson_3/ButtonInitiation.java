@@ -26,7 +26,7 @@ public class ButtonInitiation implements Serializable {
         actionButtons = new int[]{
                 R.id.button_equals, R.id.button_plus, R.id.button_minus,
                 R.id.button_multiply, R.id.button_divide, R.id.button_clear,
-                R.id.button_square
+                R.id.button_square, R.id.button_exit
         };
         return this;
     }
