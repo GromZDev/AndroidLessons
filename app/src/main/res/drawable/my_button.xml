@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"> <!--Кнопка при нажатии: -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/button_numbers_pressed" />
+            <corners android:radius="555dp" />
+            <stroke android:width="3dp" android:color="@color/button_numbers_pressed_stroke" />
+        </shape>
+    </item>
+
+    <item android:state_enabled="true"> <!--Кнопка статичная: -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/button_numbers" />
+            <corners android:radius="555dp" />
+            <stroke android:width="3dp" android:color="@color/button_numbers_stroke" />
+        </shape>
+    </item>
+
+</selector>
