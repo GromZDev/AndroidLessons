@@ -8,9 +8,11 @@
     <dimen name="margin_TOP_button">10dp</dimen>
     <dimen name="margin_BOTTOM_button">10dp</dimen>
     <dimen name="margin_END_button">10dp</dimen>
-
+    <dimen name="margin_START_line">20dp</dimen>
     <dimen name="width_count_button">70dp</dimen>
     <dimen name="height_count_button">70dp</dimen>
 
+    <dimen name="button_vertical_land_size">150dp</dimen>
+    <dimen name="button_horizontal_land_size">150dp</dimen>
 
 </resources>
