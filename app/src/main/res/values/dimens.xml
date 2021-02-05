@@ -15,4 +15,6 @@
     <dimen name="button_vertical_land_size">150dp</dimen>
     <dimen name="button_horizontal_land_size">150dp</dimen>
 
+    <dimen name="margin_END_left_line">20dp</dimen>
+
 </resources>
