@@ -21,6 +21,8 @@
     <string name="multiply">×</string>
     <string name="back">◄</string>
     <string name="plus_minus">±</string>
+    <string name="button_exit_land">■</string>
+    <string name="actions">Actions</string>
 
 
 </resources>
