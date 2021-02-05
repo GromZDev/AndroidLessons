@@ -295,6 +295,18 @@
         app:layout_constraintEnd_toStartOf="@id/button_square"
         app:layout_constraintTop_toTopOf="@id/button_equals" />
 
+    <Button
+        android:id="@+id/button_exit"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_counting"
+        android:text="@string/button_exit_land"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/top_text"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
