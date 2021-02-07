@@ -11,9 +11,22 @@
     <color name="button_numbers_stroke">#71B184</color>
     <color name="button_numbers_pressed">#326f43</color>
     <color name="button_numbers_pressed_stroke">#2F4A37</color>
-
     <color name="button_counting_gradient_start">#60000000</color>
     <color name="button_counting_gradient_end">#4A7446</color>
     <color name="button_counting">#2dda2d</color>
+
+    <!--   Новый дизайн      -->
+
+    <color name="transparent_color">#00000000</color>
+    <color name="top_part_start_gradient">#323232</color>
+    <color name="top_part_end_gradient">#5b5b5b</color>
+    <color name="footer_part_color">#3e3e3e</color>
+    <color name="button_counting_stroke">#16b5e3</color>
+
+    <color name="top_part_end_gradient_light">#56D2F1</color>
+    <color name="top_part_start_gradient_light">#036780</color>
+
+    <color name="text_appearance_light">#094F87</color>
+    <color name="text_appearance_dark">#EFDC38</color>
 
 </resources>
