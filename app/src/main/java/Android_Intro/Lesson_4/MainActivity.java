@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     protected final static String KEY_BUTTONS = "Buttons";
     protected final static String KEY_LOGIC = "Logic";
-    protected final static String SWITCH_THEME = "Theme";
     protected CalculatorLogic calculator;
     protected TextView display;
     protected TextView themeDisplay;
@@ -37,7 +36,25 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         super.onCreate(savedInstanceState);
 
-        //================= Для смены темы ================================================
+
+        changeTheme(); // Смена темы
+
+
+        makeToast(TAG);
+
+        buttonInitiation = new ButtonInitiation().invoke();
+        int[] numberButtons = buttonInitiation.getNumberButtons();
+        int[] actionButtons = buttonInitiation.getActionButtons();
+
+        display = findViewById(R.id.display);
+        calculator = new CalculatorLogic();
+
+        setButtonsOnClickListener(numberButtons, actionButtons);
+
+
+    }
+
+    private void changeTheme() {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
             setTheme(R.style.DarkTheme_Lesson_4);
         } else setTheme(R.style.Theme_Lesson_4);
@@ -56,30 +73,16 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    themeDisplay.setText(themeNameD);
+                    themeDisplay.setText(themeName);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                   themeDisplay.setText(themeName);
+                   themeDisplay.setText(themeNameD);
                 }
 
                 // restartApp();
 
             }
         });
-
-        //============================================================
-        makeToast(TAG);
-
-        buttonInitiation = new ButtonInitiation().invoke();
-        int[] numberButtons = buttonInitiation.getNumberButtons();
-        int[] actionButtons = buttonInitiation.getActionButtons();
-
-        display = findViewById(R.id.display);
-        calculator = new CalculatorLogic();
-
-        setButtonsOnClickListener(numberButtons, actionButtons);
-
-
     }
 ////==============     Для смены темы ======================
 //    private void restartApp() {
@@ -123,8 +126,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         });
     }
 
-    private void makeToast(String message) {
-//        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+    private void makeToast(String message) { // Всплывающее окно снизу
+//        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show(); // Всплывающее окно снизу
         Log.d(TAG, message);
     }
 
@@ -139,10 +143,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onRestoreInstanceState(saveInstanceState);
         buttonInitiation = (ButtonInitiation) saveInstanceState.getSerializable(KEY_BUTTONS);
         calculator = (CalculatorLogic) saveInstanceState.getSerializable(KEY_LOGIC);
-        mySwitch = (MainActivity) saveInstanceState.getSerializable(SWITCH_THEME);
         makeToast("Повторный запуск!! - onRestoreInstanceState() :<<<<<");
         display.setText(calculator.getText());
-        themeDisplay.setText(themeDisplay.getText());
+
+        if (themeDisplay != null) themeDisplay.setText(saveInstanceState.getString(themeNameD)); // для сохранения состояния показа темы
     }
 
     @Override
@@ -162,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onSaveInstanceState(saveInstanceState);
         saveInstanceState.putSerializable(KEY_BUTTONS, buttonInitiation);
         saveInstanceState.putSerializable(KEY_LOGIC, calculator);
-        saveInstanceState.putSerializable(SWITCH_THEME, (Serializable) mySwitch);
+        if (themeDisplay != null) saveInstanceState.putString(themeNameD, themeDisplay.getText().toString()); // для сохранения состояния показа темы
         makeToast("onSaveInstanceState() :<<<<<");
     }
 
