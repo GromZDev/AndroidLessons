@@ -13,7 +13,7 @@
         <item name="textAppearanceButton">@dimen/height_count_button</item>
         <item name="android:state_enabled">true</item>
         <item name="android:background">@drawable/my_button</item>
-        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
         <item name="android:state_pressed">true</item>
         <item name="strokeWidth">3dp</item>
         <item name="strokeColor">@color/button_counting_stroke</item>
@@ -27,7 +27,7 @@
         <item name="android:layout_width">@dimen/width_count_button</item>
         <item name="android:layout_height">@dimen/height_count_button</item>
         <item name="textAppearanceButton">@dimen/height_count_button</item>
-        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
         <item name="strokeWidth">3dp</item>
         <item name="strokeColor">@color/button_counting_stroke</item>
         <item name="cornerRadius">70dp</item>
