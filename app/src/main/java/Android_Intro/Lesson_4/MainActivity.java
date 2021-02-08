@@ -2,26 +2,72 @@ package Android_Intro.Lesson_4;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     protected final static String KEY_BUTTONS = "Buttons";
     protected final static String KEY_LOGIC = "Logic";
+    protected final static String SWITCH_THEME = "Theme";
     protected CalculatorLogic calculator;
     protected TextView display;
+    protected TextView themeDisplay;
     protected String TAG = "  >>>>> [жизненный цикл активити] >>>>> ";
     protected ButtonInitiation buttonInitiation;
+    protected MainActivity mySwitch;
+    protected String themeName = "Light";
+    protected String themeNameD = "Dark";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        //================= Для смены темы ================================================
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkTheme_Lesson_4);
+        } else setTheme(R.style.Theme_Lesson_4);
+
+
         setContentView(R.layout.activity_main);
+
+
+        themeDisplay = findViewById(R.id.theme);
+        SwitchCompat mySwitch = findViewById(R.id.my_switch);
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            mySwitch.setChecked(true);
+        }
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    themeDisplay.setText(themeNameD);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                   themeDisplay.setText(themeName);
+                }
+
+                // restartApp();
+
+            }
+        });
+
+        //============================================================
         makeToast(TAG);
 
         buttonInitiation = new ButtonInitiation().invoke();
@@ -33,7 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
         setButtonsOnClickListener(numberButtons, actionButtons);
 
+
     }
+////==============     Для смены темы ======================
+//    private void restartApp() {
+//        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+//        startActivity(i);
+//        finish();
+//    }
+////=======================================================
 
     private void setButtonsOnClickListener(int[] numberButtons, int[] actionButtons) {
         View.OnClickListener buttonListener = view -> {
@@ -85,8 +139,10 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(saveInstanceState);
         buttonInitiation = (ButtonInitiation) saveInstanceState.getSerializable(KEY_BUTTONS);
         calculator = (CalculatorLogic) saveInstanceState.getSerializable(KEY_LOGIC);
+        mySwitch = (MainActivity) saveInstanceState.getSerializable(SWITCH_THEME);
         makeToast("Повторный запуск!! - onRestoreInstanceState() :<<<<<");
         display.setText(calculator.getText());
+        themeDisplay.setText(themeDisplay.getText());
     }
 
     @Override
@@ -106,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(saveInstanceState);
         saveInstanceState.putSerializable(KEY_BUTTONS, buttonInitiation);
         saveInstanceState.putSerializable(KEY_LOGIC, calculator);
+        saveInstanceState.putSerializable(SWITCH_THEME, (Serializable) mySwitch);
         makeToast("onSaveInstanceState() :<<<<<");
     }
 
@@ -127,4 +184,8 @@ public class MainActivity extends AppCompatActivity {
         makeToast("onDestroy() ]");
     }
 
+    //=========================================================
+
+
 }
+
