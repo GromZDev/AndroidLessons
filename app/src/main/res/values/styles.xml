@@ -2,23 +2,15 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="MyButtonsNumbers" parent="TextAppearance.AppCompat">
-        <item name="colorPrimary">@color/top_part_end_gradient</item>
-        <item name="colorPrimaryDark">@color/button_counting_stroke</item>
-        <item name="colorAccent">@color/white</item>
 
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/button_number_size</item>
         <item name="android:layout_width">@dimen/width_count_button</item>
         <item name="android:layout_height">@dimen/height_count_button</item>
         <item name="textAppearanceButton">@dimen/height_count_button</item>
-        <item name="android:state_enabled">true</item>
         <item name="android:background">@drawable/my_button</item>
         <item name="android:gravity">center</item>
-        <item name="android:state_pressed">true</item>
-        <item name="strokeWidth">3dp</item>
-        <item name="strokeColor">@color/button_counting_stroke</item>
-        <item name="android:shape">rectangle</item>
-        <item name="android:radius">555dp</item>
+
     </style>
 
     <style name="MyButtonsActions" parent="TextAppearance.AppCompat">
@@ -42,10 +34,45 @@
         <item name="android:background">@drawable/background_top</item>
         <item name="android:state_enabled">true</item>
         <item name="android:visible">true</item>
+        <item name="background">@drawable/background_footer</item>
     </style>
 
     <style name="Background_footer" parent="TextAppearance.AppCompat">
         <item name="android:background">@drawable/background_footer</item>
+    </style>
+
+    <!--===================== Landscape ========================== -->
+
+    <style name="MyButtonsNumbers_Land" parent="TextAppearance.AppCompat">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/button_counting_stroke</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/button_number_land_size</item>
+        <item name="android:layout_width">@dimen/button_landscape_size_width</item>
+        <item name="android:layout_height">@dimen/button_landscape_size_height</item>
+        <item name="textAppearanceButton">@dimen/height_count_button</item>
+        <item name="android:state_enabled">true</item>
+        <item name="android:background">@drawable/my_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:state_pressed">true</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="strokeColor">@color/button_counting_stroke</item>
+        <item name="android:shape">rectangle</item>
+        <item name="android:radius">555dp</item>
+    </style>
+
+    <style name="MyButtonsActions_Land" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/button_action_size</item>
+        <item name="android:layout_width">@dimen/button_landscape_size_width</item>
+        <item name="android:layout_height">@dimen/height_count_button</item>
+        <item name="textAppearanceButton">@dimen/height_count_button</item>
+        <item name="android:gravity">center</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="strokeColor">@color/button_counting_stroke</item>
+        <item name="cornerRadius">70dp</item>
+        <item name="backgroundTint">@color/transparent_color</item> <!-- Прозрачность!-->
     </style>
 
 

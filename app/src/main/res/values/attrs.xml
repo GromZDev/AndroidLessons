@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <declare-styleable name="ds">
+    <declare-styleable name="ds">
 
-       <attr name="backgroundColor" format="color"/>
-       <attr name="android:textColor" format="color"/>
-       <attr name="android:tint" format="color"/>
-       <attr name="android:background" format="color"/>
-       <attr name="android:backgroundTint" format="color"/>
-       <attr name="android:color" format="color"/>
-       <attr name="android:colorBackground" format="color"/>
-       <attr name="android:textSize" format="dimension"/>
+        <attr name="backgroundColor" format="color" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:tint" format="color" />
+        <attr name="android:background" format="color" />
+        <attr name="android:backgroundTint" format="color" />
+        <attr name="android:color" format="color" />
+        <attr name="android:colorBackground" format="color" />
+        <attr name="android:textSize" format="dimension" />
 
-
-   </declare-styleable>
-
+    </declare-styleable>
 
 
 </resources>
