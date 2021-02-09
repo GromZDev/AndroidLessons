@@ -1,44 +1,37 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Lesson_4" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="DarkTheme.Lesson_4" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/top_part_end_gradient</item>
         <item name="colorPrimaryVariant">@color/footer_part_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondaryVariant">#DF9F21</item>
         <item name="colorOnSecondary">#E60707</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
         <!-- Для стиля кнопок! -->
         <item name="shapeAppearanceSmallComponent">
             @style/Widget.MaterialComponents.Button.TextButton
         </item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="textAppearanceButton">@color/text_appearance_dark</item>
-
-
         <item name="backgroundColor">#6D2BE1</item>
         <item name="android:textColor">@color/white</item>
-
         <item name="android:background">@drawable/background_top</item> <!-- Фон верхней части -->
-
         <item name="android:color">@drawable/background_top</item>
         <item name="android:colorBackground">#984367</item>
-
         <item name="android:fontFamily">@font/walter_turncoat</item>
-
         <item name="android:textSize">@dimen/textView_size</item>
-
         <item name="android:windowAnimationStyle">@style/Animation
         </item> <!-- Анимация при переходе тем. + ниже -->
-
+        <item name="colorSwitchThumbNormal">#03A9F4</item>
+        <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Title</item>
 
     </style>
 
-    <style name="DarkTheme.Lesson_4" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Lesson_4" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/transparent_color</item>
         <item name="colorPrimaryVariant">@color/top_part_end_gradient</item>
@@ -56,15 +49,13 @@
         </item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="textAppearanceButton">@color/text_appearance_light</item>
-
-
-        <item name="android:background">@drawable/background_top_light
-        </item> <!-- Фон верхней части -->
+        <!-- Фон верхней части -->
+        <item name="android:background">@drawable/background_top_light</item>
         <item name="android:textColor">@color/top_part_start_gradient</item>
         <item name="android:fontFamily">@font/walter_turncoat</item>
         <item name="android:textSize">@dimen/textView_size</item>
-
         <item name="android:windowAnimationStyle">@style/Animation</item>
+        <item name="colorSwitchThumbNormal">@color/footer_part_color</item>
 
 
     </style>
