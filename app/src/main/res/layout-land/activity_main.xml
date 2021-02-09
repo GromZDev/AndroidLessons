@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.Lesson_4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/Theme.Lesson_4"
     tools:context=".MainActivity">
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent_color"
         android:text="@string/change_theme"
-        app:layout_constraintTop_toTopOf="@id/my_top_text"
+        app:layout_constraintEnd_toEndOf="@id/button_multiply"
         app:layout_constraintStart_toStartOf="@id/button_minus"
-        app:layout_constraintEnd_toEndOf="@id/button_multiply" />
+        app:layout_constraintTop_toTopOf="@id/my_top_text" />
 
     <TextView
         android:id="@+id/theme"
@@ -27,35 +27,35 @@
         android:textAlignment="center"
         android:textSize="@dimen/textView_size"
         app:layout_constraintBottom_toTopOf="@id/my_switch"
-        app:layout_constraintStart_toStartOf="@id/my_switch"
-        app:layout_constraintEnd_toEndOf="@id/my_switch"/>
+        app:layout_constraintEnd_toEndOf="@id/my_switch"
+        app:layout_constraintStart_toStartOf="@id/my_switch" />
 
 
     <TextView
         android:id="@+id/my_top_text"
-        android:gravity="center"
         style="@style/Theme.Lesson_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
         android:background="@color/button_numbers"
+        android:backgroundTint="@color/transparent_color"
+        android:gravity="center"
         android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/textView_size"
-        android:backgroundTint="@color/transparent_color"
         app:layout_constraintBottom_toTopOf="@id/button_minus"
         app:layout_constraintStart_toEndOf="@id/display" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/display"
         style="@style/Theme.Lesson_4"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="5dp"
         android:layout_width="@dimen/display_land_width"
         android:layout_height="@dimen/display_land_height"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
         android:background="@drawable/button_counting"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
         android:textSize="@dimen/text_size_display_land"
         app:layout_constraintBottom_toTopOf="@id/button_2"
         app:layout_constraintRight_toRightOf="parent"
@@ -69,12 +69,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/line_left_vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_2"
-        android:layout_marginStart="@dimen/button_land_FIX_margin"
         style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
         android:text="@string/_2"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/button_1"
@@ -164,8 +164,8 @@
         android:layout_width="@dimen/vertical_line_width_size"
         android:layout_height="@dimen/vertical_line_height_size"
         android:layout_marginStart="@dimen/margin_START_right_line"
-        android:clickable="false"
         android:backgroundTint="@color/button_counting_stroke"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
         app:layout_constraintStart_toEndOf="@id/display" />
 
@@ -231,8 +231,8 @@
         android:layout_width="@dimen/vertical_line_width_size"
         android:layout_height="@dimen/vertical_line_height_size"
         android:layout_marginStart="@dimen/margin_START_left_line"
-        android:clickable="false"
         android:backgroundTint="@color/button_counting_stroke"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
         app:layout_constraintStart_toStartOf="parent" />
 
