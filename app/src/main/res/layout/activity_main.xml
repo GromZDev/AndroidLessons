@@ -206,7 +206,7 @@
             app:layout_constraintStart_toEndOf="@+id/button_8"
             app:layout_constraintTop_toBottomOf="@id/button_9" />
 
-        <com.google.android.material.button.MaterialButton
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/my_line_vertical"
             android:layout_width="@dimen/button_vertical_width"
             android:layout_height="@dimen/button_vertical_height"
