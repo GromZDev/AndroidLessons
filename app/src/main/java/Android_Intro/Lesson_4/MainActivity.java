@@ -100,7 +100,13 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             display.setText(calculator.getText());
         });
 
-        findViewById(R.id.button_exit).setOnClickListener(v -> calculator.exit());
+        findViewById(R.id.button_exit).setOnClickListener(v -> {
+            //  calculator.exit();
+            //  moveTaskToBack(true);
+            finish();
+
+        });
+
     }
 
 
