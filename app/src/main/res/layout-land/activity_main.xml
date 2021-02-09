@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent_color"
         android:text="@string/change_theme"
-        app:layout_constraintBottom_toTopOf="@+id/display"
-        app:layout_constraintEnd_toEndOf="@id/display"
-        app:layout_constraintStart_toStartOf="@id/display" />
+        app:layout_constraintTop_toTopOf="@id/my_top_text"
+        app:layout_constraintStart_toStartOf="@id/button_minus"
+        app:layout_constraintEnd_toEndOf="@id/button_multiply" />
 
     <TextView
         android:id="@+id/theme"
@@ -26,26 +26,25 @@
         android:backgroundTint="@color/transparent_color"
         android:textAlignment="center"
         android:textSize="@dimen/textView_size"
-        app:layout_constraintBottom_toTopOf="@id/display"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/my_switch"
-        app:layout_constraintTop_toTopOf="@id/my_switch" />
+        app:layout_constraintBottom_toTopOf="@id/my_switch"
+        app:layout_constraintStart_toStartOf="@id/my_switch"
+        app:layout_constraintEnd_toEndOf="@id/my_switch"/>
 
 
     <TextView
         android:id="@+id/my_top_text"
         android:gravity="center"
         style="@style/Theme.Lesson_4"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
         android:background="@color/button_numbers"
-        android:text="@string/actions"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/textView_size"
+        android:backgroundTint="@color/transparent_color"
         app:layout_constraintBottom_toTopOf="@id/button_minus"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@id/button_minus" />
+        app:layout_constraintStart_toEndOf="@id/display" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/display"
@@ -53,33 +52,29 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingTop="5dp"
-        android:layout_width="355dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/display_land_width"
+        android:layout_height="@dimen/display_land_height"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
         android:background="@drawable/button_counting"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_display_land"
         app:layout_constraintBottom_toTopOf="@id/button_2"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@id/button_square" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_1"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
+        style="@style/MyButtonsNumbers_Land"
         android:layout_marginStart="50dp"
         android:text="@string/_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/line_left_vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.38" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_2"
-        android:layout_marginStart="@dimen/margin_START_button"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        style="@style/MyButtonsNumbers_Land"
         android:text="@string/_2"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/button_1"
@@ -87,10 +82,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_3"
-        style="@style/MyButtonsNumbers"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
         android:text="@string/_3"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/button_2"
@@ -98,103 +91,88 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_4"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginTop="@dimen/margin_TOP_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_4"
         app:layout_constraintStart_toStartOf="@id/button_7"
         app:layout_constraintTop_toBottomOf="@id/button_2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_5"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_5"
         app:layout_constraintStart_toEndOf="@+id/button_1"
         app:layout_constraintTop_toBottomOf="@id/button_2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_6"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_6"
         app:layout_constraintStart_toEndOf="@+id/button_2"
         app:layout_constraintTop_toBottomOf="@id/button_3" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_7"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:layout_marginEnd="@dimen/margin_END_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
+        android:layout_marginEnd="@dimen/button_land_FIX_margin"
         android:text="@string/_7"
         app:layout_constraintEnd_toStartOf="@id/button_8"
         app:layout_constraintTop_toBottomOf="@id/button_5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_8"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:layout_marginEnd="@dimen/margin_END_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
+        android:layout_marginEnd="@dimen/button_land_FIX_margin"
         android:text="@string/_8"
         app:layout_constraintStart_toStartOf="@+id/button_5"
         app:layout_constraintTop_toBottomOf="@id/button_5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_9"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_9"
         app:layout_constraintStart_toEndOf="@+id/button_5"
         app:layout_constraintTop_toBottomOf="@id/button_6" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_0"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginTop="@dimen/margin_TOP_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_0"
         app:layout_constraintStart_toStartOf="@+id/button_8"
         app:layout_constraintTop_toBottomOf="@id/button_8" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_point"
-        style="@style/MyButtonsNumbers"
-        android:layout_height="65dp"
-        android:layout_width="65dp"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/point"
         app:layout_constraintStart_toEndOf="@+id/button_8"
         app:layout_constraintTop_toBottomOf="@id/button_9" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/line_vertical_one"
-        android:layout_width="10dp"
-        android:layout_height="290dp"
+        android:layout_width="@dimen/vertical_line_width_size"
+        android:layout_height="@dimen/vertical_line_height_size"
         android:layout_marginStart="@dimen/margin_START_right_line"
         android:clickable="false"
+        android:backgroundTint="@color/button_counting_stroke"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
         app:layout_constraintStart_toEndOf="@id/display" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_equals"
-        style="@style/MyButtonsActions"
-        android:layout_width="70dp"
+        style="@style/MyButtonsActions_Land"
+        android:layout_width="@dimen/button_landscape_size_width"
         android:layout_height="@dimen/button_vertical_land_size"
         android:layout_marginStart="@dimen/margin_START_button"
         android:text="@string/equals"
@@ -203,8 +181,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_exit"
-        style="@style/MyButtonsActions"
-        android:layout_width="70dp"
+        style="@style/MyButtonsActions_Land"
+        android:layout_width="@dimen/button_landscape_size_width"
         android:layout_height="@dimen/button_vertical_land_size"
         android:layout_marginStart="@dimen/margin_START_button"
         android:text="@string/button_exit_land"
@@ -216,15 +194,15 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_plus"
-        style="@style/MyButtonsActions"
-        android:layout_marginBottom="@dimen/margin_BOTTOM_button"
+        style="@style/MyButtonsActions_Land"
+        android:layout_marginBottom="@dimen/button_land_FIX_margin"
         android:text="@string/plus"
         app:layout_constraintBottom_toTopOf="@id/button_equals"
         app:layout_constraintStart_toStartOf="@id/button_equals" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_minus"
-        style="@style/MyButtonsActions"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
         android:text="@string/minus"
         app:layout_constraintBottom_toTopOf="@id/button_plus"
@@ -232,7 +210,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_multiply"
-        style="@style/MyButtonsActions"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginStart="@dimen/margin_START_button"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
         android:text="@string/multiply"
@@ -241,7 +219,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_divide"
-        style="@style/MyButtonsActions"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginStart="@dimen/margin_START_button"
         android:layout_marginTop="@dimen/margin_BOTTOM_button"
         android:text="@string/divide"
@@ -250,17 +228,18 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/line_left_vertical"
-        android:layout_width="10dp"
-        android:layout_height="290dp"
+        android:layout_width="@dimen/vertical_line_width_size"
+        android:layout_height="@dimen/vertical_line_height_size"
         android:layout_marginStart="@dimen/margin_START_left_line"
         android:clickable="false"
+        android:backgroundTint="@color/button_counting_stroke"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_clear"
-        style="@style/MyButtonsActions"
-        android:layout_width="70dp"
+        style="@style/MyButtonsActions_Land"
+        android:layout_width="@dimen/button_landscape_size_width"
         android:layout_height="@dimen/button_vertical_land_size"
         android:layout_marginTop="@dimen/margin_BOTTOM_button"
         android:layout_marginEnd="@dimen/margin_BOTTOM_button"
@@ -270,27 +249,27 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_square"
-        style="@style/MyButtonsActions"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="@dimen/margin_END_button"
-        android:layout_marginBottom="@dimen/margin_BOTTOM_button"
+        android:layout_marginBottom="@dimen/button_land_FIX_margin"
         android:text="@string/square"
         app:layout_constraintBottom_toTopOf="@id/button_back"
         app:layout_constraintEnd_toStartOf="@id/line_left_vertical" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_back"
-        style="@style/MyButtonsActions"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginEnd="@dimen/margin_END_button"
-        android:layout_marginBottom="@dimen/margin_BOTTOM_button"
+        android:layout_marginBottom="@dimen/button_land_FIX_margin"
         android:text="@string/back"
         app:layout_constraintBottom_toTopOf="@id/button_clear"
         app:layout_constraintEnd_toStartOf="@id/line_left_vertical" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_plus_minus"
-        style="@style/MyButtonsActions"
-        android:layout_marginEnd="@dimen/margin_END_button"
+        style="@style/MyButtonsActions_Land"
+        android:layout_marginEnd="@dimen/button_land_FIX_margin"
         android:text="@string/plus_minus"
         app:layout_constraintStart_toStartOf="@id/button_7"
         app:layout_constraintTop_toTopOf="@id/button_0" />
