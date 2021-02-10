@@ -1,15 +1,14 @@
-package Android_Intro.Lesson_4;
+package Android_Intro.Lesson_5;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -25,13 +24,17 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     protected ButtonInitiation buttonInitiation;
     protected String themeName = "Day";
     protected String themeNameD = "Dark";
+    protected Button button;
+    protected SaveThemeBySharedPref sharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+//        sharedPreference = new SaveThemeBySharedPref(this); // Берём экземпляр настроек
+//        if (sharedPreference.loadNightModeState()) {
+//            setTheme(R.style.Theme_Lesson_5); // Светлая тема
+//        } else setTheme(R.style.DarkTheme_Lesson_5); // Темная тема
         super.onCreate(savedInstanceState);
-
-        changeTheme(); // Смена темы
+        setContentView(R.layout.activity_main);
 
         makeToast(TAG);
 
@@ -44,31 +47,41 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         setButtonsOnClickListener(numberButtons, actionButtons);
 
-    }
+        button = findViewById(R.id.button_menu);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                startActivity(intent);
 
-    private void changeTheme() { // Смена темы по свичу!
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme_Lesson_4);
-        } else setTheme(R.style.Theme_Lesson_4);
-
-        setContentView(R.layout.activity_main); // Активити сдесь!
-
-        themeDisplay = findViewById(R.id.theme);
-        SwitchCompat mySwitch = findViewById(R.id.my_switch);
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            mySwitch.setChecked(true);
-        }
-        mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                themeDisplay.setText(themeNameD);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                themeDisplay.setText(themeName);
             }
-
         });
+
     }
+
+//    private void changeTheme() { // Смена темы по свичу!
+//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+//            setTheme(R.style.DarkTheme_Lesson_4);
+//        } else setTheme(R.style.Theme_Lesson_4);
+//
+//        setContentView(R.layout.activity_main); // Активити сдесь!
+//
+//        themeDisplay = findViewById(R.id.theme);
+//        SwitchCompat mySwitch = findViewById(R.id.my_switch);
+//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+//            mySwitch.setChecked(true);
+//        }
+//        mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+//            if (isChecked) {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                themeDisplay.setText(themeNameD);
+//            } else {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                themeDisplay.setText(themeName);
+//            }
+//
+//        });
+//    }
 
 
     private void setButtonsOnClickListener(int[] numberButtons, int[] actionButtons) {
