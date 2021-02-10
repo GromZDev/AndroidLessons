@@ -22,7 +22,7 @@
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/my_switch"
-        style="@style/Theme.Lesson_4"
+        style="@style/Theme.Lesson_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/change_theme"
@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/theme"
-        style="@style/Theme.Lesson_4"
+        style="@style/Theme.Lesson_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent_color"
@@ -48,13 +48,23 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/back_to_calculator"
-        style="@style/BackButton"
-        android:text="@string/back_to_calculator"
-        android:layout_marginTop="@dimen/margin_top_display"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/theme"
+        android:shadowColor="@color/button_numbers_pressed_stroke"
+        android:backgroundTint="@color/transparent_color"
+        app:icon="@drawable/save_icon"
+        app:iconGravity="textStart"
+        app:iconTintMode="screen"
+        app:iconTint="@color/transparent_color"
+        app:strokeColor="@color/footer_part_color"
+        app:strokeWidth="3dp"
+        android:gravity="center"
+        app:cornerRadius="@dimen/margin_START_line"
+        android:layout_width="300dp"
         android:layout_height="70dp"
-        android:layout_width="200dp" />
+        android:layout_marginTop="@dimen/margin_top_display"
+        android:text="@string/back_to_calculator"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/theme" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
