@@ -18,6 +18,19 @@
         app:layout_constraintStart_toStartOf="@id/button_minus"
         app:layout_constraintTop_toTopOf="@id/my_top_text" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_menu"
+        style="@style/Theme.Lesson_4"
+        android:layout_width="@dimen/top_button_width"
+        android:layout_height="@dimen/top_button_height"
+        android:layout_marginEnd="@dimen/margin_TOP_button"
+        android:layout_marginTop="@dimen/margin_END_button"
+        android:textSize="@dimen/button_action_size"
+        android:background="@color/transparent_color"
+        android:drawableTop="@drawable/button_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/theme"
         style="@style/Theme.Lesson_4"
