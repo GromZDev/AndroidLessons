@@ -101,6 +101,9 @@ public class MenuActivity extends AppCompatActivity implements DataTransfer {
         SwitchCompat mySwitch = findViewById(R.id.my_switch);
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             mySwitch.setChecked(true);
+            themeDisplay.setText(themeNameD);
+        } else {
+            themeDisplay.setText(themeName);
         }
         mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
