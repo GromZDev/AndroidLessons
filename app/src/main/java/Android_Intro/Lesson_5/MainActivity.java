@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.Serializable;
 
 
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity implements Serializable, DataTransfer {
 
     protected final static String KEY_BUTTONS = "Buttons";
     protected final static String KEY_LOGIC = "Logic";
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     protected String themeNameD = "Dark";
     protected Button button;
     protected SaveThemeBySharedPref sharedPreference;
+    protected TextView userNameGreetings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
             }
         });
+
+        userNameGreetings = findViewById(R.id.greetings);
+        String text = getIntent().getExtras().getString(userName); // userName тут из интерфейса!
+        userNameGreetings.append(" " + text + "!");
+        String themeText = getIntent().getExtras().getString(currentTheme);
+        userNameGreetings.append("\nYour Theme is " + themeText);
 
     }
 
@@ -114,9 +122,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         });
 
         findViewById(R.id.button_exit).setOnClickListener(v -> {
-            //  calculator.exit();
+              calculator.exit();
             //  moveTaskToBack(true);
-            finish();
+        
 
         });
 
