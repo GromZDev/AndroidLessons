@@ -73,14 +73,11 @@ public class MenuActivity extends AppCompatActivity implements DataTransfer {
                 finish();
             } else if (ed_inputName.getText().length() == 0) {
 
-                AlertDialog.Builder alert2 = new AlertDialog.Builder(MenuActivity.this);
+                AlertDialog.Builder alert2 = new AlertDialog.Builder(MenuActivity.this); // Диалоговое окно всплывает
 
-                alert2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //       Toast.makeText(MenuActivity.this, "Now Enter your Name Please", Toast.LENGTH_LONG).show();
-                        dialog.dismiss();
-                    }
+                alert2.setPositiveButton("OK", (dialog, which) -> {
+                    //       Toast.makeText(MenuActivity.this, "Now Enter your Name Please", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
                 });
 
                 ConstraintLayout alertLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.custom_alert_dialog, null);
