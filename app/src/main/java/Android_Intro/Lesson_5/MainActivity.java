@@ -49,17 +49,16 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
 
         setButtonsOnClickListener(numberButtons, actionButtons);
 
-        button = findViewById(R.id.button_menu);
-        button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-            startActivity(intent);
-            stopMainActivity();
-
-        });
+        goToMenu();
 
         userNameGreetings = findViewById(R.id.greetings);
 
-//==================================== Инфа из менюшки ========
+        getNameFromMenu();
+
+    }
+
+    private void getNameFromMenu() {
+        //==================================== Инфа из менюшки ========
         // bundle - чтобы MainActivity не зависала при отсутствии данных из меню и если в
         // манифесте "открыта" MainActivity
         Intent intent = getIntent();
@@ -80,7 +79,27 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
             String themeText = getIntent().getExtras().getString(currentTheme);
             userNameGreetings.append("\nYour Theme is " + themeText);
         }
- // ================================
+    }
+
+    private void goToMenu() {
+        button = findViewById(R.id.button_menu);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            transferNameToMenu(intent);
+            stopMainActivity();
+        });
+    }
+
+    private void transferNameToMenu(Intent intent) {
+        Intent intent2 = getIntent();
+        Bundle bundle = intent2.getExtras();
+        if (bundle != null) {
+            String text = getIntent().getExtras().getString(userName);
+            if (text != null) {
+                intent.putExtra(userName, text);
+            }
+        }
+        startActivity(intent);
     }
 
     public void stopMainActivity() {
@@ -120,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
         findViewById(R.id.button_exit).setOnClickListener(v -> {
              // calculator.exit();
             stopMainActivity();
-        
+
 
         });
 

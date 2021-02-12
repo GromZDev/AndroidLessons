@@ -24,7 +24,6 @@ public class MenuActivity extends AppCompatActivity implements DataTransfer {
     protected SaveThemeBySharedPref sharedPreference;
     protected EditText ed_inputName;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreference = new SaveThemeBySharedPref(this); // Берём экземпляр настроек
@@ -36,7 +35,6 @@ public class MenuActivity extends AppCompatActivity implements DataTransfer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-
         SwitchCompat mySwitch = findViewById(R.id.my_switch);
         if (sharedPreference.loadNightModeState()) {
             mySwitch.setChecked(true);
@@ -47,12 +45,25 @@ public class MenuActivity extends AppCompatActivity implements DataTransfer {
             restartApplication();
         });
 
-
         changeTheme(); // Логика смены темы
 
         ed_inputName = findViewById(R.id.inputText); // Edit Text для ввода имени
 
         goToMainActivity(); // Переход в калькулятор
+
+        receiveNameFromMain(); // Получаем имя чтобы не вводить повторно. Или меняем имя!
+
+    }
+
+    private void receiveNameFromMain() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle == null) {
+            return;
+        }
+
+        String text = getIntent().getExtras().getString(userName); // userName тут из интерфейса!
+        ed_inputName.append(text);
     }
 
 
@@ -84,7 +95,6 @@ public class MenuActivity extends AppCompatActivity implements DataTransfer {
                 alert2.setView(alertLayout);
                 alert2.show();
             }
-
         });
     }
 
@@ -113,9 +123,7 @@ public class MenuActivity extends AppCompatActivity implements DataTransfer {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 themeDisplay.setText(themeName);
-
             }
-
         });
     }
 
