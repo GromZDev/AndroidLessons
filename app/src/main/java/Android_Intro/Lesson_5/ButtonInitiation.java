@@ -2,7 +2,7 @@ package Android_Intro.Lesson_5;
 
 import java.io.Serializable;
 
-public class ButtonInitiation implements Serializable {
+public class ButtonInitiation {
 
     private int[] numberButtons;
     private int[] actionButtons;

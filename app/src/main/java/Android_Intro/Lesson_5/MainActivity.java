@@ -141,8 +141,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
     @Override
     protected void onRestoreInstanceState(Bundle saveInstanceState) {
         super.onRestoreInstanceState(saveInstanceState);
-        buttonInitiation = (ButtonInitiation) saveInstanceState.getSerializable(KEY_BUTTONS);
-        calculator = (CalculatorLogic) saveInstanceState.getParcelable(KEY_LOGIC);
+        calculator = saveInstanceState.getParcelable(KEY_LOGIC);
         makeToast("Повторный запуск!! - onRestoreInstanceState() :<<<<<");
         display.setText(calculator.getText());
 
@@ -165,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
     @Override
     protected void onSaveInstanceState(@NonNull Bundle saveInstanceState) {
         super.onSaveInstanceState(saveInstanceState);
-        saveInstanceState.putSerializable(KEY_BUTTONS, buttonInitiation);
+
         saveInstanceState.putParcelable(KEY_LOGIC, calculator);
 
         // для сохранения состояния показа темы
