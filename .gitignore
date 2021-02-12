@@ -13,5 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-compiler.xml
-mics.xml
+/.idea/compiler.xml
+/.idea/mics.xml
