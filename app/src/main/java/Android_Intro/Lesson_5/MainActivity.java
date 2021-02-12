@@ -50,19 +50,18 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
         setButtonsOnClickListener(numberButtons, actionButtons);
 
         button = findViewById(R.id.button_menu);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-                startActivity(intent);
-                stopMainActivity();
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            startActivity(intent);
+            stopMainActivity();
 
-            }
         });
 
         userNameGreetings = findViewById(R.id.greetings);
 
 //==================================== Инфа из менюшки ========
+        // bundle - чтобы MainActivity не зависала при отсутствии данных из меню и если в
+        // манифесте "открыта" MainActivity
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle == null){
@@ -143,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
     protected void onRestoreInstanceState(Bundle saveInstanceState) {
         super.onRestoreInstanceState(saveInstanceState);
         buttonInitiation = (ButtonInitiation) saveInstanceState.getSerializable(KEY_BUTTONS);
-        calculator = (CalculatorLogic) saveInstanceState.getSerializable(KEY_LOGIC);
+        calculator = (CalculatorLogic) saveInstanceState.getParcelable(KEY_LOGIC);
         makeToast("Повторный запуск!! - onRestoreInstanceState() :<<<<<");
         display.setText(calculator.getText());
 
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
     protected void onSaveInstanceState(@NonNull Bundle saveInstanceState) {
         super.onSaveInstanceState(saveInstanceState);
         saveInstanceState.putSerializable(KEY_BUTTONS, buttonInitiation);
-        saveInstanceState.putSerializable(KEY_LOGIC, calculator);
+        saveInstanceState.putParcelable(KEY_LOGIC, calculator);
 
         // для сохранения состояния показа темы
         if (themeDisplay != null)
