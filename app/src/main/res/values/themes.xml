@@ -29,6 +29,8 @@
         <item name="colorSwitchThumbNormal">#03A9F4</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Title</item>
 
+        <item name="textColorAlertDialogListItem">@color/white</item>
+
     </style>
 
     <style name="Theme.Lesson_5" parent="Theme.AppCompat.Light.NoActionBar">
@@ -57,6 +59,7 @@
         <item name="android:windowAnimationStyle">@style/Animation</item>
         <item name="colorSwitchThumbNormal">@color/footer_part_color</item>
 
+        <item name="textColorAlertDialogListItem">@color/white</item>
 
     </style>
 
