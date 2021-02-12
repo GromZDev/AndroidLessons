@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lesson_3</string>
+    <string name="app_name">Lesson_4</string>
     <string name="top_text">My Calculator</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -23,6 +23,7 @@
     <string name="plus_minus">±</string>
     <string name="button_exit_land">■</string>
     <string name="actions">Actions</string>
+    <string name="change_theme">Theme</string>
 
 
 </resources>

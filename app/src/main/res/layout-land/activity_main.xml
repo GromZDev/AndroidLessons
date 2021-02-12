@@ -2,207 +2,189 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.Lesson_4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_land"
     tools:context=".MainActivity">
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/my_switch"
+        style="@style/Theme.Lesson_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent_color"
+        android:text="@string/change_theme"
+        app:layout_constraintEnd_toEndOf="@id/button_multiply"
+        app:layout_constraintStart_toStartOf="@id/button_minus"
+        app:layout_constraintTop_toTopOf="@id/my_top_text" />
+
     <TextView
-        android:id="@+id/desc"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:id="@+id/theme"
+        style="@style/Theme.Lesson_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent_color"
+        android:textAlignment="center"
+        android:textSize="@dimen/textView_size"
+        app:layout_constraintBottom_toTopOf="@id/my_switch"
+        app:layout_constraintEnd_toEndOf="@id/my_switch"
+        app:layout_constraintStart_toStartOf="@id/my_switch" />
+
+
+    <TextView
+        android:id="@+id/my_top_text"
+        style="@style/Theme.Lesson_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
         android:background="@color/button_numbers"
-        android:text="@string/actions"
-        android:textAlignment="center"
+        android:backgroundTint="@color/transparent_color"
+        android:gravity="center"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/textView_size"
         app:layout_constraintBottom_toTopOf="@id/button_minus"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@id/button_minus" />
+        app:layout_constraintStart_toEndOf="@id/display" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/display"
-        android:layout_width="310dp"
-        android:layout_height="60dp"
+        style="@style/Theme.Lesson_4"
+        android:layout_width="@dimen/display_land_width"
+        android:layout_height="@dimen/display_land_height"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
-        android:background="@color/button_numbers"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textView_size"
+        android:background="@drawable/button_counting"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:textSize="@dimen/text_size_display_land"
         app:layout_constraintBottom_toTopOf="@id/button_2"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@id/button_square" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_1"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
+        style="@style/MyButtonsNumbers_Land"
         android:layout_marginStart="50dp"
-        android:background="@drawable/my_button"
         android:text="@string/_1"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/line_left_vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.3" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_2"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
         android:text="@string/_2"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/button_1"
         app:layout_constraintTop_toTopOf="@id/button_1" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_3"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
         android:text="@string/_3"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/button_2"
         app:layout_constraintTop_toTopOf="@id/button_2" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_4"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_4"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintStart_toStartOf="@id/button_7"
         app:layout_constraintTop_toBottomOf="@id/button_2" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_5"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_5"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintStart_toEndOf="@+id/button_1"
         app:layout_constraintTop_toBottomOf="@id/button_2" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_6"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_6"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintStart_toEndOf="@+id/button_2"
         app:layout_constraintTop_toBottomOf="@id/button_3" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_7"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:layout_marginEnd="@dimen/margin_END_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
+        android:layout_marginEnd="@dimen/button_land_FIX_margin"
         android:text="@string/_7"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintEnd_toStartOf="@id/button_8"
         app:layout_constraintTop_toBottomOf="@id/button_5" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_8"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:layout_marginEnd="@dimen/margin_END_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
+        android:layout_marginEnd="@dimen/button_land_FIX_margin"
         android:text="@string/_8"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintStart_toStartOf="@+id/button_5"
         app:layout_constraintTop_toBottomOf="@id/button_5" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_9"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_9"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintStart_toEndOf="@+id/button_5"
         app:layout_constraintTop_toBottomOf="@id/button_6" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_0"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/_0"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintStart_toStartOf="@+id/button_8"
         app:layout_constraintTop_toBottomOf="@id/button_8" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_point"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginStart="@dimen/margin_START_button"
-        android:layout_marginTop="@dimen/margin_TOP_button"
-        android:background="@drawable/my_button"
+        style="@style/MyButtonsNumbers_Land"
+        android:layout_marginStart="@dimen/button_land_FIX_margin"
+        android:layout_marginTop="@dimen/button_land_FIX_margin"
         android:text="@string/point"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_number_land_size"
         app:layout_constraintStart_toEndOf="@+id/button_8"
         app:layout_constraintTop_toBottomOf="@id/button_9" />
 
-    <Button
-        android:id="@+id/line_vertical"
-        android:layout_width="10dp"
-        android:layout_height="250dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/line_vertical_one"
+        android:layout_width="@dimen/vertical_line_width_size"
+        android:layout_height="@dimen/vertical_line_height_size"
         android:layout_marginStart="@dimen/margin_START_right_line"
+        android:backgroundTint="@color/button_counting_stroke"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
         app:layout_constraintStart_toEndOf="@id/display" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_equals"
+        style="@style/MyButtonsActions_Land"
         android:layout_width="@dimen/button_landscape_size_width"
         android:layout_height="@dimen/button_vertical_land_size"
         android:layout_marginStart="@dimen/margin_START_button"
-        android:background="@drawable/button_counting"
         android:text="@string/equals"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
-        app:layout_constraintStart_toEndOf="@id/line_vertical" />
+        app:layout_constraintStart_toEndOf="@+id/line_vertical_one" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_exit"
+        style="@style/MyButtonsActions_Land"
         android:layout_width="@dimen/button_landscape_size_width"
         android:layout_height="@dimen/button_vertical_land_size"
         android:layout_marginStart="@dimen/margin_START_button"
-        android:background="@drawable/button_counting"
         android:text="@string/button_exit_land"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -210,115 +192,85 @@
         app:layout_constraintBottom_toBottomOf="@id/button_equals"
         app:layout_constraintStart_toEndOf="@id/button_equals" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_plus"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginBottom="@dimen/margin_BOTTOM_button"
-        android:background="@drawable/button_counting"
+        style="@style/MyButtonsActions_Land"
+        android:layout_marginBottom="@dimen/button_land_FIX_margin"
         android:text="@string/plus"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintBottom_toTopOf="@id/button_equals"
         app:layout_constraintStart_toStartOf="@id/button_equals" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_minus"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
-        android:background="@drawable/button_counting"
         android:text="@string/minus"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintBottom_toTopOf="@id/button_plus"
         app:layout_constraintStart_toStartOf="@id/button_plus" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_multiply"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginStart="@dimen/margin_START_button"
         android:layout_marginBottom="@dimen/margin_BOTTOM_button"
-        android:background="@drawable/button_counting"
         android:text="@string/multiply"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintStart_toEndOf="@id/button_minus"
         app:layout_constraintTop_toTopOf="@id/button_minus" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_divide"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginStart="@dimen/margin_START_button"
         android:layout_marginTop="@dimen/margin_BOTTOM_button"
-        android:background="@drawable/button_counting"
         android:text="@string/divide"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintStart_toEndOf="@id/button_plus"
         app:layout_constraintTop_toBottomOf="@id/button_multiply" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/line_left_vertical"
-        android:layout_width="10dp"
-        android:layout_height="250dp"
+        android:layout_width="@dimen/vertical_line_width_size"
+        android:layout_height="@dimen/vertical_line_height_size"
         android:layout_marginStart="@dimen/margin_START_left_line"
+        android:backgroundTint="@color/button_counting_stroke"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@id/button_point"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_clear"
+        style="@style/MyButtonsActions_Land"
         android:layout_width="@dimen/button_landscape_size_width"
         android:layout_height="@dimen/button_vertical_land_size"
         android:layout_marginTop="@dimen/margin_BOTTOM_button"
         android:layout_marginEnd="@dimen/margin_BOTTOM_button"
-        android:background="@drawable/button_big_land"
         android:text="@string/clear"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintBottom_toBottomOf="@id/line_left_vertical"
         app:layout_constraintEnd_toStartOf="@id/line_left_vertical" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_square"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="@dimen/margin_END_button"
-        android:layout_marginBottom="@dimen/margin_BOTTOM_button"
-        android:background="@drawable/button_counting"
+        android:layout_marginBottom="@dimen/button_land_FIX_margin"
         android:text="@string/square"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintBottom_toTopOf="@id/button_back"
         app:layout_constraintEnd_toStartOf="@id/line_left_vertical" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_back"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
+        style="@style/MyButtonsActions_Land"
         android:layout_marginEnd="@dimen/margin_END_button"
-        android:layout_marginBottom="@dimen/margin_BOTTOM_button"
-        android:background="@drawable/button_counting"
+        android:layout_marginBottom="@dimen/button_land_FIX_margin"
         android:text="@string/back"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintBottom_toTopOf="@id/button_clear"
         app:layout_constraintEnd_toStartOf="@id/line_left_vertical" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_plus_minus"
-        android:layout_width="@dimen/button_landscape_size_width"
-        android:layout_height="@dimen/button_landscape_size_height"
-        android:layout_marginEnd="@dimen/margin_END_button"
-        android:background="@drawable/button_counting"
+        style="@style/MyButtonsActions_Land"
+        android:layout_marginEnd="@dimen/button_land_FIX_margin"
         android:text="@string/plus_minus"
-        android:textColor="@color/white"
-        android:textSize="@dimen/button_counting_land_size"
         app:layout_constraintStart_toStartOf="@id/button_7"
         app:layout_constraintTop_toTopOf="@id/button_0" />
 

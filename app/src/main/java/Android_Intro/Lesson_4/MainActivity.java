@@ -1,7 +1,9 @@
-package Android_Intro.Lesson_3;
+package Android_Intro.Lesson_4;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,19 +11,28 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     protected final static String KEY_BUTTONS = "Buttons";
     protected final static String KEY_LOGIC = "Logic";
     protected CalculatorLogic calculator;
     protected TextView display;
+    protected TextView themeDisplay;
     protected String TAG = "  >>>>> [жизненный цикл активити] >>>>> ";
     protected ButtonInitiation buttonInitiation;
+    protected String themeName = "Day";
+    protected String themeNameD = "Dark";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        changeTheme(); // Смена темы
+
         makeToast(TAG);
 
         buttonInitiation = new ButtonInitiation().invoke();
@@ -34,6 +45,31 @@ public class MainActivity extends AppCompatActivity {
         setButtonsOnClickListener(numberButtons, actionButtons);
 
     }
+
+    private void changeTheme() { // Смена темы по свичу!
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme_Lesson_4);
+        } else setTheme(R.style.Theme_Lesson_4);
+
+        setContentView(R.layout.activity_main); // Активити сдесь!
+
+        themeDisplay = findViewById(R.id.theme);
+        SwitchCompat mySwitch = findViewById(R.id.my_switch);
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            mySwitch.setChecked(true);
+        }
+        mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                themeDisplay.setText(themeNameD);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                themeDisplay.setText(themeName);
+            }
+
+        });
+    }
+
 
     private void setButtonsOnClickListener(int[] numberButtons, int[] actionButtons) {
         View.OnClickListener buttonListener = view -> {
@@ -65,12 +101,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.button_exit).setOnClickListener(v -> {
-            calculator.exit();
+            //  calculator.exit();
+            //  moveTaskToBack(true);
+            finish();
+
         });
+
     }
 
-    private void makeToast(String message) {
-//        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+    private void makeToast(String message) { // Всплывающее окно снизу
+//        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show(); // Всплывающее окно снизу
         Log.d(TAG, message);
     }
 
@@ -87,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
         calculator = (CalculatorLogic) saveInstanceState.getSerializable(KEY_LOGIC);
         makeToast("Повторный запуск!! - onRestoreInstanceState() :<<<<<");
         display.setText(calculator.getText());
+
+        // для сохранения состояния показа темы
+        if (themeDisplay != null) themeDisplay.setText(saveInstanceState.getString(themeNameD));
     }
 
     @Override
@@ -106,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(saveInstanceState);
         saveInstanceState.putSerializable(KEY_BUTTONS, buttonInitiation);
         saveInstanceState.putSerializable(KEY_LOGIC, calculator);
+
+        // для сохранения состояния показа темы
+        if (themeDisplay != null)
+            saveInstanceState.putString(themeNameD, themeDisplay.getText().toString());
         makeToast("onSaveInstanceState() :<<<<<");
     }
 
@@ -128,3 +176,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
