@@ -55,41 +55,38 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                 startActivity(intent);
+                stopMainActivity();
 
             }
         });
 
         userNameGreetings = findViewById(R.id.greetings);
-        String text = getIntent().getExtras().getString(userName); // userName тут из интерфейса!
-        userNameGreetings.append(" " + text + "!");
-        String themeText = getIntent().getExtras().getString(currentTheme);
-        userNameGreetings.append("\nYour Theme is " + themeText);
 
+//==================================== Инфа из менюшки ========
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle == null){
+            return;
+        }
+
+        String text = bundle.getString(userName);
+
+        if (text == null){
+            Intent intent2 = new Intent(MainActivity.this, MenuActivity.class);
+            startActivity(intent2);
+
+        } else {
+            text = getIntent().getExtras().getString(userName); // userName тут из интерфейса!
+            userNameGreetings.append(" " + text + "!");
+            String themeText = getIntent().getExtras().getString(currentTheme);
+            userNameGreetings.append("\nYour Theme is " + themeText);
+        }
+ // ================================
     }
 
-//    private void changeTheme() { // Смена темы по свичу!
-//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-//            setTheme(R.style.DarkTheme_Lesson_4);
-//        } else setTheme(R.style.Theme_Lesson_4);
-//
-//        setContentView(R.layout.activity_main); // Активити сдесь!
-//
-//        themeDisplay = findViewById(R.id.theme);
-//        SwitchCompat mySwitch = findViewById(R.id.my_switch);
-//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-//            mySwitch.setChecked(true);
-//        }
-//        mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                themeDisplay.setText(themeNameD);
-//            } else {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                themeDisplay.setText(themeName);
-//            }
-//
-//        });
-//    }
+    public void stopMainActivity() {
+        finish();
+    }
 
 
     private void setButtonsOnClickListener(int[] numberButtons, int[] actionButtons) {
@@ -122,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
         });
 
         findViewById(R.id.button_exit).setOnClickListener(v -> {
-              calculator.exit();
-            //  moveTaskToBack(true);
+             // calculator.exit();
+            stopMainActivity();
         
 
         });
