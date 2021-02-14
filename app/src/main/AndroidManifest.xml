@@ -1,15 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="Android_Intro.Lesson_4">
+    package="Android_Intro.Lesson_5">
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Lesson_4">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.Lesson_5">
+        <activity android:name="Android_Intro.Lesson_5.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="Android_Intro.Lesson_5.MenuActivity">
+            <intent-filter>
+                <action android:name="My_Calculator" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="AppToOpenCalculator.OpenCalculatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

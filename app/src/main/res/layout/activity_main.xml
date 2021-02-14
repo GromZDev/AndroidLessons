@@ -1,48 +1,78 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.Lesson_5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/Theme.Lesson_4"
     tools:context=".MainActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_my_top"
+        style="@style/Theme.Lesson_5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/Theme.Lesson_4"
         app:layout_constraintBottom_toTopOf="@+id/layout_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-
-        <TextView
-            android:id="@+id/my_top_text"
-            style="@style/Theme.Lesson_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_TOP_button"
-            android:text="@string/top_text"
-            android:textAlignment="center"
-            android:textSize="@dimen/textView_size"
-            android:backgroundTint="@color/transparent_color"
-            app:layout_constraintBottom_toTopOf="@+id/display"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_menu"
+            android:layout_width="@dimen/top_button_width"
+            android:layout_height="@dimen/top_button_height"
+            android:layout_marginStart="@dimen/margin_TOP_button"
+            android:layout_marginTop="@dimen/margin_END_button"
+            android:background="@color/transparent_color"
+            android:drawableTop="@drawable/button_menu"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_action_size"
+            app:icon="@drawable/button_menu"
+            app:iconGravity="textStart"
+            app:iconTint="@color/transparent_color"
+            app:iconTintMode="screen"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/greetings"
+            style="@style/Theme.Lesson_5"
+            android:layout_width="200dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_user_name"
+            android:textSize="@dimen/text_size_display_land"
+            android:backgroundTint="@color/transparent_color"
+            android:layout_marginTop="@dimen/margin_TOP_button"
+            app:layout_constraintStart_toEndOf="@id/button_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_exit" />
+
+        <TextView
+            android:id="@+id/my_top_text"
+            style="@style/Theme.Lesson_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_TOP_button"
+            android:backgroundTint="@color/transparent_color"
+            android:text="@string/top_text"
+            android:textAlignment="center"
+            android:textSize="@dimen/textView_size"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greetings" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/display"
-            style="@style/Theme.Lesson_4"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="5dp"
+            style="@style/Theme.Lesson_5"
             android:layout_width="330dp"
             android:layout_height="80dp"
-            android:textSize="25sp"
             android:background="@drawable/button_counting"
+            android:paddingStart="20dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -52,50 +82,25 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_exit"
-            style="@style/Theme.Lesson_4"
+            style="@style/Theme.Lesson_5"
             android:layout_width="@dimen/top_button_width"
             android:layout_height="@dimen/top_button_height"
             android:layout_marginTop="@dimen/margin_TOP_button"
             android:layout_marginEnd="@dimen/margin_END_button"
-            android:textSize="@dimen/button_action_size"
             android:background="@color/transparent_color"
             android:drawableTop="@drawable/ic_baseline_power_off_24"
+            android:textSize="@dimen/button_action_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/my_switch"
-            style="@style/Theme.Lesson_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/change_theme"
-            android:gravity="center"
-            android:layout_marginStart="@dimen/margin_START_line"
-            android:backgroundTint="@color/transparent_color"
-            app:layout_constraintBottom_toTopOf="@+id/display"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/theme"
-            style="@style/Theme.Lesson_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/transparent_color"
-            android:textAlignment="center"
-            android:textSize="@dimen/textView_size"
-            app:layout_constraintBottom_toTopOf="@id/display"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/my_switch"
-            app:layout_constraintTop_toTopOf="@id/my_switch" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_footer"
+        style="@style/Background_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Background_footer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

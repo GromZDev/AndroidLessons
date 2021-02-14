@@ -1,11 +1,11 @@
-package Android_Intro.Lesson_4;
+package Android_Intro.Lesson_5;
 
 
 import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
-
-public class CalculatorLogic implements Serializable {
+public class CalculatorLogic implements Parcelable {
     private double firstValue;
     private double secondValue;
 
@@ -14,6 +14,36 @@ public class CalculatorLogic implements Serializable {
     private State status;
 
     private int userActionSelected;
+
+    protected CalculatorLogic(Parcel in) {
+        firstValue = in.readDouble();
+        secondValue = in.readDouble();
+        userActionSelected = in.readInt();
+    }
+
+    public static final Creator<CalculatorLogic> CREATOR = new Creator<CalculatorLogic>() {
+        @Override
+        public CalculatorLogic createFromParcel(Parcel in) {
+            return new CalculatorLogic(in);
+        }
+
+        @Override
+        public CalculatorLogic[] newArray(int size) {
+            return new CalculatorLogic[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeDouble(firstValue);
+        parcel.writeDouble(secondValue);
+        parcel.writeInt(userActionSelected);
+    }
 
     private enum State {
         firstValueInput, actionSelected, secondValueInput, resultShow,

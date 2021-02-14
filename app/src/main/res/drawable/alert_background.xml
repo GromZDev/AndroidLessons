@@ -1,0 +1,9 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/top_part_end_gradient"/>
+    <stroke android:width="3dp" android:color="@color/button_counting_stroke" />
+
+
+
+
+</shape>

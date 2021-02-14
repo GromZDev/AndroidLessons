@@ -1,37 +1,34 @@
-package Android_Intro.Lesson_4;
+package Android_Intro.Lesson_5;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
 
 
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity implements Serializable, DataTransfer {
 
-    protected final static String KEY_BUTTONS = "Buttons";
     protected final static String KEY_LOGIC = "Logic";
     protected CalculatorLogic calculator;
     protected TextView display;
     protected TextView themeDisplay;
     protected String TAG = "  >>>>> [жизненный цикл активити] >>>>> ";
     protected ButtonInitiation buttonInitiation;
-    protected String themeName = "Day";
     protected String themeNameD = "Dark";
+    protected Button button;
+    protected TextView userNameGreetings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        changeTheme(); // Смена темы
+        setContentView(R.layout.activity_main);
 
         makeToast(TAG);
 
@@ -44,30 +41,61 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         setButtonsOnClickListener(numberButtons, actionButtons);
 
+        goToMenu();
+
+        userNameGreetings = findViewById(R.id.greetings);
+
+        getNameFromMenu();
+
     }
 
-    private void changeTheme() { // Смена темы по свичу!
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme_Lesson_4);
-        } else setTheme(R.style.Theme_Lesson_4);
-
-        setContentView(R.layout.activity_main); // Активити сдесь!
-
-        themeDisplay = findViewById(R.id.theme);
-        SwitchCompat mySwitch = findViewById(R.id.my_switch);
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            mySwitch.setChecked(true);
+    private void getNameFromMenu() {
+        //==================================== Инфа из менюшки ========
+        // bundle - чтобы MainActivity не зависала при отсутствии данных из меню и если в
+        // манифесте "открыта" MainActivity
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle == null) {
+            return;
         }
-        mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                themeDisplay.setText(themeNameD);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                themeDisplay.setText(themeName);
-            }
 
+        String text = bundle.getString(userName);
+
+        if (text == null) {
+            Intent intent2 = new Intent(MainActivity.this, MenuActivity.class);
+            startActivity(intent2);
+
+        } else {
+            text = getIntent().getExtras().getString(userName); // userName тут из интерфейса!
+            userNameGreetings.append(" " + text + "!");
+            String themeText = getIntent().getExtras().getString(currentTheme);
+            userNameGreetings.append("\nYour Theme is " + themeText);
+        }
+    }
+
+    private void goToMenu() {
+        button = findViewById(R.id.button_menu);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            transferNameToMenu(intent);
+            stopMainActivity();
         });
+    }
+
+    private void transferNameToMenu(Intent intent) {
+        Intent intent2 = getIntent();
+        Bundle bundle = intent2.getExtras();
+        if (bundle != null) {
+            String text = getIntent().getExtras().getString(userName);
+            if (text != null) {
+                intent.putExtra(userName, text);
+            }
+        }
+        startActivity(intent);
+    }
+
+    public void stopMainActivity() {
+        finish();
     }
 
 
@@ -101,9 +129,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         });
 
         findViewById(R.id.button_exit).setOnClickListener(v -> {
-            //  calculator.exit();
-            //  moveTaskToBack(true);
-            finish();
+            // calculator.exit();
+            stopMainActivity();
+
 
         });
 
@@ -124,8 +152,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onRestoreInstanceState(Bundle saveInstanceState) {
         super.onRestoreInstanceState(saveInstanceState);
-        buttonInitiation = (ButtonInitiation) saveInstanceState.getSerializable(KEY_BUTTONS);
-        calculator = (CalculatorLogic) saveInstanceState.getSerializable(KEY_LOGIC);
+        calculator = saveInstanceState.getParcelable(KEY_LOGIC);
         makeToast("Повторный запуск!! - onRestoreInstanceState() :<<<<<");
         display.setText(calculator.getText());
 
@@ -148,8 +175,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle saveInstanceState) {
         super.onSaveInstanceState(saveInstanceState);
-        saveInstanceState.putSerializable(KEY_BUTTONS, buttonInitiation);
-        saveInstanceState.putSerializable(KEY_LOGIC, calculator);
+
+        saveInstanceState.putParcelable(KEY_LOGIC, calculator);
 
         // для сохранения состояния показа темы
         if (themeDisplay != null)

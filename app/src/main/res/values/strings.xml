@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lesson_4</string>
+    <string name="app_name">Lesson_5</string>
     <string name="top_text">My Calculator</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -24,6 +24,14 @@
     <string name="button_exit_land">■</string>
     <string name="actions">Actions</string>
     <string name="change_theme">Theme</string>
+    <string name="calculator_menu">Calculator Menu</string>
+    <string name="back_to_calculator">Go Calculator!</string>
+    <string name="userName">Enter your Name:</string>
+    <string name="welcome_user_name">Welcome</string>
+    <string name="alert_title">Attention! First you should introduce yourself!</string>
+    <string name="ok">OK</string>
+    <string name="open">Open</string>
+    <string name="open_app_tv">To open My Calculator press the button</string>
 
 
 </resources>
