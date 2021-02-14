@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -16,25 +15,18 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable, DataTransfer {
 
-    protected final static String KEY_BUTTONS = "Buttons";
     protected final static String KEY_LOGIC = "Logic";
     protected CalculatorLogic calculator;
     protected TextView display;
     protected TextView themeDisplay;
     protected String TAG = "  >>>>> [жизненный цикл активити] >>>>> ";
     protected ButtonInitiation buttonInitiation;
-    protected String themeName = "Day";
     protected String themeNameD = "Dark";
     protected Button button;
-    protected SaveThemeBySharedPref sharedPreference;
     protected TextView userNameGreetings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        sharedPreference = new SaveThemeBySharedPref(this); // Берём экземпляр настроек
-//        if (sharedPreference.loadNightModeState()) {
-//            setTheme(R.style.Theme_Lesson_5); // Светлая тема
-//        } else setTheme(R.style.DarkTheme_Lesson_5); // Темная тема
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -63,13 +55,13 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
         // манифесте "открыта" MainActivity
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if (bundle == null){
+        if (bundle == null) {
             return;
         }
 
         String text = bundle.getString(userName);
 
-        if (text == null){
+        if (text == null) {
             Intent intent2 = new Intent(MainActivity.this, MenuActivity.class);
             startActivity(intent2);
 
@@ -137,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Dat
         });
 
         findViewById(R.id.button_exit).setOnClickListener(v -> {
-             // calculator.exit();
+            // calculator.exit();
             stopMainActivity();
 
 
