@@ -30,6 +30,8 @@
     <string name="welcome_user_name">Welcome</string>
     <string name="alert_title">Attention! First you should introduce yourself!</string>
     <string name="ok">OK</string>
+    <string name="open">Open</string>
+    <string name="open_app_tv">To open My Calculator press the button</string>
 
 
 </resources>
