@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="TOP_margin">20dp</dimen>
+    <dimen name="LEFT_notes_name_list_margin">20dp</dimen>
+
+
+</resources>
