@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Lesson_6_Notes</string>
+    <string name="my_notes">MyNotes</string>
+
+    <string name="note1">Встать и умыться</string>
+    <string name="note2">Принять контрастный душ</string>
+    <string name="note3">Сделать вкусный завтрак</string>
+    <string name="note4">Завести автомобиль на прогрев</string>
+    <string name="note5">Выехать на работу</string>
+
+
 </resources>

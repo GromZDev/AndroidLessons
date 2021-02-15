@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="MyNotes">
+        <item>Note1</item>
+        <item>Note2</item>
+        <item>Note3</item>
+        <item>Note4</item>
+        <item>Note5</item>
+    </string-array>
+
+    <integer-array name="MyNotesDescription">
+        <item>@string/note1</item>
+        <item>@string/note2</item>
+        <item>@string/note3</item>
+        <item>@string/note4</item>
+        <item>@string/note5</item>
+    </integer-array>
+
+
+
+
+
+</resources>
