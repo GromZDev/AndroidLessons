@@ -1,5 +1,6 @@
 package Android_Intro.Lesson_6_Notes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -13,9 +14,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class NoteFragment extends Fragment { //TODO 1 создали класс-фрагмент, сделали лэйаут к нему
+import java.util.ArrayList;
+import java.util.List;
+
+public class NoteFragment extends Fragment {
+    private static List<MyNote> noteList; //TODO 1 создали класс-фрагмент, сделали лэйаут к нему
 
     private boolean isLandscape;
+
+    public static List<MyNote> getNoteList() {
+        return noteList;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,18 +46,35 @@ public class NoteFragment extends Fragment { //TODO 1 создали класс-
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
+
+
+
+
+
     private void initView(View view){ //TODO 2 Метод получения данных, далее идем в разметку мэйна
         LinearLayout linearLayout = (LinearLayout) view; // Получаем лайаут
         String[] array = getResources().getStringArray(R.array.MyNotes) ; // Получаем список
         int margin = getResources().getDimensionPixelSize(R.dimen.LEFT_notes_name_list_margin); // Отступы определяем
 
-        for (int i = 0; i < array.length ; i++) {
+
+        noteList = new ArrayList<>();
+        noteList.add(new MyNote("Заметка1", "Описание1", "Тема заметки 1"));
+        noteList.add(new MyNote("Заметка2", "Описание2", "Тема заметки 2"));
+
+
+
+//===============================
+        for (int i = 0; i < noteList.size() ; i++) {
             String name = array[i];
             TextView tw = new TextView(linearLayout.getContext()); // ВАЖНО! Если контекст вьюхи
             // передадим в какой-то класс, живущий дольше фрагмента, то будет утечка памяти!!!
             tw.setText(name);
             tw.setTextSize(30f);
             tw.setPadding(margin, 0, margin, 0); // Программно добавляем отступы
+            tw.setText(noteList.get(i).getNoteName());
+
+
+   // ============================
 
             int index = i; //TODO 3
             tw.setOnClickListener(new View.OnClickListener() { // Вешаем на текст тач
