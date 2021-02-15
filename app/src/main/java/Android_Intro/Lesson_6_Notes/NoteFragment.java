@@ -1,6 +1,7 @@
 package Android_Intro.Lesson_6_Notes;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 public class NoteFragment extends Fragment { //TODO 1 создали класс-фрагмент, сделали лэйаут к нему
 
+    private boolean isLandscape;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,6 +28,13 @@ public class NoteFragment extends Fragment { //TODO 1 создали класс-
         // Вызывается после того, когда вьюха создана. Тут получаем наш вью - fragment_note
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) { // TODO 6 делаем лэндскейп
+        super.onActivityCreated(savedInstanceState);
+        isLandscape =
+                getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     private void initView(View view){ //TODO 2 Метод получения данных, далее идем в разметку мэйна
@@ -45,14 +54,28 @@ public class NoteFragment extends Fragment { //TODO 1 создали класс-
             tw.setOnClickListener(new View.OnClickListener() { // Вешаем на текст тач
                 @Override
                 public void onClick(View view) {
-                    startDescriptionActivity(index);
+                    checkOrientation(index);
                 }
             });
             linearLayout.addView(tw);
         }
     }
 
+    private void checkOrientation (int index){ //TODO 6
+        if (isLandscape){
+            openDescription(index);
+        } else {
+            startDescriptionActivity(index);
+        }
+    }
 
+    private void openDescription(int index){ //TODO 6 2:06
+        DescriptionNote fragment = DescriptionNote.newInstance(index);
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_land_note, fragment)
+                .commit();
+    }
 
     private void startDescriptionActivity(int index){ // TODO 3 и 5
         Intent intent = new Intent(getActivity(), DescriptionActivity.class);
