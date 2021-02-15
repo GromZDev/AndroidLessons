@@ -11,9 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
+
+import Android_Intro.Lesson_6_Notes.NoteFragment;
+
 public class DescriptionNote extends Fragment { //TODO 3 Создаем фрагмент остального описания, лэйаут
 
     private TextView textView;
+
 
     public static final String ARGUMENT = "arg_index"; // ключ для передачи описания заметки
 
@@ -45,8 +50,20 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
             int index = getArguments().getInt(ARGUMENT);
             TypedArray array = getResources().obtainTypedArray(R.array.MyNotesDescription); // 1:32 видео
             // Теперь нужно получить id описания заметки
-            int descId = array.getResourceId(index, 0);
-            textView.setText(descId);
+   //         int descId = array.getResourceId(index, 0);
+   //         textView.setText(descId);
+
+  //============================
+            String d = NoteFragment.getNoteList().get(index).getNoteDescription().concat(" | ").concat(NoteFragment.getNoteList().get(index).getTheme());
+                textView.setText(d);
+
+         //   textView.setText(NoteFragment.getNoteList().get(index).getTheme());
+
+
+
+  //============================
+
+
         }
 
     }
