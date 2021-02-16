@@ -18,7 +18,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/TOP_margin"
+        android:layout_marginTop="10dp"
         android:textSize="25sp" />
 
     <TextView
@@ -41,8 +41,8 @@
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparent"
         android:layout_marginTop="@dimen/TOP_margin"
+        android:backgroundTint="@color/transparent"
         android:text="Save"
         app:strokeColor="@color/footer_button_stroke"
         app:strokeWidth="2dp" />

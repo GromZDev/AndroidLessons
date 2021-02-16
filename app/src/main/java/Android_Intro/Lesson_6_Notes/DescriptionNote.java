@@ -117,13 +117,13 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
 
         if (getArguments() != null){
             int index = getArguments().getInt(ARGUMENT);
-            TypedArray array = getResources().obtainTypedArray(R.array.MyNotesDescription); // 1:32 видео
+        //    TypedArray array = getResources().obtainTypedArray(R.array.MyNotesDescription); // 1:32 видео
 
   //============================ Вывод описания
             d = NoteFragment.getNoteList().get(index).getNoteDescription().concat(" | ")
                     .concat(NoteFragment.getNoteList().get(index).getTheme());
                 textView.setText(d);
-            code = NoteFragment.getNoteList().get(index).getNoteDescription().toString(); // передаю строку по которой буду опознавать
+            code = NoteFragment.getNoteList().get(index).getNoteDescription(); // передаю строку по которой буду опознавать
 
         }
 
