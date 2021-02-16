@@ -37,5 +37,15 @@
         app:strokeColor="@color/footer_button_stroke"
         app:strokeWidth="2dp" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent"
+        android:layout_marginTop="@dimen/TOP_margin"
+        android:text="Save"
+        app:strokeColor="@color/footer_button_stroke"
+        app:strokeWidth="2dp" />
+
 
 </LinearLayout>
