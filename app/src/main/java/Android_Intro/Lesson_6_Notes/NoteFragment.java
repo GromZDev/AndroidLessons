@@ -17,8 +17,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteFragment extends Fragment {
-    private static List<MyNote> noteList; //TODO 1 создали класс-фрагмент, сделали лэйаут к нему
+public class NoteFragment extends Fragment {//TODO 1 создали класс-фрагмент, сделали лэйаут к нему
+
+    private static List<MyNote> noteList;
 
     private boolean isLandscape;
 
@@ -60,6 +61,9 @@ public class NoteFragment extends Fragment {
         noteList = new ArrayList<>();
         noteList.add(new MyNote("Заметка1", "Описание1", "Тема заметки 1"));
         noteList.add(new MyNote("Заметка2", "Описание2", "Тема заметки 2"));
+        noteList.add(new MyNote("Заметка3", "Описание3", "Тема заметки 3"));
+        noteList.add(new MyNote("Заметка4", "Описание4", "Тема заметки 4"));
+        noteList.add(new MyNote("Заметка5", "Описание5", "Тема заметки 5"));
 
 
 
