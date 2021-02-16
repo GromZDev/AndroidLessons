@@ -23,14 +23,27 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
 
     private boolean isLandscape;
 
-    public static List<MyNote> getNoteList() {
-        return noteList;
-    }
+    private TextView tw;
+    private String dateFromDescription;
+    private String receivedCode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_note, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_note, container, false);
+
+        receiveSavedDateAndCode();
+
+        return v;
+    }
+
+    private void receiveSavedDateAndCode() { // Получаем установленную дату и код для вставки конкретной заметке
+        Bundle bundle = this.getArguments();
+        if (bundle != null){
+            dateFromDescription = bundle.getString("data");
+            receivedCode = bundle.getString("hash");
+        }
     }
 
     @Override
@@ -38,6 +51,7 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
         // Вызывается после того, когда вьюха создана. Тут получаем наш вью - fragment_note
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+
     }
 
     @Override
@@ -48,37 +62,24 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
     }
 
 
-
-
-
-
     private void initView(View view){ //TODO 2 Метод получения данных, далее идем в разметку мэйна
         LinearLayout linearLayout = (LinearLayout) view; // Получаем лайаут
         String[] array = getResources().getStringArray(R.array.MyNotes) ; // Получаем список
         int margin = getResources().getDimensionPixelSize(R.dimen.LEFT_notes_name_list_margin); // Отступы определяем
 
+        setNotesList();
 
-        noteList = new ArrayList<>();
-        noteList.add(new MyNote("Заметка1", "Описание1", "Тема заметки 1"));
-        noteList.add(new MyNote("Заметка2", "Описание2", "Тема заметки 2"));
-        noteList.add(new MyNote("Заметка3", "Описание3", "Тема заметки 3"));
-        noteList.add(new MyNote("Заметка4", "Описание4", "Тема заметки 4"));
-        noteList.add(new MyNote("Заметка5", "Описание5", "Тема заметки 5"));
-
-
-
-//===============================
         for (int i = 0; i < noteList.size() ; i++) {
             String name = array[i];
-            TextView tw = new TextView(linearLayout.getContext()); // ВАЖНО! Если контекст вьюхи
+            tw = new TextView(linearLayout.getContext()); // ВАЖНО! Если контекст вьюхи
             // передадим в какой-то класс, живущий дольше фрагмента, то будет утечка памяти!!!
             tw.setText(name);
-            tw.setTextSize(30f);
+            tw.setTextSize(24f);
             tw.setPadding(margin, 0, margin, 0); // Программно добавляем отступы
             tw.setText(noteList.get(i).getNoteName());
 
+            setSavedDate(i);
 
-   // ============================
 
             int index = i; //TODO 3
             tw.setOnClickListener(new View.OnClickListener() { // Вешаем на текст тач
@@ -88,6 +89,22 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
                 }
             });
             linearLayout.addView(tw);
+        }
+
+    }
+
+    private void setNotesList() { // Установка списка заметок
+        noteList = new ArrayList<>();
+        noteList.add(new MyNote("Заметка1", "Описание1", "Тема заметки 1"));
+        noteList.add(new MyNote("Заметка2", "Описание2", "Тема заметки 2"));
+        noteList.add(new MyNote("Заметка3", "Описание3", "Тема заметки 3"));
+        noteList.add(new MyNote("Заметка4", "Описание4", "Тема заметки 4"));
+        noteList.add(new MyNote("Заметка5", "Описание5", "Тема заметки 5"));
+    }
+
+    private void setSavedDate(int i) { // Устанавливаем полученную дату конкретной заметке, сравнивая с её описанием ! (Yeahhh!!!)
+        if (dateFromDescription != null && receivedCode.equals(noteList.get(i).getNoteDescription()) ){
+           tw.setText(noteList.get(i).getNoteName().concat("  |  ").concat(dateFromDescription));
         }
     }
 
@@ -111,5 +128,9 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
         Intent intent = new Intent(getActivity(), DescriptionActivity.class);
         intent.putExtra(DescriptionNote.ARGUMENT, index);
         startActivity(intent);
+    }
+
+    public static List<MyNote> getNoteList() {
+        return noteList;
     }
 }
