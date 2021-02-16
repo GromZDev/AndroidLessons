@@ -7,6 +7,10 @@
     <string name="note3">Сделать вкусный завтрак</string>
     <string name="note4">Завести автомобиль на прогрев</string>
     <string name="note5">Выехать на работу</string>
+    <string name="add_note">Add Note</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="my_note_description">MyNote Description</string>
+    <string name="set_date">Set Date</string>
 
 
 </resources>
