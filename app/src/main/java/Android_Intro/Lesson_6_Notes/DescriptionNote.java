@@ -6,33 +6,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.button.MaterialButton;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
-import Android_Intro.Lesson_6_Notes.NoteFragment;
 
 public class DescriptionNote extends Fragment { //TODO 3 Создаем фрагмент остального описания, лэйаут
 
     private TextView textView;
     private TextView dateView;
-    private MaterialButton dateButton;
     String data;
     String d;
     private int day;
     private int month;
     private int year;
 
+    public static String code;
 
     public static final String ARGUMENT = "arg_index"; // ключ для передачи описания заметки
 
@@ -48,18 +42,47 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
     @Override
     //Вытаскиваем лэйаут
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_note_description, container, false);
+        View view = inflater.inflate(R.layout.fragment_note_description, container, false);
+
+        sendDateToMainFragment(view);
+
+        return view;
 
     }
+
+    private void sendDateToMainFragment(View view) {
+        MaterialButton buttonSave = view.findViewById(R.id.button_save);
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToTransferDateAndCode();
+            }
+        });
+    }
+
+    private void saveToTransferDateAndCode() { // Сохраняем для передачи в главный фрагмент дату и код для присваивания конкретной заметке
+        Bundle bundle = new Bundle();
+        bundle.putString("data", dateView.getText().toString());
+        bundle.putString("hash", code);
+        NoteFragment fragment = new NoteFragment();
+        fragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.layout_container, fragment).commit();
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { // Получаем лэйаут
         super.onViewCreated(view, savedInstanceState);
+
+        setDateWithDatePicker(view);
+
+    }
+
+    private void setDateWithDatePicker(@NonNull View view) {
         textView = view.findViewById(R.id.note_fragment_description);
         dateView = view.findViewById(R.id.date_view);
 
-//================================== Data ==========================
-        dateButton = view.findViewById(R.id.button_date);
+        MaterialButton dateButton = view.findViewById(R.id.button_date);
         Calendar calendar = Calendar.getInstance();
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +100,9 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
                     }
                 }, day, month, year);
                 datePickerDialog.show();
+
             }
         });
-
- // =============================================================
     }
 
     @Override
@@ -92,19 +114,16 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
         }
 
         super.onActivityCreated(savedInstanceState);
+
         if (getArguments() != null){
             int index = getArguments().getInt(ARGUMENT);
             TypedArray array = getResources().obtainTypedArray(R.array.MyNotesDescription); // 1:32 видео
-            // Теперь нужно получить id описания заметки
-   //         int descId = array.getResourceId(index, 0);
-   //         textView.setText(descId);
 
   //============================ Вывод описания
             d = NoteFragment.getNoteList().get(index).getNoteDescription().concat(" | ")
                     .concat(NoteFragment.getNoteList().get(index).getTheme());
                 textView.setText(d);
-
-         //   textView.setText(NoteFragment.getNoteList().get(index).getTheme());
+            code = NoteFragment.getNoteList().get(index).getNoteDescription().toString(); // передаю строку по которой буду опознавать
 
         }
 
@@ -116,7 +135,11 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
         if (dateView != null){
             outState.putString("kkk", dateView.getText().toString());
         }
-
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 }
