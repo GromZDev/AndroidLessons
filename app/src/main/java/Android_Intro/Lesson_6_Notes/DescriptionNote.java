@@ -25,6 +25,7 @@ import Android_Intro.Lesson_6_Notes.NoteFragment;
 public class DescriptionNote extends Fragment { //TODO 3 Создаем фрагмент остального описания, лэйаут
 
     private TextView textView;
+    private TextView dateView;
     private MaterialButton dateButton;
     String data;
     String d;
@@ -55,6 +56,7 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { // Получаем лэйаут
         super.onViewCreated(view, savedInstanceState);
         textView = view.findViewById(R.id.note_fragment_description);
+        dateView = view.findViewById(R.id.date_view);
 
 //================================== Data ==========================
         dateButton = view.findViewById(R.id.button_date);
@@ -69,8 +71,9 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         data = SimpleDateFormat.getDateInstance().format(calendar.getTime());
-                        String a = textView.getText().toString().concat(data);
-                        textView.setText(a);
+                     //   String a = textView.getText().toString().concat(data);
+                     //   textView.setText(a);
+                        dateView.setText(data);
                     }
                 }, day, month, year);
                 datePickerDialog.show();
