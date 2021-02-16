@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/note_fragment_description"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:scaleType="centerInside" />
 
     <com.google.android.material.button.MaterialButton

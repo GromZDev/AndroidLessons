@@ -85,6 +85,12 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) { // Вызывается после вью created
+        if (savedInstanceState != null) {
+            // Restore last state for checked position.
+            data = savedInstanceState.getString("kkk", data);
+            dateView.setText(data);
+        }
+
         super.onActivityCreated(savedInstanceState);
         if (getArguments() != null){
             int index = getArguments().getInt(ARGUMENT);
@@ -103,4 +109,14 @@ public class DescriptionNote extends Fragment { //TODO 3 Создаем фраг
         }
 
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (dateView != null){
+            outState.putString("kkk", dateView.getText().toString());
+        }
+
+    }
+
 }
