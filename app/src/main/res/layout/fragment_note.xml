@@ -8,4 +8,13 @@
     android:orientation="vertical"
     tools:context=".NoteFragment">
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_note"
+        android:layout_marginTop="@dimen/TOP_margin"
+        android:backgroundTint="@color/transparent" />
+
 </LinearLayout>
