@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
     private boolean isLandscape;
 
     private TextView tw;
+
     private String dateFromDescription;
     private String receivedCode;
 
@@ -72,16 +75,12 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
 
         setNotesList();
 
-        MaterialButton button = getView().findViewById(R.id.button_add);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout linearLayout = (LinearLayout) view;
-                getNoteList().add(new MyNote("333", "t5g4h", "rthbrthnrt"));
-                linearLayout.addView(tw);
+        viewNoteItem(linearLayout, margin);
 
-            }
-        });
+        addNote(linearLayout, margin);
+    }
+
+    private void viewNoteItem(LinearLayout linearLayout, int margin) {
 
         for (int i = 0; i < noteList.size() ; i++) {
 
@@ -91,7 +90,7 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
             tw.setText(name);
             tw.setTextSize(24f);
             tw.setPadding(margin, 0, margin, 0); // Программно добавляем отступы
-            tw.setText(noteList.get(i).getNoteName());
+          //  tw.setText(noteList.get(i).getNoteName());
 
             setSavedDate(i);
 
@@ -102,13 +101,12 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
                     checkOrientation(index);
                 }
             });
+
             linearLayout.addView(tw);
         }
-
-//addNote();
     }
 
-    private void addNote() {
+    private void addNote(LinearLayout linearLayout, int margin) {
 
         MaterialButton button = getView().findViewById(R.id.button_add);
         button.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +114,29 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
             public void onClick(View view) {
                 getNoteList().add(new MyNote("333", "t5g4h", "rthbrthnrt"));
 
+                setNameAndSaveAndViewLastAddedNote(linearLayout, margin);
             }
         });
+    }
+
+    private void setNameAndSaveAndViewLastAddedNote(LinearLayout linearLayout, int margin) {
+        String name = noteList.get(noteList.size()-1).getNoteName();
+        tw = new TextView(linearLayout.getContext());
+
+        tw.setText(name);
+        tw.setTextSize(24f);
+        tw.setPadding(margin, 0, margin, 0); // Программно добавляем отступы
+
+        setSavedDate(noteList.size()-1);
+
+        int index = (noteList.size()-1); //TODO 3
+        tw.setOnClickListener(new View.OnClickListener() { // Вешаем на текст тач
+            @Override
+            public void onClick(View view) {
+                checkOrientation(index);
+            }
+        });
+        linearLayout.addView(tw);
     }
 
     private void setNotesList() { // Установка списка заметок
@@ -161,5 +180,9 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
 
     public static List<MyNote> getNoteList() {
         return noteList;
+    }
+
+    public TextView getTw() {
+        return tw;
     }
 }
