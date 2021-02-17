@@ -23,11 +23,15 @@ import java.util.Objects;
 public class NoteFragment extends Fragment {
 
     private static List<MyNote> noteList = new ArrayList<>();
+    private MyNote myNote;
     private boolean isLandscape;
     private TextView tw;
     private String dateFromDescription;
     private String receivedCode;
     protected View v;
+
+    public static final String CURRENT_NOTE = "CurrentNote";
+    private int currentPosition = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +55,12 @@ public class NoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null) {
+            myNote = savedInstanceState.getParcelable(CURRENT_NOTE);
+        } else {
+            myNote = new MyNote("555", "666", "777");
+        }
+
         initView(view);
     }
 
@@ -59,6 +69,15 @@ public class NoteFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         isLandscape =
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (savedInstanceState != null) {
+            currentPosition = savedInstanceState.getInt(CURRENT_NOTE, 0);
+        }
+
+        if (isLandscape) {
+            openDescription(currentPosition);
+        }
+
     }
 
 
@@ -86,7 +105,8 @@ public class NoteFragment extends Fragment {
 
             int index = i;
 
-            tw.setOnClickListener(view -> checkOrientation(index));
+            tw.setOnClickListener(view ->
+                    checkOrientation(index));
 
             linearLayout.addView(tw);
         }
@@ -157,5 +177,11 @@ public class NoteFragment extends Fragment {
 
     public static List<MyNote> getNoteList() {
         return noteList;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) { // Сохранили позицию
+        outState.putParcelable(CURRENT_NOTE, myNote);
+        super.onSaveInstanceState(outState);
     }
 }
