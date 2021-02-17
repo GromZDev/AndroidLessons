@@ -6,7 +6,6 @@
     android:background="@color/cardview_dark_background"
     tools:context=".MainActivity">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/top_text"
         android:layout_width="wrap_content"
@@ -15,48 +14,44 @@
         android:text="@string/my_notes"
         android:textColor="@color/white"
         android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/land_linear_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/land_linear_layout"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- //TODO 2 Ставим фрагмент в разметку. Имя обязательно! -->
-
-<LinearLayout
-    android:id="@+id/land_linear_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_marginTop="48dp"
-    android:layout_marginStart="@dimen/TOP_margin"
-    android:layout_marginEnd="@dimen/TOP_margin"
-    android:layout_marginBottom="@dimen/TOP_margin"
-    android:orientation="horizontal">
-
-
-    <fragment
-        android:id="@+id/note_fragment"
-        android:name="Android_Intro.Lesson_6_Notes.NoteFragment"
-        android:layout_width="350dp"
+    <LinearLayout
+        android:id="@+id/land_linear_layout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/frame_land_note"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_text" />
+        android:layout_marginStart="@dimen/TOP_margin"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="@dimen/TOP_margin"
+        android:layout_marginBottom="@dimen/TOP_margin"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <FrameLayout
-        android:id="@+id/frame_land_note"
-        android:layout_width="350dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/note_fragment"
-        app:layout_constraintTop_toBottomOf="@id/top_text">
+        <fragment
+            android:id="@+id/note_fragment"
+            android:name="Android_Intro.Lesson_6_Notes.NoteFragment"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/frame_land_note"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_text" />
 
+        <FrameLayout
+            android:id="@+id/frame_land_note"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/note_fragment"
+            app:layout_constraintTop_toBottomOf="@id/top_text">
 
-    </FrameLayout>
+        </FrameLayout>
 
-</LinearLayout>
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_add"

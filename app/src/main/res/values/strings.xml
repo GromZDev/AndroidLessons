@@ -11,6 +11,7 @@
     <string name="delete_note">Delete Note</string>
     <string name="my_note_description">MyNote Description</string>
     <string name="set_date">Set Date</string>
+    <string name="save">Save</string>
 
 
 </resources>
