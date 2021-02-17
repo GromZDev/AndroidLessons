@@ -14,12 +14,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class NoteFragment extends Fragment {//TODO 1 создали класс-фрагмент, сделали лэйаут к нему
 
-    private static List<MyNote> noteList;
+    private static List<MyNote> noteList = new ArrayList<>();
 
     private boolean isLandscape;
 
@@ -27,11 +29,13 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
     private String dateFromDescription;
     private String receivedCode;
 
+    protected View v;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_note, container, false);
+        v = inflater.inflate(R.layout.fragment_note, container, false);
 
         receiveSavedDateAndCode();
 
@@ -51,7 +55,6 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
         // Вызывается после того, когда вьюха создана. Тут получаем наш вью - fragment_note
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-
     }
 
     @Override
@@ -64,13 +67,25 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
 
     private void initView(View view){ //TODO 2 Метод получения данных, далее идем в разметку мэйна
         LinearLayout linearLayout = (LinearLayout) view; // Получаем лайаут
-        String[] array = getResources().getStringArray(R.array.MyNotes) ; // Получаем список
+      //  String[] array = getResources().getStringArray(R.array.MyNotes) ; // Получаем список
         int margin = getResources().getDimensionPixelSize(R.dimen.LEFT_notes_name_list_margin); // Отступы определяем
 
         setNotesList();
 
+        MaterialButton button = getView().findViewById(R.id.button_add);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = (LinearLayout) view;
+                getNoteList().add(new MyNote("333", "t5g4h", "rthbrthnrt"));
+                linearLayout.addView(tw);
+
+            }
+        });
+
         for (int i = 0; i < noteList.size() ; i++) {
-            String name = array[i];
+
+            String name = noteList.get(i).getNoteName();
             tw = new TextView(linearLayout.getContext()); // ВАЖНО! Если контекст вьюхи
             // передадим в какой-то класс, живущий дольше фрагмента, то будет утечка памяти!!!
             tw.setText(name);
@@ -79,7 +94,6 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
             tw.setText(noteList.get(i).getNoteName());
 
             setSavedDate(i);
-
 
             int index = i; //TODO 3
             tw.setOnClickListener(new View.OnClickListener() { // Вешаем на текст тач
@@ -91,6 +105,19 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
             linearLayout.addView(tw);
         }
 
+//addNote();
+    }
+
+    private void addNote() {
+
+        MaterialButton button = getView().findViewById(R.id.button_add);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getNoteList().add(new MyNote("333", "t5g4h", "rthbrthnrt"));
+
+            }
+        });
     }
 
     private void setNotesList() { // Установка списка заметок
@@ -100,6 +127,8 @@ public class NoteFragment extends Fragment {//TODO 1 создали класс-�
         noteList.add(new MyNote("Заметка3", "Описание3", "Тема заметки 3"));
         noteList.add(new MyNote("Заметка4", "Описание4", "Тема заметки 4"));
         noteList.add(new MyNote("Заметка5", "Описание5", "Тема заметки 5"));
+        noteList.add(new MyNote("Заметка6", "Описание6", "Тема заметки 6"));
+
     }
 
     private void setSavedDate(int i) { // Устанавливаем полученную дату конкретной заметке, сравнивая с её описанием ! (Yeahhh!!!)
