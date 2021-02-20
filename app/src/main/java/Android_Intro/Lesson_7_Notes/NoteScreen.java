@@ -1,5 +1,6 @@
 package Android_Intro.Lesson_7_Notes;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,10 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +27,37 @@ public class NoteScreen extends Fragment {
     private TextView tw;
     private NoteDescription fragment = new NoteDescription();
 
+//==================== Создание верхнего меню =====================
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
+        setHasOptionsMenu(true); // активация меню
+        super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main_header, menu); // Инфлейтим меню
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
-
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_settings:
+                Toast.makeText(getActivity(), "Go to Settings", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_search:
+                Toast.makeText(getActivity(), "Search MyNote", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_sort:
+                Toast.makeText(getActivity(), "Do sort MyNotes", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+//==============================================================
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,6 +67,7 @@ public class NoteScreen extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
         myNoteArrayList.add(new MyNote("Заметка1", "Описание1", "Тема заметки 1"));
