@@ -6,6 +6,11 @@
     <string name="share">Share</string>
     <string name="send_note">Send Note</string>
     <string name="add_image">Add Image</string>
+    <string name="app_settings">App Settings</string>
+    <string name="about_app">About App</string>
+
+    <string name="nav_drawer_open">Open Navigation Drawer</string>
+    <string name="nav_drawer_close">Close Navigation Drawer</string>
 
 
 </resources>
