@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Lesson_7_Notes</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="sort_my_notes">Sort My Notes</string>
 
 
 </resources>
