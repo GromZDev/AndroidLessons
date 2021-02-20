@@ -1,5 +1,6 @@
 package Android_Intro.Lesson_7_Notes;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,10 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -21,6 +26,41 @@ public class NoteDescription extends Fragment {
     private String descriptionFromNote;
 
     private NoteScreen fragment;
+
+    //==================== Создание верхнего меню =====================
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
+        setHasOptionsMenu(true); // активация меню
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_note_description, menu); // Инфлейтим меню
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_share:
+                Toast.makeText(getActivity(), "Share this Note", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_send:
+                Toast.makeText(getActivity(), "Send this Note", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_addImage:
+                Toast.makeText(getActivity(), "Add Image", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+//==============================================================
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
