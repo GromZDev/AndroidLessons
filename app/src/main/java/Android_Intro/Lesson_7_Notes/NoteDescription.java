@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -69,7 +71,16 @@ public class NoteDescription extends Fragment {
         v = inflater.inflate(R.layout.fragment_note_description, container, false);
 
         receiveNoteDescription();
+
+        toolbarInitiation();
+
         return v;
+    }
+
+    private void toolbarInitiation() {
+        Toolbar toolbar = v.findViewById(R.id.toolbar_fragment);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
     }
 
     private void receiveNoteDescription() {
