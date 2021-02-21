@@ -5,8 +5,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -28,8 +30,10 @@ public class NoteScreen extends Fragment {
     private static List<MyNote> myNoteArrayList = new ArrayList<>();
     private TextView tw;
     private NoteDescription fragment = new NoteDescription();
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
 
-//==================== Создание верхнего меню =====================
+    //==================== Создание верхнего меню =====================
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
         setHasOptionsMenu(true); // активация меню
@@ -46,7 +50,7 @@ public class NoteScreen extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_settings:
                 Toast.makeText(getActivity(), "Go to Settings", Toast.LENGTH_SHORT).show();
                 break;
@@ -59,22 +63,30 @@ public class NoteScreen extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-//==============================================================
+
+    //==============================================================
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_note_screen, container, false);
+        View v = inflater.inflate(R.layout.drawer_fragment_note_screen, container, false);
 
-        toolbarInitiation(v);
+        toolbar = toolbarInitiation(v);
+
+        drawerLayout = v.findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout,
+                toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         return v;
     }
 
-    private void toolbarInitiation(View v) {
+    private Toolbar toolbarInitiation(View v) {
         Toolbar toolbar = v.findViewById(R.id.toolbar_main_fragment);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
+        return toolbar;
     }
 
     @Override
@@ -90,7 +102,7 @@ public class NoteScreen extends Fragment {
 //        myNoteArrayList.add(new MyNote("Заметка6", "Описание6", "Тема заметки 6"));
 
 
-        LinearLayout linearLayout = (LinearLayout) view;
+        LinearLayout linearLayout = view.findViewById(R.id.linear_layout_note);
 
         for (int i = 0; i < myNoteArrayList.size(); i++) {
             String name = myNoteArrayList.get(i).getNoteName();
@@ -101,36 +113,31 @@ public class NoteScreen extends Fragment {
 
             int index = i;
 
-           tw.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   goToNoteDescriptionWithData(index);
-               }
-           });
+            tw.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToNoteDescriptionWithData(index);
+                }
+            });
 
             linearLayout.addView(tw);
         }
     }
 
-
-
     private void goToNoteDescriptionWithData(int index) {
-        fragment = new NoteDescription();
+        //  fragment = new NoteDescription();
 
         Bundle bundle = new Bundle();
         bundle.putString("data", myNoteArrayList.get(index).getNoteDescription());
-        fragment.setArguments(bundle);
+        MainActivity.getNoteDescription().setArguments(bundle);
         if (getFragmentManager() != null) {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-         //           .addToBackStack(null)
+                    .replace(R.id.fragment_container, MainActivity.getNoteDescription())
+                    //           .addToBackStack(null)
                     .commit();
         }
     }
 
-    public static List<MyNote> getMyNoteArrayList() {
-        return myNoteArrayList;
-    }
 
 }
