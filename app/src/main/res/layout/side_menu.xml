@@ -13,7 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tw"
         android:layout_marginStart="30dp"
-        android:src="@drawable/note_icon"/>
+        android:src="@drawable/note_icon"
+        android:contentDescription="@string/myNote_application" />
 
     <TextView
         android:id="@+id/tw"
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/walter_turncoat"
-        android:text="MyNote App"
+        android:text="@string/mynote_app"
         android:textColor="#444444"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
