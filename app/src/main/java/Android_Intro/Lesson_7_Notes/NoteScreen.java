@@ -30,7 +30,7 @@ import java.util.List;
 
 public class NoteScreen extends Fragment {
 
- //   private static List<MyNote> myNoteArrayList = new ArrayList<>(); //
+    //   private static List<MyNote> myNoteArrayList = new ArrayList<>(); //
     private TextView tw;
     private NoteDescription fragment = new NoteDescription();
     DrawerLayout drawerLayout;
@@ -98,7 +98,7 @@ public class NoteScreen extends Fragment {
                 int id = item.getItemId();
                 if (clickOnNavigateFragment(id)) {
                     drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
-                  return true;
+                    return true;
 
                 }
                 return false;
@@ -112,15 +112,15 @@ public class NoteScreen extends Fragment {
                 Toast.makeText(getActivity(), "Going to Settings App", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.side_menu_about:
-                        if (getFragmentManager() != null) {
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.fragment_container, new AboutApp())
-                                    //       .addToBackStack(null)
-                                    .commit();
-                            drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
-                            break;
-                        }
+                if (getFragmentManager() != null) {
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, new AboutApp())
+                            //       .addToBackStack(null)
+                            .commit();
+                    drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
+                    break;
+                }
 
                 return true;
         }
@@ -139,9 +139,9 @@ public class NoteScreen extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
         List<MyNote> myNoteArrayList = new ArrayList<>();
-            myNoteArrayList.add(new MyNote("Заметка1", "Описание1", "Тема заметки 1"));
-            myNoteArrayList.add(new MyNote("Заметка2", "Описание2", "Тема заметки 2"));
-            myNoteArrayList.add(new MyNote("Заметка3", "Описание3", "Тема заметки 3"));
+        myNoteArrayList.add(new MyNote("Note Num1", "Note Description1", "Тема заметки 1"));
+        myNoteArrayList.add(new MyNote("Note Num2", "Note Description2", "Тема заметки 2"));
+        myNoteArrayList.add(new MyNote("Note Num2", "Note Description3", "Тема заметки 3"));
 //        myNoteArrayList.add(new MyNote("Заметка4", "Описание4", "Тема заметки 4"));
 //        myNoteArrayList.add(new MyNote("Заметка5", "Описание5", "Тема заметки 5"));
 //        myNoteArrayList.add(new MyNote("Заметка6", "Описание6", "Тема заметки 6"));
@@ -154,7 +154,7 @@ public class NoteScreen extends Fragment {
             tw = new TextView(linearLayout.getContext());
             tw.setText(name);
             tw.setTextSize(24f);
-            tw.setPadding(20, 0, 20, 0);
+            tw.setPadding(60, 16, 0, 0);
 
             int index = i;
 
@@ -162,7 +162,7 @@ public class NoteScreen extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                 //   goToNoteDescriptionWithData(index); // Список заметок будет повторяться при возврате
+                    //   goToNoteDescriptionWithData(index); // Список заметок будет повторяться при возврате
                     SettingsStorage ss = new SettingsStorage();
                     Bundle bundle = new Bundle();
                     bundle.putString(ss.getDataToFragmentDescription(), myNoteArrayList.get(index).getNoteDescription());
