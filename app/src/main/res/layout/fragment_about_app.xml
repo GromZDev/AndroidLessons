@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            android:backgroundTint="@color/toolbar_bg"
             app:popupTheme="@style/Theme.Lesson_7_Notes.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -25,18 +26,19 @@
         android:id="@+id/text_view_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/TOP_margin"
         android:fontFamily="@font/walter_turncoat"
         android:gravity="center"
-        android:layout_marginTop="20dp"
         android:text="@string/text_in_aboutApp"
-        android:textSize="25sp"
+        android:textSize="@dimen/aboutApp_text_size"
         android:textStyle="bold" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_back_from_aboutApp"
+        style="@style/MyButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="55dp"
+        android:layout_margin="56dp"
         android:layout_marginTop="@dimen/TOP_margin"
         android:text="@string/back" />
 

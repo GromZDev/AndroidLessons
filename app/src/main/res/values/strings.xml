@@ -12,7 +12,7 @@
     <string name="nav_drawer_open">Open Navigation Drawer</string>
     <string name="nav_drawer_close">Close Navigation Drawer</string>
     <string name="back">Back</string>
-    <string name="mynote_app">MyNote App</string>
+    <string name="my_note_app">MyNote App</string>
     <string name="myNote_application">MyNote Application</string>
 
     <string name="text_in_aboutApp">This application is made on the 7th lesson of Android development Intro from Geekbrains by Evseev Dmitriy</string>

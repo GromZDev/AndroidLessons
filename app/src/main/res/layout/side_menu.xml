@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/walter_turncoat"
-        android:text="@string/mynote_app"
-        android:textColor="#444444"
+        android:text="@string/my_note_app"
+        android:textColor="@color/button_stroke_color"
         android:textSize="@dimen/main_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/note_img" />
