@@ -92,22 +92,23 @@ public class NoteScreen extends Fragment {
         toggle.syncState();
 
         NavigationView navigationView = v.findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (clickOnNavigateFragment(id)) {
-                    drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
-                    return true;
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (clickOnNavigateFragment(id)) {
+                drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
+                return true;
 
-                }
-                return false;
             }
+            return false;
         });
     }
 
+    @SuppressLint("NonConstantResourceId")
     private boolean clickOnNavigateFragment(int id) {
         switch (id) {
+            case R.id.side_home:
+                Toast.makeText(getActivity(), "Going to Home Page", Toast.LENGTH_SHORT).show();
+                return true;
             case R.id.side_menu_settings:
                 Toast.makeText(getActivity(), "Going to Settings App", Toast.LENGTH_SHORT).show();
                 return true;
@@ -121,6 +122,11 @@ public class NoteScreen extends Fragment {
                     drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
                     break;
                 }
+            case R.id.side_share_app:
+                Toast.makeText(getActivity(), "Share this App with friends", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.side_feedback:
+                Toast.makeText(getActivity(), "Feedback via mail", Toast.LENGTH_SHORT).show();
 
                 return true;
         }
@@ -130,6 +136,7 @@ public class NoteScreen extends Fragment {
     private Toolbar toolbarInitiation(View v) {
         Toolbar toolbar = v.findViewById(R.id.toolbar_main_fragment);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
+        assert activity != null;
         activity.setSupportActionBar(toolbar);
         return toolbar;
     }
@@ -158,22 +165,19 @@ public class NoteScreen extends Fragment {
 
             int index = i;
 
-            tw.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            tw.setOnClickListener(v -> {
 
-                    //   goToNoteDescriptionWithData(index); // Список заметок будет повторяться при возврате
-                    SettingsStorage ss = new SettingsStorage();
-                    Bundle bundle = new Bundle();
-                    bundle.putString(ss.getDataToFragmentDescription(), myNoteArrayList.get(index).getNoteDescription());
-                    MainActivity.getNoteDescription().setArguments(bundle);
-                    if (getFragmentManager() != null) {
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container, MainActivity.getNoteDescription())
-                                //           .addToBackStack(null)
-                                .commit();
-                    }
+                //   goToNoteDescriptionWithData(index); // Список заметок будет повторяться при возврате
+                SettingsStorage ss = new SettingsStorage();
+                Bundle bundle = new Bundle();
+                bundle.putString(ss.getDataToFragmentDescription(), myNoteArrayList.get(index).getNoteDescription());
+                MainActivity.getNoteDescription().setArguments(bundle);
+                if (getFragmentManager() != null) {
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, MainActivity.getNoteDescription())
+                            //           .addToBackStack(null)
+                            .commit();
                 }
             });
 
