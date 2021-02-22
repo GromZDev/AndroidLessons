@@ -16,7 +16,10 @@
     <string name="myNote_application">MyNote Application</string>
 
     <string name="text_in_aboutApp">This application is made on the 7th lesson of Android development Intro from Geekbrains by Evseev Dmitriy</string>
-
+    <string name="share_this_app">Share this App</string>
+    <string name="feedback">Feedback</string>
+    <string name="second_menu">Useful actions</string>
+    <string name="home_page">Home Page</string>
 
 
 </resources>
