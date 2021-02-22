@@ -1,0 +1,11 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="MyButtons" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/button_stroke_color</item>
+        <item name="fontFamily">@font/walter_turncoat</item>
+        <item name="backgroundTint">@color/toolbar_bg</item>
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

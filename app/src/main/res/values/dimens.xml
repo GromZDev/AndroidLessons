@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="TOP_margin">20dp</dimen>
     <dimen name="LEFT_notes_name_list_margin">20dp</dimen>
     <dimen name="main_text_size">24sp</dimen>
+    <dimen name="aboutApp_text_size">28sp</dimen>
     <dimen name="margin_start_noteList">20dp</dimen>
     <dimen name="margin_top_noteList">24dp</dimen>
 
