@@ -15,5 +15,8 @@
     <string name="mynote_app">MyNote App</string>
     <string name="myNote_application">MyNote Application</string>
 
+    <string name="text_in_aboutApp">This application is made on the 7th lesson of Android development Intro from Geekbrains by Evseev Dmitriy</string>
+
+
 
 </resources>
