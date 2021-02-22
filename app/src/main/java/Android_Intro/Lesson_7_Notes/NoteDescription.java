@@ -86,7 +86,7 @@ public class NoteDescription extends Fragment {
     private void receiveNoteDescription() {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            descriptionFromNote = bundle.getString("data");
+            descriptionFromNote = bundle.getString(new SettingsStorage().getDataToFragmentDescription());
 
         }
     }
