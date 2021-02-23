@@ -187,8 +187,24 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 // ========== Имплементим метод, берём позицию и переходим по клику конкретной заметки =============
     @Override
     public void onOnItemClicked(int position) {
-        MyNote myNote = noteList.get(position);
-        Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
+     //   MyNote myNote = noteList.get(position);
+     //   Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
+
+        goToFragmentDescription(position);
+    }
+
+    private void goToFragmentDescription(int position) {
+        SettingsStorage ss = new SettingsStorage();
+        Bundle bundle = new Bundle();
+        bundle.putString(ss.getDataToFragmentDescription(), noteList.get(position).getNoteDescription());
+        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, MainActivity.getNoteDescriptionFragment())
+                    //           .addToBackStack(null)
+                    .commit();
+        }
     }
 // =================================================================================================
 }
