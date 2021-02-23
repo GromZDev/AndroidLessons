@@ -1,0 +1,18 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"> <!--Кнопка при нажатии: -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/transparent_color" />
+            <corners android:radius="35dp" />
+            <stroke android:width="3dp" android:color="@color/button_stroke_color" />
+        </shape>
+    </item>
+
+    <item android:state_enabled="true"> <!--Кнопка статичная: -->
+                <shape android:shape="rectangle">
+                    <gradient android:angle="180" android:endColor="@color/toolbar_bg" android:startColor="@color/item_note_end_bg" android:type="linear" />
+                    <corners android:radius="35dp" />
+
+                </shape>
+    </item>
+
+</selector>
