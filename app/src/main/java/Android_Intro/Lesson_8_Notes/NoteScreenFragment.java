@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NoteScreenFragment extends Fragment {
+public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -178,10 +178,17 @@ public class NoteScreenFragment extends Fragment {
     private void initNoteListByRecyclerView(@NonNull View view) {
         RecyclerView noteRecyclerView = view.findViewById(R.id.recyclerView_Notes);
         noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList); //19.54
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this); //19.54
         noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Или new LinearLayoutManager(noteRecyclerView.getContext())
         noteRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
+// ========== Имплементим метод, берём позицию и переходим по клику конкретной заметки =============
+    @Override
+    public void onOnItemClicked(int position) {
+        MyNote myNote = noteList.get(position);
+        Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
+    }
+// =================================================================================================
 }
