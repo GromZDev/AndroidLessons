@@ -17,10 +17,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     protected Context mContext;
     protected List<MyNote> myNoteArrayList;
+    protected static MyNoteAdapterCallback callback;
 
-    public RecyclerViewAdapter(Context mContext, List<MyNote> myNoteArrayList) {
+    public RecyclerViewAdapter(Context mContext, List<MyNote> myNoteArrayList, MyNoteAdapterCallback callback) {
         this.mContext = mContext;
         this.myNoteArrayList = myNoteArrayList;
+        this.callback = callback;
     }
 
     @NonNull
@@ -56,8 +58,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textView_NoteName = itemView.findViewById(R.id.item_note_name);
             textView_NoteTheme = itemView.findViewById(R.id.item_note_theme);
 
-
-
+            textView_NoteName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        callback.onOnItemClicked(getAdapterPosition());
+                    }
+                }
+            });
         }
+
+
     }
 }
