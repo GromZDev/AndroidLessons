@@ -82,7 +82,7 @@ public class AboutApp extends Fragment {
             if (getFragmentManager() != null) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, MainActivity.getNoteScreen())
+                        .replace(R.id.fragment_container, MainActivity.getNoteScreenFragment())
                         //       .addToBackStack(null)
                         .commit();
 

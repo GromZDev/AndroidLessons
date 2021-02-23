@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NoteScreen extends Fragment {
+public class NoteScreenFragment extends Fragment {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -169,11 +169,11 @@ public class NoteScreen extends Fragment {
                 SettingsStorage ss = new SettingsStorage();
                 Bundle bundle = new Bundle();
                 bundle.putString(ss.getDataToFragmentDescription(), myNoteArrayList.get(index).getNoteDescription());
-                MainActivity.getNoteDescription().setArguments(bundle);
+                MainActivity.getNoteDescriptionFragment().setArguments(bundle);
                 if (getFragmentManager() != null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.fragment_container, MainActivity.getNoteDescription())
+                            .replace(R.id.fragment_container, MainActivity.getNoteDescriptionFragment())
                             //           .addToBackStack(null)
                             .commit();
                 }

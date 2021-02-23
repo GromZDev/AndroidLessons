@@ -12,10 +12,10 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("StaticFieldLeak")
-    private static final NoteScreen noteScreen = new NoteScreen();
+    private static final NoteScreenFragment NOTE_SCREEN_FRAGMENT = new NoteScreenFragment();
 
     @SuppressLint("StaticFieldLeak")
-    private static final NoteDescription noteDescription = new NoteDescription();
+    private static final NoteDescriptionFragment NOTE_DESCRIPTION_FRAGMENT = new NoteDescriptionFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +24,17 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, noteScreen);
+        fragmentTransaction.replace(R.id.fragment_container, NOTE_SCREEN_FRAGMENT);
         fragmentTransaction.commit();
 
     }
 
-    public static NoteScreen getNoteScreen() {
-        return noteScreen;
+    public static NoteScreenFragment getNoteScreenFragment() {
+        return NOTE_SCREEN_FRAGMENT;
     }
 
-    public static NoteDescription getNoteDescription() {
-        return noteDescription;
+    public static NoteDescriptionFragment getNoteDescriptionFragment() {
+        return NOTE_DESCRIPTION_FRAGMENT;
     }
 
 }

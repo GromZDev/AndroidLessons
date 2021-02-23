@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class NoteDescription extends Fragment {
+public class NoteDescriptionFragment extends Fragment {
 
     protected View viewFragment;
     private String descriptionFromNote;
@@ -101,7 +101,7 @@ public class NoteDescription extends Fragment {
             if (getFragmentManager() != null) {
                getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, MainActivity.getNoteScreen())
+                        .replace(R.id.fragment_container, MainActivity.getNoteScreenFragment())
                  //       .addToBackStack(null)
                         .commit();
             }
