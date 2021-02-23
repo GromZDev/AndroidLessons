@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_7_Notes;
+package Android_Intro.Lesson_8_Notes;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -22,13 +22,13 @@ public class MyNote implements Parcelable {
 
     public static final Creator<MyNote> CREATOR = new Creator<MyNote>() {
         @Override
-        public Android_Intro.Lesson_7_Notes.MyNote createFromParcel(Parcel in) {
-            return new Android_Intro.Lesson_7_Notes.MyNote(in);
+        public Android_Intro.Lesson_8_Notes.MyNote createFromParcel(Parcel in) {
+            return new Android_Intro.Lesson_8_Notes.MyNote(in);
         }
 
         @Override
-        public Android_Intro.Lesson_7_Notes.MyNote[] newArray(int size) {
-            return new Android_Intro.Lesson_7_Notes.MyNote[size];
+        public Android_Intro.Lesson_8_Notes.MyNote[] newArray(int size) {
+            return new Android_Intro.Lesson_8_Notes.MyNote[size];
         }
     };
 

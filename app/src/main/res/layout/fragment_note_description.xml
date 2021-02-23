@@ -8,7 +8,7 @@
         android:id="@+id/menu_toolbar_description_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Lesson_7_Notes.AppBarOverlay"
+        android:theme="@style/Theme.Lesson_8_Notes.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:backgroundTint="@color/toolbar_bg"
-            app:popupTheme="@style/Theme.Lesson_7_Notes.PopupOverlay" />
+            app:popupTheme="@style/Theme.Lesson_8_Notes.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

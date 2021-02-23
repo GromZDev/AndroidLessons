@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_7_Notes;
+package Android_Intro.Lesson_8_Notes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -15,19 +15,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 
-public class NoteDescriptionFragment extends Fragment {
 
-    protected View viewFragment;
-    private String descriptionFromNote;
+public class AboutApp extends Fragment {
 
-    //==================== Создание верхнего меню =====================
+    View viewAboutApp;
+
+// ================== Меню тулбар ================
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true); // активация меню
         super.onCreate(savedInstanceState);
     }
@@ -55,58 +54,39 @@ public class NoteDescriptionFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-//==============================================================
-
-
-
+// =========================================
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        viewFragment = inflater.inflate(R.layout.fragment_note_description, container, false);
+        viewAboutApp = inflater.inflate(R.layout.fragment_about_app, container, false);
 
-        receiveNoteDescription();
+        doButtonBack();
 
         toolbarInitiation();
 
-        return viewFragment;
+        return viewAboutApp;
+
     }
 
     private void toolbarInitiation() {
-        Toolbar toolbar = viewFragment.findViewById(R.id.toolbar_fragment);
+        Toolbar toolbar = viewAboutApp.findViewById(R.id.toolbar_about_fragment);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
     }
 
-    private void receiveNoteDescription() {
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            descriptionFromNote = bundle.getString(new SettingsStorage().getDataToFragmentDescription());
-
-        }
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        TextView tw = view.findViewById(R.id.textView);
-        tw.setText(descriptionFromNote);
-
-
-        Button back = view.findViewById(R.id.back);
-        back.setOnClickListener(v -> {
-
+    private void doButtonBack() {
+        MaterialButton buttonBack = viewAboutApp.findViewById(R.id.button_back_from_aboutApp);
+        buttonBack.setOnClickListener(v -> {
             if (getFragmentManager() != null) {
-               getFragmentManager()
+                getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, MainActivity.getNoteScreenFragment())
-                 //       .addToBackStack(null)
+                        //       .addToBackStack(null)
                         .commit();
+
             }
         });
-
     }
-
 }
