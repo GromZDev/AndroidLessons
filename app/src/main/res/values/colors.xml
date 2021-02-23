@@ -10,4 +10,5 @@
     <color name="button_stroke_color">#444444</color>
     <color name="transparent_color">#00000000</color>
     <color name="toolbar_bg">#F2A000</color>
+    <color name="item_note_end_bg">#D87C09</color>
 </resources>

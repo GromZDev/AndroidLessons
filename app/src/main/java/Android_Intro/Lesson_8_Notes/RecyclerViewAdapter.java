@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.google.android.material.textview.MaterialTextView;
+
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyNoteViewHolder> {
@@ -46,8 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class MyNoteViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView_Note;
-        private TextView textView_NoteName;
-        private TextView textView_NoteTheme;
+        private final MaterialTextView textView_NoteName;
+        private final MaterialTextView textView_NoteTheme;
 
         public MyNoteViewHolder(@NonNull View itemView) {
             super(itemView);
