@@ -22,7 +22,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class AboutApp extends Fragment {
 
-    View v;
+    View viewAboutApp;
 
 // ================== Меню тулбар ================
     @Override
@@ -60,35 +60,32 @@ public class AboutApp extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_about_app, container, false);
+        viewAboutApp = inflater.inflate(R.layout.fragment_about_app, container, false);
 
         doButtonBack();
 
         toolbarInitiation();
 
-        return v;
+        return viewAboutApp;
 
     }
 
     private void toolbarInitiation() {
-        Toolbar toolbar = v.findViewById(R.id.toolbar_about_fragment);
+        Toolbar toolbar = viewAboutApp.findViewById(R.id.toolbar_about_fragment);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
     }
 
     private void doButtonBack() {
-        MaterialButton buttonBack = v.findViewById(R.id.button_back_from_aboutApp);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getFragmentManager() != null) {
-                    getFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, MainActivity.getNoteScreen())
-                            //       .addToBackStack(null)
-                            .commit();
+        MaterialButton buttonBack = viewAboutApp.findViewById(R.id.button_back_from_aboutApp);
+        buttonBack.setOnClickListener(v -> {
+            if (getFragmentManager() != null) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, MainActivity.getNoteScreen())
+                        //       .addToBackStack(null)
+                        .commit();
 
-                }
             }
         });
     }

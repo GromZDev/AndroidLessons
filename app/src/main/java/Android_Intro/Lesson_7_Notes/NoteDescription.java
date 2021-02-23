@@ -19,15 +19,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Objects;
-
 
 public class NoteDescription extends Fragment {
 
-    protected View v;
+    protected View viewFragment;
     private String descriptionFromNote;
-
-    private NoteScreen fragment;
 
     //==================== Создание верхнего меню =====================
     @Override
@@ -68,17 +64,17 @@ public class NoteDescription extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_note_description, container, false);
+        viewFragment = inflater.inflate(R.layout.fragment_note_description, container, false);
 
         receiveNoteDescription();
 
         toolbarInitiation();
 
-        return v;
+        return viewFragment;
     }
 
     private void toolbarInitiation() {
-        Toolbar toolbar = v.findViewById(R.id.toolbar_fragment);
+        Toolbar toolbar = viewFragment.findViewById(R.id.toolbar_fragment);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
     }
@@ -100,20 +96,14 @@ public class NoteDescription extends Fragment {
 
 
         Button back = view.findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        back.setOnClickListener(v -> {
 
-
-             //   NoteScreen fragment = new NoteScreen();
-             //   NoteScreen fragment = new NoteScreen();
-                if (getFragmentManager() != null) {
-                   getFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, MainActivity.getNoteScreen())
-                     //       .addToBackStack(null)
-                            .commit();
-                }
+            if (getFragmentManager() != null) {
+               getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, MainActivity.getNoteScreen())
+                 //       .addToBackStack(null)
+                        .commit();
             }
         });
 

@@ -30,9 +30,6 @@ import java.util.List;
 
 public class NoteScreen extends Fragment {
 
-    //   private static List<MyNote> myNoteArrayList = new ArrayList<>(); //
-    private TextView tw;
-    private NoteDescription fragment = new NoteDescription();
     DrawerLayout drawerLayout;
     Toolbar toolbar;
 
@@ -158,14 +155,15 @@ public class NoteScreen extends Fragment {
 
         for (int i = 0; i < myNoteArrayList.size(); i++) {
             String name = myNoteArrayList.get(i).getNoteName();
-            tw = new TextView(linearLayout.getContext());
-            tw.setText(name);
-            tw.setTextSize(24f);
-            tw.setPadding(60, 16, 0, 0);
+            //   private static List<MyNote> myNoteArrayList = new ArrayList<>(); //
+            TextView textViewOfNotes = new TextView(linearLayout.getContext());
+            textViewOfNotes.setText(name);
+            textViewOfNotes.setTextSize(24f);
+            textViewOfNotes.setPadding(60, 16, 0, 0);
 
             int index = i;
 
-            tw.setOnClickListener(v -> {
+            textViewOfNotes.setOnClickListener(v -> {
 
                 //   goToNoteDescriptionWithData(index); // Список заметок будет повторяться при возврате
                 SettingsStorage ss = new SettingsStorage();
@@ -181,7 +179,7 @@ public class NoteScreen extends Fragment {
                 }
             });
 
-            linearLayout.addView(tw);
+            linearLayout.addView(textViewOfNotes);
         }
     }
 
