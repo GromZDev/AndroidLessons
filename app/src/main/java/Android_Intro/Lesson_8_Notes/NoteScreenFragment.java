@@ -11,6 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,11 +35,36 @@ public class NoteScreenFragment extends Fragment {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
 
-    //==================== Создание верхнего меню =====================
+    private List<MyNote> noteList;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
         setHasOptionsMenu(true); // активация меню
         super.onCreate(savedInstanceState);
+
+        noteList = new ArrayList<>();
+        noteList.add(new MyNote("Note Num1", "Note Description1", "Тема заметки 1"));
+        noteList.add(new MyNote("Note Num2", "Note Description2", "Тема заметки 2"));
+        noteList.add(new MyNote("Note Num3", "Note Description3", "Тема заметки 3"));
+        noteList.add(new MyNote("Note Num4", "Note Description4", "Тема заметки 4"));
+        noteList.add(new MyNote("Note Num5", "Note Description5", "Тема заметки 5"));
+        noteList.add(new MyNote("Note Num6", "Note Description6", "Тема заметки 6"));
+        noteList.add(new MyNote("Note Num7", "Note Description7", "Тема заметки 7"));
+        noteList.add(new MyNote("Note Num8", "Note Description8", "Тема заметки 8"));
+        noteList.add(new MyNote("Note Num9", "Note Description9", "Тема заметки 9"));
+        noteList.add(new MyNote("Note Num10", "Note Description10", "Тема заметки 10"));
+        noteList.add(new MyNote("Note Num11", "Note Description11", "Тема заметки 11"));
+        noteList.add(new MyNote("Note Num12", "Note Description12", "Тема заметки 12"));
+        noteList.add(new MyNote("Note Num13", "Note Description13", "Тема заметки 13"));
+        noteList.add(new MyNote("Note Num14", "Note Description14", "Тема заметки 14"));
+        noteList.add(new MyNote("Note Num15", "Note Description15", "Тема заметки 15"));
+        noteList.add(new MyNote("Note Num16", "Note Description16", "Тема заметки 16"));
+        noteList.add(new MyNote("Note Num17", "Note Description17", "Тема заметки 17"));
+        noteList.add(new MyNote("Note Num18", "Note Description18", "Тема заметки 18"));
+        noteList.add(new MyNote("Note Num19", "Note Description19", "Тема заметки 19"));
+        noteList.add(new MyNote("Note Num20", "Note Description20", "Тема заметки 20"));
+
+
     }
 
     @Override
@@ -67,16 +94,15 @@ public class NoteScreenFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    //==============================================================
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.drawer_fragment_note_screen, container, false);
+        View viewNoteFragment = inflater.inflate(R.layout.drawer_fragment_note_screen, container, false);
 
-        initiateSideNavMenu(v); // Наше боковое меню
+        initiateSideNavMenu(viewNoteFragment); // Наше боковое меню
 
-        return v;
+        return viewNoteFragment;
     }
 
     private void initiateSideNavMenu(View v) {
@@ -142,59 +168,20 @@ public class NoteScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        List<MyNote> myNoteArrayList = new ArrayList<>();
-        myNoteArrayList.add(new MyNote("Note Num1", "Note Description1", "Тема заметки 1"));
-        myNoteArrayList.add(new MyNote("Note Num2", "Note Description2", "Тема заметки 2"));
-        myNoteArrayList.add(new MyNote("Note Num2", "Note Description3", "Тема заметки 3"));
-//        myNoteArrayList.add(new MyNote("Заметка4", "Описание4", "Тема заметки 4"));
-//        myNoteArrayList.add(new MyNote("Заметка5", "Описание5", "Тема заметки 5"));
-//        myNoteArrayList.add(new MyNote("Заметка6", "Описание6", "Тема заметки 6"));
 
+//================================ Сетим RecyclerView =========================
+        initNoteListByRecyclerView(view);
+//=============================================================================
 
-        LinearLayout linearLayout = view.findViewById(R.id.linear_layout_note);
-
-        for (int i = 0; i < myNoteArrayList.size(); i++) {
-            String name = myNoteArrayList.get(i).getNoteName();
-            //   private static List<MyNote> myNoteArrayList = new ArrayList<>(); //
-            TextView textViewOfNotes = new TextView(linearLayout.getContext());
-            textViewOfNotes.setText(name);
-            textViewOfNotes.setTextSize(24f);
-            textViewOfNotes.setPadding(60, 16, 0, 0);
-
-            int index = i;
-
-            textViewOfNotes.setOnClickListener(v -> {
-
-                //   goToNoteDescriptionWithData(index); // Список заметок будет повторяться при возврате
-                SettingsStorage ss = new SettingsStorage();
-                Bundle bundle = new Bundle();
-                bundle.putString(ss.getDataToFragmentDescription(), myNoteArrayList.get(index).getNoteDescription());
-                MainActivity.getNoteDescriptionFragment().setArguments(bundle);
-                if (getFragmentManager() != null) {
-                    getFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, MainActivity.getNoteDescriptionFragment())
-                            //           .addToBackStack(null)
-                            .commit();
-                }
-            });
-
-            linearLayout.addView(textViewOfNotes);
-        }
     }
 
-//    private void goToNoteDescriptionWithData(int index) { // Список заметок будет повторяться при возврате
-//        Bundle bundle = new Bundle();
-//        bundle.putString("data", myNoteArrayList().get(index).getNoteDescription());
-//        MainActivity.getNoteDescription().setArguments(bundle);
-//        if (getFragmentManager() != null) {
-//            getFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.fragment_container, MainActivity.getNoteDescription())
-//                    //           .addToBackStack(null)
-//                    .commit();
-//        }
-//    }
-
+    private void initNoteListByRecyclerView(@NonNull View view) {
+        RecyclerView noteRecyclerView = view.findViewById(R.id.recyclerView_Notes);
+        noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList); //19.54
+        noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // Или new LinearLayoutManager(noteRecyclerView.getContext())
+        noteRecyclerView.setAdapter(recyclerViewAdapter);
+    }
 
 }
