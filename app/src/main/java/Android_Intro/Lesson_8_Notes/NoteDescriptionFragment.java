@@ -45,7 +45,7 @@ public class NoteDescriptionFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_share:
                 Toast.makeText(getActivity(), "Share this Note", Toast.LENGTH_SHORT).show();
                 break;
@@ -55,11 +55,34 @@ public class NoteDescriptionFragment extends Fragment {
             case R.id.action_addImage:
                 Toast.makeText(getActivity(), "Add Image", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.action_editNote:
+
+                goToEditDataFragment();
+
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
-//==============================================================
 
+    //================================== Переходим во фрагмент редактора данных ====================
+    private void goToEditDataFragment() {
+        SettingsStorage ss = new SettingsStorage();
+        Bundle bundle = new Bundle();
+
+        bundle.putString(ss.getThemeToEdit(), themeFromNote);
+        bundle.putString(ss.getDescriptionToEdit(), descriptionFromNote);
+
+        MainActivity.getEditNoteFragment().setArguments(bundle);
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, MainActivity.getEditNoteFragment())
+                    //           .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+    //==================================================================================================
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -106,10 +129,10 @@ public class NoteDescriptionFragment extends Fragment {
         back.setOnClickListener(v -> {
 
             if (getFragmentManager() != null) {
-               getFragmentManager()
+                getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, MainActivity.getNoteScreenFragment())
-                 //       .addToBackStack(null)
+                        //       .addToBackStack(null)
                         .commit();
             }
         });
