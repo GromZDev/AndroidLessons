@@ -32,7 +32,6 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
-
     private List<MyNote> noteList;
 
     @Override
@@ -194,7 +193,11 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private void goToFragmentDescription(int position) {
         SettingsStorage ss = new SettingsStorage();
         Bundle bundle = new Bundle();
+
         bundle.putString(ss.getDataToFragmentDescription(), noteList.get(position).getNoteDescription());
+        bundle.putInt(ss.getImageToFragmentDescription(), noteList.get(position).getImg());
+        bundle.putString(ss.getThemeToFragmentDescription(), noteList.get(position).getTheme());
+
         MainActivity.getNoteDescriptionFragment().setArguments(bundle);
         if (getFragmentManager() != null) {
             getFragmentManager()

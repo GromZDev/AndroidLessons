@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ public class NoteDescriptionFragment extends Fragment {
 
     protected View viewFragment;
     private String descriptionFromNote;
+    private int imageFromNote;
+    private String themeFromNote;
 
     //==================== Создание верхнего меню =====================
     @Override
@@ -57,9 +60,6 @@ public class NoteDescriptionFragment extends Fragment {
     }
 //==============================================================
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,7 +83,8 @@ public class NoteDescriptionFragment extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             descriptionFromNote = bundle.getString(new SettingsStorage().getDataToFragmentDescription());
-
+            imageFromNote = bundle.getInt(new SettingsStorage().getImageToFragmentDescription());
+            themeFromNote = bundle.getString(new SettingsStorage().getThemeToFragmentDescription());
         }
     }
 
@@ -91,8 +92,14 @@ public class NoteDescriptionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tw = view.findViewById(R.id.textView);
-        tw.setText(descriptionFromNote);
+        TextView descriptionView = view.findViewById(R.id.textView);
+        descriptionView.setText(descriptionFromNote);
+
+        ImageView imageNoteDescription = view.findViewById(R.id.item_desc_image);
+        imageNoteDescription.setImageResource(imageFromNote);
+
+        TextView themeView = view.findViewById(R.id.note_description_theme);
+        themeView.setText(themeFromNote);
 
 
         Button back = view.findViewById(R.id.back);
