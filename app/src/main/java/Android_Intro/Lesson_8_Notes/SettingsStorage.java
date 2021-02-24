@@ -13,4 +13,13 @@ public class SettingsStorage {
     public String getThemeToFragmentDescription() {
         return "theme_to_fragment_desc";
     }
+
+
+    public String getThemeToEdit() {
+        return "theme_to_edit";
+    }
+
+    public String getDescriptionToEdit() {
+        return "description_to_edit";
+    }
 }
