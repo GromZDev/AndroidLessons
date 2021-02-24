@@ -28,6 +28,10 @@ public class NoteDescriptionFragment extends Fragment {
     private int imageFromNote;
     private String themeFromNote;
 
+    protected TextView descriptionView;
+    protected ImageView imageNoteDescription;
+    protected TextView themeView;
+
     //==================== Создание верхнего меню =====================
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
@@ -113,17 +117,17 @@ public class NoteDescriptionFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
-        TextView descriptionView = view.findViewById(R.id.textView);
+        descriptionView = view.findViewById(R.id.textView);
         descriptionView.setText(descriptionFromNote);
 
-        ImageView imageNoteDescription = view.findViewById(R.id.item_desc_image);
+        imageNoteDescription = view.findViewById(R.id.item_desc_image);
         imageNoteDescription.setImageResource(imageFromNote);
 
-        TextView themeView = view.findViewById(R.id.note_description_theme);
+        themeView = view.findViewById(R.id.note_description_theme);
         themeView.setText(themeFromNote);
-
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {
