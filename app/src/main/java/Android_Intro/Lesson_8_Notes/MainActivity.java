@@ -17,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private static final NoteDescriptionFragment NOTE_DESCRIPTION_FRAGMENT = new NoteDescriptionFragment();
 
+    @SuppressLint("StaticFieldLeak")
+    private static final EditNoteFragment EDIT_NOTE_FRAGMENT = new EditNoteFragment();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,4 +42,7 @@ public class MainActivity extends AppCompatActivity {
         return NOTE_DESCRIPTION_FRAGMENT;
     }
 
+    public static EditNoteFragment getEditNoteFragment() {
+        return EDIT_NOTE_FRAGMENT;
+    }
 }
