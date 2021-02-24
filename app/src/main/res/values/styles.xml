@@ -24,5 +24,15 @@
 
     </style>
 
+    <style name="TextParam" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/walter_turncoat</item>
+
+    </style>
+
+
+
+
 
 </resources>
