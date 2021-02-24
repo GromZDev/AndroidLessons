@@ -48,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class MyNoteViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageView_Note;
+        private final ImageView imageView_Note;
         private final MaterialTextView textView_NoteName;
         private final MaterialTextView textView_NoteTheme;
 
@@ -59,12 +59,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textView_NoteName = itemView.findViewById(R.id.item_note_name);
             textView_NoteTheme = itemView.findViewById(R.id.item_note_theme);
 
-            textView_NoteName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                        callback.onOnItemClicked(getAdapterPosition());
-                    }
+            textView_NoteName.setOnClickListener(v -> {
+                if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                    callback.onOnItemClicked(getAdapterPosition());
                 }
             });
         }
