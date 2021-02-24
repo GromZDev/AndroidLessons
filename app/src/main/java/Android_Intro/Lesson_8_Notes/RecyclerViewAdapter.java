@@ -37,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.textView_NoteName.setText(myNoteArrayList.get(position).getNoteName());
         holder.textView_NoteTheme.setText(myNoteArrayList.get(position).getTheme());
+        holder.imageView_Note.setImageResource(myNoteArrayList.get(position).getImg());
 
     }
 
