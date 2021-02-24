@@ -22,4 +22,8 @@ public class SettingsStorage {
     public String getDescriptionToEdit() {
         return "description_to_edit";
     }
+
+    public String getEditedThemeFromEditFragment() {
+        return "edited_theme_from_editor_fragment";
+    }
 }
