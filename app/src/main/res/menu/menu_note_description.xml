@@ -16,4 +16,8 @@
         android:id="@+id/action_addImage"
         android:title="@string/add_image" />
 
+    <item
+        android:id="@+id/action_editNote"
+        android:title="@string/edit_note" />
+
 </menu>
