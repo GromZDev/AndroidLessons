@@ -1,36 +1,23 @@
 package Android_Intro.Lesson_8_Notes;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class MyNote implements Parcelable {
+public class MyNote {
     private final String noteName;
     private final String noteDescription;
     private final String theme;
+    private final int img;
 
-    public MyNote(String noteName, String noteDescription, String theme) {
+    public MyNote(String noteName, String noteDescription, String theme, int img) {
         this.noteName = noteName;
         this.noteDescription = noteDescription;
         this.theme = theme;
+        this.img = img;
     }
 
-    protected MyNote(Parcel in) {
-        noteName = in.readString();
-        noteDescription = in.readString();
-        theme = in.readString();
+
+
+    public int getImg() {
+        return img;
     }
-
-    public static final Creator<MyNote> CREATOR = new Creator<MyNote>() {
-        @Override
-        public Android_Intro.Lesson_8_Notes.MyNote createFromParcel(Parcel in) {
-            return new Android_Intro.Lesson_8_Notes.MyNote(in);
-        }
-
-        @Override
-        public Android_Intro.Lesson_8_Notes.MyNote[] newArray(int size) {
-            return new Android_Intro.Lesson_8_Notes.MyNote[size];
-        }
-    };
 
     public String getNoteName() {
         return noteName;
@@ -44,15 +31,5 @@ public class MyNote implements Parcelable {
         return theme;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(noteName);
-        dest.writeString(noteDescription);
-        dest.writeString(theme);
-    }
 }

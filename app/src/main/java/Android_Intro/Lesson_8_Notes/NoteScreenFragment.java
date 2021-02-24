@@ -20,8 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -43,26 +41,26 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         super.onCreate(savedInstanceState);
 
         noteList = new ArrayList<>();
-        noteList.add(new MyNote("Note Num1", "Note Description1", "Тема заметки 1"));
-        noteList.add(new MyNote("Note Num2", "Note Description2", "Тема заметки 2"));
-        noteList.add(new MyNote("Note Num3", "Note Description3", "Тема заметки 3"));
-        noteList.add(new MyNote("Note Num4", "Note Description4", "Тема заметки 4"));
-        noteList.add(new MyNote("Note Num5", "Note Description5", "Тема заметки 5"));
-        noteList.add(new MyNote("Note Num6", "Note Description6", "Тема заметки 6"));
-        noteList.add(new MyNote("Note Num7", "Note Description7", "Тема заметки 7"));
-        noteList.add(new MyNote("Note Num8", "Note Description8", "Тема заметки 8"));
-        noteList.add(new MyNote("Note Num9", "Note Description9", "Тема заметки 9"));
-        noteList.add(new MyNote("Note Num10", "Note Description10", "Тема заметки 10"));
-        noteList.add(new MyNote("Note Num11", "Note Description11", "Тема заметки 11"));
-        noteList.add(new MyNote("Note Num12", "Note Description12", "Тема заметки 12"));
-        noteList.add(new MyNote("Note Num13", "Note Description13", "Тема заметки 13"));
-        noteList.add(new MyNote("Note Num14", "Note Description14", "Тема заметки 14"));
-        noteList.add(new MyNote("Note Num15", "Note Description15", "Тема заметки 15"));
-        noteList.add(new MyNote("Note Num16", "Note Description16", "Тема заметки 16"));
-        noteList.add(new MyNote("Note Num17", "Note Description17", "Тема заметки 17"));
-        noteList.add(new MyNote("Note Num18", "Note Description18", "Тема заметки 18"));
-        noteList.add(new MyNote("Note Num19", "Note Description19", "Тема заметки 19"));
-        noteList.add(new MyNote("Note Num20", "Note Description20", "Тема заметки 20"));
+        noteList.add(new MyNote("Note Num1", "Note Description1", "Тема заметки 1", R.drawable.fallout_1));
+        noteList.add(new MyNote("Note Num2", "Note Description2", "Тема заметки 2", R.drawable.fallout_6));
+        noteList.add(new MyNote("Note Num3", "Note Description3", "Тема заметки 3", R.drawable.fallout_8));
+        noteList.add(new MyNote("Note Num4", "Note Description4", "Тема заметки 4", R.drawable.fallout_5));
+        noteList.add(new MyNote("Note Num5", "Note Description5", "Тема заметки 5", R.drawable.fallout_3));
+        noteList.add(new MyNote("Note Num6", "Note Description6", "Тема заметки 6", R.drawable.fallout_4));
+        noteList.add(new MyNote("Note Num7", "Note Description7", "Тема заметки 7", R.drawable.fallout_7));
+        noteList.add(new MyNote("Note Num8", "Note Description8", "Тема заметки 8", R.drawable.fallout_2));
+        noteList.add(new MyNote("Note Num9", "Note Description9", "Тема заметки 9", R.drawable.fallout_8));
+        noteList.add(new MyNote("Note Num10", "Note Description10", "Тема заметки 10", R.drawable.fallout_4));
+        noteList.add(new MyNote("Note Num11", "Note Description11", "Тема заметки 11", R.drawable.fallout_3));
+        noteList.add(new MyNote("Note Num12", "Note Description12", "Тема заметки 12", R.drawable.fallout_1));
+        noteList.add(new MyNote("Note Num13", "Note Description13", "Тема заметки 13", R.drawable.fallout_9));
+        noteList.add(new MyNote("Note Num14", "Note Description14", "Тема заметки 14", R.drawable.fallout_2));
+        noteList.add(new MyNote("Note Num15", "Note Description15", "Тема заметки 15", R.drawable.fallout_4));
+        noteList.add(new MyNote("Note Num16", "Note Description16", "Тема заметки 16", R.drawable.fallout_5));
+        noteList.add(new MyNote("Note Num17", "Note Description17", "Тема заметки 17", R.drawable.fallout_8));
+        noteList.add(new MyNote("Note Num18", "Note Description18", "Тема заметки 18", R.drawable.fallout_6));
+        noteList.add(new MyNote("Note Num19", "Note Description19", "Тема заметки 19", R.drawable.fallout_9));
+        noteList.add(new MyNote("Note Num20", "Note Description20", "Тема заметки 20", R.drawable.fallout_7));
 
 
     }
