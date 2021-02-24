@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".EditNoteFragment">
 
+    <TextView
+        style="@style/TextParam"
+        android:id="@+id/theme_textView_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_theme"
+        android:layout_marginTop="@dimen/TOP_margin_secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/edit_Theme"
@@ -17,8 +27,19 @@
         android:labelFor="@+id/edit_Theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Edit Theme" />
+        app:layout_constraintTop_toBottomOf="@id/theme_textView_edit"
+        tools:text="Theme" />
+
+    <TextView
+        style="@style/TextParam"
+        android:id="@+id/description_textView_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_description"
+        android:layout_marginTop="@dimen/TOP_margin_secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_Theme"/>
 
     <EditText
         android:id="@+id/edit_Description"
@@ -31,8 +52,8 @@
         android:labelFor="@+id/edit_Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_Theme"
-        tools:text="Edit Description" />
+        app:layout_constraintTop_toBottomOf="@id/description_textView_edit"
+        tools:text="Description" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/confirm_button"

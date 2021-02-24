@@ -25,6 +25,8 @@
     <string name="edit_note">Edit Note</string>
 
     <string name="confirm">Confirm</string>
+    <string name="edit_theme">Edit Theme:</string>
+    <string name="edit_description">Edit Description:</string>
 
 
 </resources>
