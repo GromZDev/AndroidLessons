@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_8_Notes;
+package Android_Intro.Lesson_9_Notes;
 
 import android.content.Context;
 import android.view.LayoutInflater;
