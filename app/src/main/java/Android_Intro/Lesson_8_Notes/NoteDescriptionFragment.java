@@ -114,6 +114,7 @@ public class NoteDescriptionFragment extends Fragment {
             descriptionFromNote = bundle.getString(new SettingsStorage().getDataToFragmentDescription());
             imageFromNote = bundle.getInt(new SettingsStorage().getImageToFragmentDescription());
             themeFromNote = bundle.getString(new SettingsStorage().getThemeToFragmentDescription());
+          // themeFromNote = bundle.getString(new SettingsStorage().getEditedThemeFromEditFragment());  // <<<<<<<<<<<<<<<<<<<<<<<<<<<
         }
     }
 

@@ -57,17 +57,11 @@ public class EditNoteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         buttonConfirm = view.findViewById(R.id.confirm_button);
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendDataToDescriptionFragment(v);
-
-            }
-        });
+        buttonConfirm.setOnClickListener(v -> sendDataToDescriptionFragment());
 
     }
 
-    private void sendDataToDescriptionFragment(View v) {
+    private void sendDataToDescriptionFragment() {
         String editedTheme = editTheme.getText().toString();
 
 
@@ -77,6 +71,7 @@ public class EditNoteFragment extends Fragment {
         bundle.putString(ss.getEditedThemeFromEditFragment(), editedTheme);
 
         Fragment fragment = new NoteDescriptionFragment();
+        fragment.setArguments(bundle);
 //        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
         if (getFragmentManager() != null) {
             getFragmentManager()

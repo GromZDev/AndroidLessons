@@ -28,7 +28,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public MyNoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View noteView = LayoutInflater.from(mContext).inflate(R.layout.item_note, parent, false);
+        View noteView = LayoutInflater.from(mContext).inflate(R.layout.item_note, parent, false); //  или parent.getContext()
         return new MyNoteViewHolder(noteView);
     }
 
