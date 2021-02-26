@@ -76,11 +76,13 @@ public class NoteDescriptionFragment extends Fragment {
         bundle.putString(ss.getThemeToEdit(), themeFromNote);
         bundle.putString(ss.getDescriptionToEdit(), descriptionFromNote);
 
-        MainActivity.getEditNoteFragment().setArguments(bundle);
+        Fragment fragment = new EditNoteFragment();
+        fragment.setArguments(bundle);
+//        MainActivity.getEditNoteFragment().setArguments(bundle);
         if (getFragmentManager() != null) {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, MainActivity.getEditNoteFragment())
+                    .replace(R.id.fragment_container, fragment)
                     //           .addToBackStack(null)
                     .commit();
         }
@@ -131,12 +133,12 @@ public class NoteDescriptionFragment extends Fragment {
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {
-
+            Fragment fragment = new NoteScreenFragment();
             if (getFragmentManager() != null) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, MainActivity.getNoteScreenFragment())
-                        //       .addToBackStack(null)
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });

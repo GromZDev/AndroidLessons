@@ -71,19 +71,18 @@ public class EditNoteFragment extends Fragment {
         String editedTheme = editTheme.getText().toString();
 
 
-
-
         SettingsStorage ss = new SettingsStorage();
         Bundle bundle = new Bundle();
 
         bundle.putString(ss.getEditedThemeFromEditFragment(), editedTheme);
 
-        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
+        Fragment fragment = new NoteDescriptionFragment();
+//        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
         if (getFragmentManager() != null) {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, MainActivity.getNoteDescriptionFragment())
-                    //           .addToBackStack(null)
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
     }

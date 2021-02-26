@@ -32,14 +32,14 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
-    private List<MyNote> noteList;
+    private final List<MyNote> noteList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
         setHasOptionsMenu(true); // активация меню
         super.onCreate(savedInstanceState);
 
-        noteList = new ArrayList<>();
+//        noteList = new ArrayList<>();
         noteList.add(new MyNote("Note Num1", "Note Description1", "Тема заметки 1", R.drawable.fallout_1));
         noteList.add(new MyNote("Note Num2", "Note Description2", "Тема заметки 2", R.drawable.fallout_6));
         noteList.add(new MyNote("Note Num3", "Note Description3", "Тема заметки 3", R.drawable.fallout_8));
@@ -137,7 +137,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragment_container, new AboutApp())
-                            //       .addToBackStack(null)
+                            .addToBackStack(null)
                             .commit();
                     drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
                     break;
@@ -181,11 +181,11 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         noteRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
-// ========== Имплементим метод, берём позицию и переходим по клику конкретной заметки =============
+    // ========== Имплементим метод, берём позицию и переходим по клику конкретной заметки =============
     @Override
     public void onOnItemClicked(int position) {
-     //   MyNote myNote = noteList.get(position);
-     //   Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
+        //   MyNote myNote = noteList.get(position);
+        //   Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
 
         goToFragmentDescription(position);
     }
@@ -198,12 +198,14 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         bundle.putInt(ss.getImageToFragmentDescription(), noteList.get(position).getImg());
         bundle.putString(ss.getThemeToFragmentDescription(), noteList.get(position).getTheme());
 
-        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
+        Fragment fragment = new NoteDescriptionFragment();
+        fragment.setArguments(bundle);
+        //       MainActivity.getNoteDescriptionFragment().setArguments(bundle);
         if (getFragmentManager() != null) {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, MainActivity.getNoteDescriptionFragment())
-                    //           .addToBackStack(null)
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
     }

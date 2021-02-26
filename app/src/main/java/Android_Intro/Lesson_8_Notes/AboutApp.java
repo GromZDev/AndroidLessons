@@ -24,7 +24,7 @@ public class AboutApp extends Fragment {
 
     View viewAboutApp;
 
-// ================== Меню тулбар ================
+    // ================== Меню тулбар ================
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true); // активация меню
@@ -41,7 +41,7 @@ public class AboutApp extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_share:
                 Toast.makeText(getActivity(), "Share this Note", Toast.LENGTH_SHORT).show();
                 break;
@@ -78,12 +78,13 @@ public class AboutApp extends Fragment {
 
     private void doButtonBack() {
         MaterialButton buttonBack = viewAboutApp.findViewById(R.id.button_back_from_aboutApp);
+        Fragment fragment = new NoteScreenFragment();
         buttonBack.setOnClickListener(v -> {
             if (getFragmentManager() != null) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, MainActivity.getNoteScreenFragment())
-                        //       .addToBackStack(null)
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
                         .commit();
 
             }
