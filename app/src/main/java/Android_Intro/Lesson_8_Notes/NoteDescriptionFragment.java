@@ -83,7 +83,7 @@ public class NoteDescriptionFragment extends Fragment {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
-                    //           .addToBackStack(null)
+                    .addToBackStack(null)
                     .commit();
         }
     }
