@@ -20,10 +20,7 @@ public class EditNoteFragment extends Fragment {
     protected EditText editTheme;
     protected EditText editDescription;
     protected MaterialButton buttonConfirm;
-
-
-    private String themeToEdit;
-    private String descriptionToEdit;
+    protected MyNote myNote;
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new EditNoteFragment();
@@ -41,26 +38,9 @@ public class EditNoteFragment extends Fragment {
 
         viewEditNote = inflater.inflate(R.layout.fragment_edit_note, container, false);
 
-     //   receiveNoteThemeAndDescriptionToEdit(viewEditNote);
-
-
         return viewEditNote;
     }
 
-    private void receiveNoteThemeAndDescriptionToEdit(View view) {
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            themeToEdit = bundle.getString(new SettingsStorage().getThemeToEdit());
-            descriptionToEdit = bundle.getString(new SettingsStorage().getDescriptionToEdit());
-
-            editTheme = view.findViewById(R.id.edit_Theme);
-            editTheme.setText(themeToEdit);
-
-            editDescription = view.findViewById(R.id.edit_Description);
-            editDescription.setText(descriptionToEdit);
-
-        }
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -71,29 +51,30 @@ public class EditNoteFragment extends Fragment {
 
         if (getArguments() != null) {
             SettingsStorage ss = new SettingsStorage();
-            MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
+            myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
 
             editDescription.setText(myNote.getNoteDescription());
-
             editTheme.setText(myNote.getTheme());
 
         }
+
+        int image = myNote.getImg(); // Для передачи! Берем родную картинку и передаем ее обратно! (Менять пока не будем)
 
         buttonConfirm = view.findViewById(R.id.confirm_button);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendDataToDescriptionFragment();
+                sendDataToDescriptionFragment(image);
 
             }
         });
 
     }
 
-    private void sendDataToDescriptionFragment() {
+    private void sendDataToDescriptionFragment(int image) {
 
         MyNote myEditedNote = new MyNote(editDescription.getText().toString(),
-                editDescription.getText().toString(), editTheme.getText().toString(), R.drawable.fallout_1);
+                editDescription.getText().toString(), editTheme.getText().toString(), image);
         Fragment fragment = NoteDescriptionFragment.newInstance(myEditedNote); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
@@ -101,25 +82,6 @@ public class EditNoteFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
 
-
-
-//        String editedTheme = editTheme.getText().toString();
-//
-//
-//        SettingsStorage ss = new SettingsStorage();
-//        Bundle bundle = new Bundle();
-//
-//        bundle.putString(ss.getEditedThemeFromEditFragment(), editedTheme);
-//
-//        Fragment fragment = new NoteDescriptionFragment();
-////        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
-//        if (getFragmentManager() != null) {
-//            getFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.fragment_container, fragment)
-//                    .addToBackStack(null)
-//                    .commit();
-//        }
     }
 
 
