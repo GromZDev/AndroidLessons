@@ -194,14 +194,12 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         //   MyNote myNote = noteList.get(position);
         //   Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
 
-     //   goToFragmentDescription(position);
-
         MyNote myNote = noteList.get(position);
         replaceFragment(myNote);
 
     }
 
-    private void replaceFragment (@NonNull MyNote model) {
+    private void replaceFragment(@NonNull MyNote model) {
         Fragment fragment = NoteDescriptionFragment.newInstance(model); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
@@ -210,24 +208,4 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 .commit();
     }
 
-    private void goToFragmentDescription(int position) {
-        SettingsStorage ss = new SettingsStorage();
-        Bundle bundle = new Bundle();
-
-        bundle.putString(ss.getDataToFragmentDescription(), noteList.get(position).getNoteDescription());
-        bundle.putInt(ss.getImageToFragmentDescription(), noteList.get(position).getImg());
-        bundle.putString(ss.getThemeToFragmentDescription(), noteList.get(position).getTheme());
-
-        Fragment fragment = new NoteDescriptionFragment();
-        fragment.setArguments(bundle);
-        //       MainActivity.getNoteDescriptionFragment().setArguments(bundle);
-        if (getFragmentManager() != null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
-    }
-// =================================================================================================
 }

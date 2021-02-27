@@ -24,9 +24,6 @@ import android.widget.Toast;
 public class NoteDescriptionFragment extends Fragment {
 
     protected View viewFragment;
-    private String descriptionFromNote;
-    private int imageFromNote;
-    private String themeFromNote;
 
     protected TextView descriptionView;
     protected ImageView imageNoteDescription;
@@ -88,26 +85,6 @@ public class NoteDescriptionFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
 
-
-
-
-
-//        SettingsStorage ss = new SettingsStorage();
-//        Bundle bundle = new Bundle();
-//
-//        bundle.putString(ss.getThemeToEdit(), themeFromNote);
-//        bundle.putString(ss.getDescriptionToEdit(), descriptionFromNote);
-//
-//        Fragment fragment = new EditNoteFragment();
-//        fragment.setArguments(bundle);
-////        MainActivity.getEditNoteFragment().setArguments(bundle);
-//        if (getFragmentManager() != null) {
-//            getFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.fragment_container, fragment)
-//                    .addToBackStack(null)
-//                    .commit();
-//        }
     }
 
     //==================================================================================================
@@ -116,9 +93,6 @@ public class NoteDescriptionFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewFragment = inflater.inflate(R.layout.fragment_note_description, container, false);
-
-     //   receiveNoteDescription();
-
 
         toolbarInitiation();
 
@@ -129,15 +103,6 @@ public class NoteDescriptionFragment extends Fragment {
         Toolbar toolbar = viewFragment.findViewById(R.id.toolbar_fragment);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
-    }
-
-    private void receiveNoteDescription() {
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            descriptionFromNote = bundle.getString(new SettingsStorage().getDataToFragmentDescription());
-            imageFromNote = bundle.getInt(new SettingsStorage().getImageToFragmentDescription());
-            themeFromNote = bundle.getString(new SettingsStorage().getThemeToFragmentDescription());
-        }
     }
 
     @Override
