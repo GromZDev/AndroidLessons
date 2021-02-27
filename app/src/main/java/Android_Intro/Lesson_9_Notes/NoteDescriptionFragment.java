@@ -80,21 +80,34 @@ public class NoteDescriptionFragment extends Fragment {
     //================================== Переходим во фрагмент редактора данных ====================
     private void goToEditDataFragment() {
         SettingsStorage ss = new SettingsStorage();
-        Bundle bundle = new Bundle();
+        MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
+        Fragment fragment = EditNoteFragment.newInstance(myNote); // Упаковали данные заодно!!!
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
 
-        bundle.putString(ss.getThemeToEdit(), themeFromNote);
-        bundle.putString(ss.getDescriptionToEdit(), descriptionFromNote);
 
-        Fragment fragment = new EditNoteFragment();
-        fragment.setArguments(bundle);
-//        MainActivity.getEditNoteFragment().setArguments(bundle);
-        if (getFragmentManager() != null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
+
+
+
+//        SettingsStorage ss = new SettingsStorage();
+//        Bundle bundle = new Bundle();
+//
+//        bundle.putString(ss.getThemeToEdit(), themeFromNote);
+//        bundle.putString(ss.getDescriptionToEdit(), descriptionFromNote);
+//
+//        Fragment fragment = new EditNoteFragment();
+//        fragment.setArguments(bundle);
+////        MainActivity.getEditNoteFragment().setArguments(bundle);
+//        if (getFragmentManager() != null) {
+//            getFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.fragment_container, fragment)
+//                    .addToBackStack(null)
+//                    .commit();
+//        }
     }
 
     //==================================================================================================

@@ -25,13 +25,23 @@ public class EditNoteFragment extends Fragment {
     private String themeToEdit;
     private String descriptionToEdit;
 
+    public static Fragment newInstance(@NonNull MyNote model) {
+        Fragment fragment = new EditNoteFragment();
+        Bundle bundle = new Bundle();
+        SettingsStorage ss = new SettingsStorage();
+        bundle.putParcelable(ss.getMyNoteDataToEdit(), model);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         viewEditNote = inflater.inflate(R.layout.fragment_edit_note, container, false);
 
-        receiveNoteThemeAndDescriptionToEdit(viewEditNote);
+     //   receiveNoteThemeAndDescriptionToEdit(viewEditNote);
 
 
         return viewEditNote;
@@ -56,35 +66,60 @@ public class EditNoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        editTheme = view.findViewById(R.id.edit_Theme);
+        editDescription = view.findViewById(R.id.edit_Description);
+
+        if (getArguments() != null) {
+            SettingsStorage ss = new SettingsStorage();
+            MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
+
+            editDescription.setText(myNote.getNoteDescription());
+
+            editTheme.setText(myNote.getTheme());
+
+        }
+
         buttonConfirm = view.findViewById(R.id.confirm_button);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendDataToDescriptionFragment(v);
+                sendDataToDescriptionFragment();
 
             }
         });
 
     }
 
-    private void sendDataToDescriptionFragment(View v) {
-        String editedTheme = editTheme.getText().toString();
+    private void sendDataToDescriptionFragment() {
+
+        MyNote myEditedNote = new MyNote(editDescription.getText().toString(),
+                editDescription.getText().toString(), editTheme.getText().toString(), R.drawable.fallout_1);
+        Fragment fragment = NoteDescriptionFragment.newInstance(myEditedNote); // Упаковали данные заодно!!!
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
 
 
-        SettingsStorage ss = new SettingsStorage();
-        Bundle bundle = new Bundle();
 
-        bundle.putString(ss.getEditedThemeFromEditFragment(), editedTheme);
-
-        Fragment fragment = new NoteDescriptionFragment();
-//        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
-        if (getFragmentManager() != null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
+//        String editedTheme = editTheme.getText().toString();
+//
+//
+//        SettingsStorage ss = new SettingsStorage();
+//        Bundle bundle = new Bundle();
+//
+//        bundle.putString(ss.getEditedThemeFromEditFragment(), editedTheme);
+//
+//        Fragment fragment = new NoteDescriptionFragment();
+////        MainActivity.getNoteDescriptionFragment().setArguments(bundle);
+//        if (getFragmentManager() != null) {
+//            getFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.fragment_container, fragment)
+//                    .addToBackStack(null)
+//                    .commit();
+//        }
     }
 
 

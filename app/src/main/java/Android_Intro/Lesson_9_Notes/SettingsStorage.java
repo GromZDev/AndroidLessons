@@ -30,4 +30,10 @@ public class SettingsStorage {
     public String getMyNoteData() {
         return "my_note_data";
     }
+
+    public String getMyNoteDataToEdit() {
+        return "my_note_data_to_edit";
+    }
+
+
 }
