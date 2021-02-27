@@ -35,15 +35,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyNoteViewHolder holder, int position) {
 
-        holder.textView_NoteName.setText(myNoteArrayList.get(position).getNoteName());
-        holder.textView_NoteTheme.setText(myNoteArrayList.get(position).getTheme());
-        holder.imageView_Note.setImageResource(myNoteArrayList.get(position).getImg());
+//        holder.textView_NoteName.setText(myNoteArrayList.get(position).getNoteName());
+//        holder.textView_NoteTheme.setText(myNoteArrayList.get(position).getTheme());
+//        holder.imageView_Note.setImageResource(myNoteArrayList.get(position).getImg());
+        // Либо делаем без метода onBind, тогда дополняем как выше
+        holder.onBind(position, myNoteArrayList.get(position));
 
     }
 
     @Override
     public int getItemCount() {
         return myNoteArrayList.size();
+    }
+
+    public void setItems(List<MyNote> noteList) { // Метод добавления позиции.
+        myNoteArrayList.clear();
+        myNoteArrayList.addAll(noteList);
+        notifyDataSetChanged();
     }
 
     public static class MyNoteViewHolder extends RecyclerView.ViewHolder {
@@ -64,6 +72,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     callback.onOnItemClicked(getAdapterPosition());
                 }
             });
+        }
+
+        public void onBind (int position, MyNote model) {
+            imageView_Note.setImageResource(model.getImg());
+            textView_NoteName.setText(model.getNoteName());
+            textView_NoteTheme.setText(model.getTheme());
         }
 
 
