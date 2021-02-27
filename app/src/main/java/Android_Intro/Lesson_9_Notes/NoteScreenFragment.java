@@ -196,10 +196,9 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 
         MyNote myNote = noteList.get(position);
         replaceFragment(myNote);
-
     }
 
-    private void replaceFragment(@NonNull MyNote model) {
+    private void replaceFragment (@NonNull MyNote model) {
         Fragment fragment = NoteDescriptionFragment.newInstance(model); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
