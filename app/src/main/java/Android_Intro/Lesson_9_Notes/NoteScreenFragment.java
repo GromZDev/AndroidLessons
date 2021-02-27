@@ -39,7 +39,11 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         setHasOptionsMenu(true); // активация меню
         super.onCreate(savedInstanceState);
 
-//        noteList = new ArrayList<>();
+        initNoteList();
+
+    }
+
+    private void initNoteList() {
         noteList.add(new MyNote("Note Num1", "Note Description1", "Тема заметки 1", R.drawable.fallout_1));
         noteList.add(new MyNote("Note Num2", "Note Description2", "Тема заметки 2", R.drawable.fallout_6));
         noteList.add(new MyNote("Note Num3", "Note Description3", "Тема заметки 3", R.drawable.fallout_8));
@@ -60,8 +64,6 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         noteList.add(new MyNote("Note Num18", "Note Description18", "Тема заметки 18", R.drawable.fallout_6));
         noteList.add(new MyNote("Note Num19", "Note Description19", "Тема заметки 19", R.drawable.fallout_9));
         noteList.add(new MyNote("Note Num20", "Note Description20", "Тема заметки 20", R.drawable.fallout_7));
-
-
     }
 
     @Override
@@ -174,6 +176,11 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 
     private void initNoteListByRecyclerView(@NonNull View view) {
         RecyclerView noteRecyclerView = view.findViewById(R.id.recyclerView_Notes);
+
+        noteRecyclerView.addItemDecoration(new MyNoteDecorator(getResources().getDimensionPixelSize(R.dimen.layout_marginTop),
+                getResources().getDimensionPixelSize(R.dimen.layout_marginStartAndEnd),
+                getResources().getDimensionPixelSize(R.dimen.layout_marginBottom)));
+
         noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this); //19.54
         noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

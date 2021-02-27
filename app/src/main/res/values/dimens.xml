@@ -7,4 +7,8 @@
     <dimen name="margin_start_noteList">20dp</dimen>
     <dimen name="margin_top_noteList">24dp</dimen>
 
+    <dimen name="layout_marginTop">8dp</dimen>
+    <dimen name="layout_marginStartAndEnd">16dp</dimen>
+    <dimen name="layout_marginBottom">12dp</dimen>
+
 </resources>
