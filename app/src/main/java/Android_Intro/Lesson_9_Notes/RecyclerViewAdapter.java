@@ -17,7 +17,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     protected Context mContext;
     protected List<MyNote> myNoteArrayList;
-    protected static MyNoteAdapterCallback callback;
+    protected final MyNoteAdapterCallback callback;
 
     public RecyclerViewAdapter(Context mContext, List<MyNote> myNoteArrayList, MyNoteAdapterCallback callback) {
         this.mContext = mContext;
@@ -29,7 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public MyNoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View noteView = LayoutInflater.from(mContext).inflate(R.layout.item_note, parent, false);
-        return new MyNoteViewHolder(noteView);
+        return new MyNoteViewHolder(noteView, callback);
     }
 
     @Override
@@ -59,25 +59,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private final ImageView imageView_Note;
         private final MaterialTextView textView_NoteName;
         private final MaterialTextView textView_NoteTheme;
+        private final MyNoteAdapterCallback callback;
 
-        public MyNoteViewHolder(@NonNull View itemView) {
+        public MyNoteViewHolder(@NonNull View itemView, MyNoteAdapterCallback callback) {
             super(itemView);
 
             imageView_Note = itemView.findViewById(R.id.item_note_image);
             textView_NoteName = itemView.findViewById(R.id.item_note_name);
             textView_NoteTheme = itemView.findViewById(R.id.item_note_theme);
-
-            textView_NoteName.setOnClickListener(v -> {
-                if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                    callback.onOnItemClicked(getAdapterPosition());
-                }
-            });
+            this.callback = callback;
         }
 
         public void onBind (int position, MyNote model) {
             imageView_Note.setImageResource(model.getImg());
             textView_NoteName.setText(model.getNoteName());
             textView_NoteTheme.setText(model.getTheme());
+
+            textView_NoteName.setOnClickListener(v -> {
+                if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                    callback.onOnItemClicked(getAdapterPosition());
+                }
+            });
+
         }
 
 
