@@ -32,6 +32,15 @@ public class NoteDescriptionFragment extends Fragment {
     protected ImageView imageNoteDescription;
     protected TextView themeView;
 
+    public static Fragment newInstance(@NonNull MyNote model) {
+        Fragment fragment = new NoteDescriptionFragment();
+        Bundle bundle = new Bundle();
+        SettingsStorage ss = new SettingsStorage();
+        bundle.putParcelable(ss.getMyNoteData(), model);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     //==================== Создание верхнего меню =====================
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
@@ -95,7 +104,8 @@ public class NoteDescriptionFragment extends Fragment {
 
         viewFragment = inflater.inflate(R.layout.fragment_note_description, container, false);
 
-        receiveNoteDescription();
+     //   receiveNoteDescription();
+
 
         toolbarInitiation();
 
@@ -123,13 +133,31 @@ public class NoteDescriptionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         descriptionView = view.findViewById(R.id.textView);
-        descriptionView.setText(descriptionFromNote);
-
         imageNoteDescription = view.findViewById(R.id.item_desc_image);
-        imageNoteDescription.setImageResource(imageFromNote);
-
         themeView = view.findViewById(R.id.note_description_theme);
-        themeView.setText(themeFromNote);
+
+        if (getArguments() != null) {
+            SettingsStorage ss = new SettingsStorage();
+            MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
+
+            descriptionView.setText(myNote.getNoteDescription());
+
+            imageNoteDescription.setImageResource(myNote.getImg());
+
+            themeView.setText(myNote.getTheme());
+
+
+        }
+
+
+//        descriptionView = view.findViewById(R.id.textView);
+//        descriptionView.setText(descriptionFromNote);
+//
+//        imageNoteDescription = view.findViewById(R.id.item_desc_image);
+//        imageNoteDescription.setImageResource(imageFromNote);
+//
+//        themeView = view.findViewById(R.id.note_description_theme);
+//        themeView.setText(themeFromNote);
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {

@@ -26,4 +26,8 @@ public class SettingsStorage {
     public String getEditedThemeFromEditFragment() {
         return "edited_theme_from_editor_fragment";
     }
+
+    public String getMyNoteData() {
+        return "my_note_data";
+    }
 }
