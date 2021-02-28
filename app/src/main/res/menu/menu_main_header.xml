@@ -15,4 +15,8 @@
         android:id="@+id/action_sort"
         android:title="@string/sort_my_notes" />
 
+    <item
+        android:id="@+id/action_add_new_note"
+        android:title="@string/add_new_note" />
+
 </menu>
