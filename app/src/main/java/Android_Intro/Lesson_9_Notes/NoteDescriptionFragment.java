@@ -128,15 +128,6 @@ public class NoteDescriptionFragment extends Fragment {
         }
 
 
-//        descriptionView = view.findViewById(R.id.textView);
-//        descriptionView.setText(descriptionFromNote);
-//
-//        imageNoteDescription = view.findViewById(R.id.item_desc_image);
-//        imageNoteDescription.setImageResource(imageFromNote);
-//
-//        themeView = view.findViewById(R.id.note_description_theme);
-//        themeView.setText(themeFromNote);
-
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {
             Fragment fragment = new NoteScreenFragment();
