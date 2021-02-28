@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -200,6 +201,18 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Или new LinearLayoutManager(noteRecyclerView.getContext())
         noteRecyclerView.setAdapter(recyclerViewAdapter);
+
+        animatorInitiate(); // Устанавливаем аниматор
+
+    }
+
+    private void animatorInitiate() { // Устанавливаем аниматор
+        DefaultItemAnimator itemAnimator = new DefaultItemAnimator();
+        SettingsStorage ss = new SettingsStorage();
+        itemAnimator.setAddDuration(ss.getAnimationDuration());
+        itemAnimator.setChangeDuration(ss.getAnimationDuration());
+        itemAnimator.setRemoveDuration(ss.getAnimationDuration());
+        noteRecyclerView.setItemAnimator(itemAnimator);
     }
 
     // ========== Имплементим метод, берём позицию и переходим по клику конкретной заметки =============
