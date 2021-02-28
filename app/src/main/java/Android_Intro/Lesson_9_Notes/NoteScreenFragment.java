@@ -98,6 +98,10 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 recyclerViewAdapter.notifyItemInserted(0); // Уведомляем о добавлении для отображения
                 noteRecyclerView.scrollToPosition(0); // Фокусируемся на этой позиции
                 break;
+            case R.id.action_clear_all:
+                clearAllData();
+                recyclerViewAdapter.notifyDataSetChanged();
+                break;
 
         }
         return super.onOptionsItemSelected(item);
@@ -220,6 +224,11 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @Override
     public void sortMyNotes() {
         noteList.sort(Comparator.comparing(MyNote::getNoteName));
+    }
+
+    @Override
+    public void clearAllData() {
+        noteList.clear();
     }
 
     private void replaceFragment(@NonNull MyNote model) {

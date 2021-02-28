@@ -7,4 +7,6 @@ public interface MyNoteAdapterCallback {
     void insertNewNote(int position);
 
     void sortMyNotes();
+
+    void clearAllData();
 }
