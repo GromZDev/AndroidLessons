@@ -155,7 +155,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 if (getFragmentManager() != null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.fragment_container, new AboutApp())
+                            .replace(R.id.fragment_container, new AboutAppFragment())
                             .addToBackStack(null)
                             .commit();
                     drawerLayout.closeDrawer(GravityCompat.START); // При клике возвращаем меню назад
