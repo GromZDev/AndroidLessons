@@ -34,41 +34,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/item_desc_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="@dimen/TOP_margin_secondary"
-        android:contentDescription="@string/item_description_image"
-        android:layout_marginStart="44dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menu_toolbar_description_note" />
-
-    <TextView
-        android:id="@+id/note_description_theme"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frame_img_and_theme"
+        style="@style/MyNoteItem"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_description_fragment_layout"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="@dimen/main_text_size"
-        android:textAlignment="center"
-        android:fontFamily="@font/walter_turncoat"
-        app:layout_constraintStart_toEndOf="@id/item_desc_image"
-        app:layout_constraintTop_toBottomOf="@id/menu_toolbar_description_note"
-        app:layout_constraintBottom_toBottomOf="@id/item_desc_image"
-        tools:text="Note Theme"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu_toolbar_description_note">
+
+        <ImageView
+            android:id="@+id/item_desc_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/TOP_margin_secondary"
+            android:contentDescription="@string/item_description_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/note_description_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/TOP_margin"
+            android:fontFamily="@font/walter_turncoat"
+            android:textAlignment="center"
+            android:textSize="@dimen/main_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_desc_image"
+            tools:text="Note Theme" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView"
+        style="@style/MyNoteDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_start_noteList"
+        android:layout_marginStart="@dimen/margin_description_fragment_layout"
         android:layout_marginTop="@dimen/margin_top_noteList"
-        android:layout_marginEnd="@dimen/margin_start_noteList"
-        android:textSize="@dimen/main_text_size"
-        android:textAlignment="center"
-        android:fontFamily="@font/walter_turncoat"
+        android:layout_marginEnd="@dimen/margin_description_fragment_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_desc_image" />
+        app:layout_constraintTop_toBottomOf="@id/frame_img_and_theme"
+        tools:text="Description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
