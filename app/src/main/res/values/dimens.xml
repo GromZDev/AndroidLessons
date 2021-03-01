@@ -12,4 +12,6 @@
     <dimen name="layout_marginStartAndEnd">16dp</dimen>
     <dimen name="layout_marginBottom">12dp</dimen>
 
+    <dimen name="START_and_END_margin_Edit">20dp</dimen>
+
 </resources>
