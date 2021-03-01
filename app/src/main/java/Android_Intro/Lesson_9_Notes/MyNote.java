@@ -3,17 +3,21 @@ package Android_Intro.Lesson_9_Notes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 public class MyNote implements Parcelable {
     private final String noteName;
     private final String noteDescription;
     private final String theme;
     private final int img;
+    private final Date date;
 
-    public MyNote(String noteName, String noteDescription, String theme, int img) {
+    public MyNote(String noteName, String noteDescription, String theme, int img, Date date) {
         this.noteName = noteName;
         this.noteDescription = noteDescription;
         this.theme = theme;
         this.img = img;
+        this.date = date;
     }
 
 
@@ -22,6 +26,7 @@ public class MyNote implements Parcelable {
         noteDescription = in.readString();
         theme = in.readString();
         img = in.readInt();
+        date = new Date(in.readLong());
     }
 
     public static final Creator<MyNote> CREATOR = new Creator<MyNote>() {
@@ -52,6 +57,9 @@ public class MyNote implements Parcelable {
         return theme;
     }
 
+    public Date getDate() {
+        return date;
+    }
 
     @Override
     public int describeContents() {
@@ -59,10 +67,11 @@ public class MyNote implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(noteName);
-        dest.writeString(noteDescription);
-        dest.writeString(theme);
-        dest.writeInt(img);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(noteName);
+        parcel.writeString(noteDescription);
+        parcel.writeString(theme);
+        parcel.writeInt(img);
+        parcel.writeLong(date.getTime());
     }
 }

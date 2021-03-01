@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.google.android.material.button.MaterialButton;
+import java.util.Calendar;
 
 
 public class EditNoteFragment extends Fragment {
@@ -74,7 +75,7 @@ public class EditNoteFragment extends Fragment {
     private void sendDataToDescriptionFragment(int image) {
 
         MyNote myEditedNote = new MyNote(editDescription.getText().toString(),
-                editDescription.getText().toString(), editTheme.getText().toString(), image);
+                editDescription.getText().toString(), editTheme.getText().toString(), image, Calendar.getInstance().getTime());
         Fragment fragment = NoteDescriptionFragment.newInstance(myEditedNote); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()

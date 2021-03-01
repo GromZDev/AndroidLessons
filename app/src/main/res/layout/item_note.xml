@@ -12,13 +12,12 @@
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/my_note_image"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/item_note_name"
-        android:layout_width="wrap_content"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/walter_turncoat"
@@ -29,12 +28,24 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/item_note_theme"
-        android:layout_width="wrap_content"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/walter_turncoat"
         android:textSize="@dimen/main_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/item_note_name"
+        app:layout_constraintTop_toBottomOf="@id/item_note_name"
         tools:text="Note Theme" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/item_note_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/walter_turncoat"
+        android:textSize="@dimen/date_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/item_note_image"
+        app:layout_constraintTop_toBottomOf="@id/item_note_theme"
+        tools:text="time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
