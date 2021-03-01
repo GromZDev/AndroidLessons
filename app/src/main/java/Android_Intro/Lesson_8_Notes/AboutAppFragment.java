@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 
 
-public class AboutApp extends Fragment {
+public class AboutAppFragment extends Fragment {
 
     View viewAboutApp;
 
