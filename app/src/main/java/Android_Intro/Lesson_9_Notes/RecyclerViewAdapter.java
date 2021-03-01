@@ -50,12 +50,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return myNoteArrayList.size();
     }
 
-    public void setItems(List<MyNote> noteList) { // Метод добавления позиции.
-        myNoteArrayList.clear();
-        myNoteArrayList.addAll(noteList);
-        notifyDataSetChanged();
-    }
-
     public static class MyNoteViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imageView_Note;
@@ -75,12 +69,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         @SuppressLint("SimpleDateFormat")
-        public void onBind (int position, MyNote model) {
+        public void onBind(int position, MyNote model) {
             imageView_Note.setImageResource(model.getImg());
             textView_NoteName.setText(model.getNoteName());
             textView_NoteTheme.setText(model.getTheme());
-            textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yy | hh:mm:ss").format(model.getDate()));
-
+            textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(model.getDate()));
             textView_NoteName.setOnClickListener(v -> {
                 if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                     callback.onOnItemClicked(getAdapterPosition());

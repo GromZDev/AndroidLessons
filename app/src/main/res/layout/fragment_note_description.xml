@@ -28,7 +28,7 @@
         style="@style/MyButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,11 +67,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_desc_image"
             tools:text="Note Theme" />
+
+        <TextView
+            android:id="@+id/note_description_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/TOP_margin"
+            android:fontFamily="@font/walter_turncoat"
+            android:textAlignment="center"
+            android:textSize="@dimen/main_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/note_description_theme"
+            tools:text="Date" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/MyNoteDescription"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_description_fragment_layout"
@@ -79,7 +91,13 @@
         android:layout_marginEnd="@dimen/margin_description_fragment_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frame_img_and_theme"
-        tools:text="Description" />
+        app:layout_constraintTop_toBottomOf="@+id/frame_img_and_theme">
 
+        <TextView
+            android:id="@+id/textView"
+            style="@style/MyNoteDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="Description" />
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

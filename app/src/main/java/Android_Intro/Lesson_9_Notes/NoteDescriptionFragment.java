@@ -1,6 +1,7 @@
 package Android_Intro.Lesson_9_Notes;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 public class NoteDescriptionFragment extends Fragment {
 
@@ -28,6 +32,8 @@ public class NoteDescriptionFragment extends Fragment {
     protected TextView descriptionView;
     protected ImageView imageNoteDescription;
     protected TextView themeView;
+    protected TextView dateView;
+    protected DatePickerDialog.OnDateSetListener dateSetListener;
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new NoteDescriptionFragment();
@@ -113,6 +119,7 @@ public class NoteDescriptionFragment extends Fragment {
         descriptionView = view.findViewById(R.id.textView);
         imageNoteDescription = view.findViewById(R.id.item_desc_image);
         themeView = view.findViewById(R.id.note_description_theme);
+        dateView = view.findViewById(R.id.note_description_date);
 
         if (getArguments() != null) {
             SettingsStorage ss = new SettingsStorage();
@@ -124,9 +131,12 @@ public class NoteDescriptionFragment extends Fragment {
 
             themeView.setText(myNote.getTheme());
 
+            @SuppressLint("SimpleDateFormat")
+            String date = new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(myNote.getDate());
+            // Берём дату, установленную при инициации заметок!!!
+            dateView.setText(date);
 
         }
-
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {
@@ -140,6 +150,36 @@ public class NoteDescriptionFragment extends Fragment {
             }
         });
 
+        // ========================= Устанавливаем DatePicker Dialog ========================
+        setDatePickerDialog();
+        //===================================================================================
+    }
+
+    private void setDatePickerDialog() {
+        dateView.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                    android.R.style.Theme_Material_Dialog, dateSetListener,
+                    year, month, day);
+            // Меняя темы получаем разный дизайн!!!
+            datePickerDialog.show();
+        });
+
+        dateSetListener = (view1, year, month, dayOfMonth) -> {
+            month = month + 1;
+            Calendar calendar = Calendar.getInstance();
+
+            String newDate = dayOfMonth + "-" + month + "-" + year;
+
+            @SuppressLint("SimpleDateFormat")
+            String date = new SimpleDateFormat(" =||= hh:mm:ss").format(calendar.getTime());
+
+            dateView.setText(newDate.concat(date));
+        };
     }
 
 }
