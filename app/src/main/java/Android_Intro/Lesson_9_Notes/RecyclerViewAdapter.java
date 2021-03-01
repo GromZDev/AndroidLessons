@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -20,11 +21,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     protected Context mContext;
     protected List<MyNote> myNoteArrayList;
     protected final MyNoteAdapterCallback callback;
+    protected Fragment fragment; // Для контекстного меню + в конструктор
+    private int contextMenuPosition; // Для контекстного меню + геттер
 
-    public RecyclerViewAdapter(Context mContext, List<MyNote> myNoteArrayList, MyNoteAdapterCallback callback) {
+    public RecyclerViewAdapter(Context mContext, List<MyNote> myNoteArrayList, MyNoteAdapterCallback callback, Fragment fragment) {
         this.mContext = mContext;
         this.myNoteArrayList = myNoteArrayList;
         this.callback = callback;
+        this.fragment = fragment;
+    }
+
+    public int getContextMenuPosition() {
+        return contextMenuPosition;
     }
 
     @NonNull
@@ -50,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return myNoteArrayList.size();
     }
 
-    public static class MyNoteViewHolder extends RecyclerView.ViewHolder {
+    public class MyNoteViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imageView_Note;
         private final MaterialTextView textView_NoteName;
@@ -58,7 +66,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private final MaterialTextView textView_NoteDate;
         private final MyNoteAdapterCallback callback;
 
-        public MyNoteViewHolder(@NonNull View itemView, MyNoteAdapterCallback callback) {
+
+        public MyNoteViewHolder(@NonNull final View itemView, MyNoteAdapterCallback callback) {
             super(itemView);
 
             imageView_Note = itemView.findViewById(R.id.item_note_image);
@@ -66,6 +75,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textView_NoteTheme = itemView.findViewById(R.id.item_note_theme);
             textView_NoteDate = itemView.findViewById(R.id.item_note_date);
             this.callback = callback;
+
+//===================== Сетим контекстное меню ========================
+            if (fragment != null) {
+                itemView.setOnLongClickListener(v -> {
+                    contextMenuPosition = getLayoutPosition();
+                    return false;
+                });
+                fragment.registerForContextMenu(itemView);
+            }
+
+            imageView_Note.setOnLongClickListener(v -> {
+                contextMenuPosition = getLayoutPosition();
+                itemView.showContextMenu(10, 10);
+                return true;
+            });
+//===================== ======================= ========================
         }
 
         @SuppressLint("SimpleDateFormat")

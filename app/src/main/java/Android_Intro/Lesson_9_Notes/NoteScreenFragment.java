@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -198,7 +199,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 getResources().getDimensionPixelSize(R.dimen.layout_marginBottom)));
 
         noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this); //19.54
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this); //19.54
         noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Или new LinearLayoutManager(noteRecyclerView.getContext())
         noteRecyclerView.setAdapter(recyclerViewAdapter);
@@ -207,6 +208,28 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 
     }
 
+    //====================== Сетим контекстное меню ===========================
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = requireActivity().getMenuInflater();
+        inflater.inflate(R.menu.item_context_menu, menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int position = recyclerViewAdapter.getContextMenuPosition();
+        if (item.getItemId() == R.id.action_delete) {
+            noteList.remove(position);
+            recyclerViewAdapter.notifyItemRemoved(position);
+            return true;
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    //=========================================================================
     private void animatorInitiate() { // Устанавливаем аниматор
         DefaultItemAnimator itemAnimator = new DefaultItemAnimator();
         SettingsStorage ss = new SettingsStorage();
