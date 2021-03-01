@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Lesson_7_Notes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Lesson_8_Notes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,13 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Lesson_7_Notes.NoActionBar">
+    <style name="Theme.Lesson_8_Notes.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Lesson_7_Notes.AppBarOverlay"
+    <style name="Theme.Lesson_8_Notes.AppBarOverlay"
         parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="Theme.Lesson_7_Notes.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+    <style name="Theme.Lesson_8_Notes.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 </resources>

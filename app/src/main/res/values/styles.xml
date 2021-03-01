@@ -8,4 +8,31 @@
         <item name="android:background">@drawable/button_bg</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="MyNoteItem" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/button_stroke_color</item>
+        <item name="fontFamily">@font/walter_turncoat</item>
+        <item name="android:background">@drawable/item_note_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+
+
+    </style>
+
+    <style name="TextParam" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/walter_turncoat</item>
+
+    </style>
+
+
+
+
+
 </resources>

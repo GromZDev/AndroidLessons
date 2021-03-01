@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AboutApp">
+    tools:context=".AboutAppFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/menu_toolbar_description_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Lesson_7_Notes.AppBarOverlay">
+        android:theme="@style/Theme.Lesson_8_Notes.AppBarOverlay">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_about_fragment"
@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:backgroundTint="@color/toolbar_bg"
-            app:popupTheme="@style/Theme.Lesson_7_Notes.PopupOverlay" />
+            app:popupTheme="@style/Theme.Lesson_8_Notes.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

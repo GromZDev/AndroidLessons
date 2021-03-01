@@ -8,7 +8,7 @@
         android:id="@+id/menu_toolbar_description_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Lesson_7_Notes.AppBarOverlay"
+        android:theme="@style/Theme.Lesson_8_Notes.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:backgroundTint="@color/toolbar_bg"
-            app:popupTheme="@style/Theme.Lesson_7_Notes.PopupOverlay" />
+            app:popupTheme="@style/Theme.Lesson_8_Notes.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,11 +28,34 @@
         style="@style/MyButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_desc_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/TOP_margin_secondary"
+        android:contentDescription="@string/item_description_image"
+        android:layout_marginStart="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu_toolbar_description_note" />
+
+    <TextView
+        android:id="@+id/note_description_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/main_text_size"
+        android:textAlignment="center"
+        android:fontFamily="@font/walter_turncoat"
+        app:layout_constraintStart_toEndOf="@id/item_desc_image"
+        app:layout_constraintTop_toBottomOf="@id/menu_toolbar_description_note"
+        app:layout_constraintBottom_toBottomOf="@id/item_desc_image"
+        tools:text="Note Theme"/>
 
     <TextView
         android:id="@+id/textView"
@@ -40,8 +63,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_start_noteList"
         android:layout_marginTop="@dimen/margin_top_noteList"
+        android:layout_marginEnd="@dimen/margin_start_noteList"
         android:textSize="@dimen/main_text_size"
+        android:textAlignment="center"
+        android:fontFamily="@font/walter_turncoat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menu_toolbar_description_note" />
+        app:layout_constraintTop_toBottomOf="@id/item_desc_image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

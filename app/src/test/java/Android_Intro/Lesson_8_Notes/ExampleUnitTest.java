@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_7_Notes;
+package Android_Intro.Lesson_8_Notes;
 
 import org.junit.Test;
 

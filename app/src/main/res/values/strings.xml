@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lesson_7_Notes</string>
+    <string name="app_name">Lesson_8_Notes</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>
     <string name="sort_my_notes">Sort My Notes</string>
@@ -15,11 +15,18 @@
     <string name="my_note_app">MyNote App</string>
     <string name="myNote_application">MyNote Application</string>
 
-    <string name="text_in_aboutApp">This application is made on the 7th lesson of Android development Intro from Geekbrains by Evseev Dmitriy</string>
+    <string name="text_in_aboutApp">This application is made on the 8th lesson of Android development Intro from Geekbrains by Evseev Dmitriy</string>
     <string name="share_this_app">Share this App</string>
     <string name="feedback">Feedback</string>
     <string name="second_menu">Useful actions</string>
     <string name="home_page">Home Page</string>
+    <string name="my_note_image">MyNote image</string>
+    <string name="item_description_image">Item Description Image</string>
+    <string name="edit_note">Edit Note</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="edit_theme">Edit Theme:</string>
+    <string name="edit_description">Edit Description:</string>
 
 
 </resources>
