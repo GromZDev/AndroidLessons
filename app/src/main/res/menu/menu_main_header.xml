@@ -1,0 +1,26 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:title="@string/sort_my_notes" />
+
+    <item
+        android:id="@+id/action_add_new_note"
+        android:title="@string/add_new_note" />
+
+    <item
+        android:id="@+id/action_clear_all"
+        android:title="@string/clear_all_notes" />
+
+</menu>
