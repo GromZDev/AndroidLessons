@@ -73,9 +73,10 @@ public class EditNoteFragment extends Fragment {
     }
 
     private void sendDataToDescriptionFragment(int image) {
-
-        MyNote myEditedNote = new MyNote(editDescription.getText().toString(),
-                editDescription.getText().toString(), editTheme.getText().toString(), image, Calendar.getInstance().getTime());
+        SettingsStorage ss = new SettingsStorage();
+        MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
+        MyNote myEditedNote = new MyNote(myNote.getNoteName(),
+                editDescription.getText().toString(), editTheme.getText().toString(), image, myNote.getDate());
         Fragment fragment = NoteDescriptionFragment.newInstance(myEditedNote); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
