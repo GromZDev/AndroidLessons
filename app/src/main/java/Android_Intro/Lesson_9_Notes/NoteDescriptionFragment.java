@@ -34,6 +34,7 @@ public class NoteDescriptionFragment extends Fragment {
     protected TextView themeView;
     protected TextView dateView;
     protected DatePickerDialog.OnDateSetListener dateSetListener;
+    protected MyNote newData;
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new NoteDescriptionFragment();
@@ -140,11 +141,17 @@ public class NoteDescriptionFragment extends Fragment {
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {
-            Fragment fragment = new NoteScreenFragment();
-            if (getFragmentManager() != null) {
-                getFragmentManager()
+            if (getFragmentManager() != null){
+                SettingsStorage ss = new SettingsStorage();
+                newData = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
+                MyNote data = new MyNote(newData.getNoteName(),
+                        descriptionView.getText().toString(), themeView.getText().toString(), newData.getImg(), newData.getDate());
+
+
+                Fragment fragment = NoteScreenFragment.newInstance(data);
+                requireActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
+                        .replace(R.id.fragment_container, fragment, "TAG")
                         .addToBackStack(null)
                         .commit();
             }

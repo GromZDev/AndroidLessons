@@ -39,6 +39,15 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private RecyclerView noteRecyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
 
+    public static Fragment newInstance(@NonNull MyNote model) {
+        Fragment fragment = new NoteScreenFragment();
+        Bundle bundle = new Bundle();
+        SettingsStorage ss = new SettingsStorage();
+        bundle.putParcelable(ss.getDataToMain(), model);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
         setHasOptionsMenu(true); // активация меню
@@ -188,6 +197,17 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 //================================ Сетим RecyclerView =========================
         initNoteListByRecyclerView(view);
 //=============================================================================
+
+//                if (getArguments() != null) {
+//            SettingsStorage ss = new SettingsStorage();
+//            NoteScreenFragment list = (NoteScreenFragment) getFragmentManager().findFragmentByTag("TAG");
+//            MyNote note3 = (MyNote) getArguments().getParcelable(ss.getDataToMain());
+//            list.noteList.set(0, note3);
+//
+//
+//
+//
+//        }
 
     }
 

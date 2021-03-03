@@ -14,5 +14,9 @@ public class SettingsStorage {
         return 1500;
     }
 
+    public String getDataToMain() {
+        return "my_note_data_to_main";
+    }
+
 
 }
