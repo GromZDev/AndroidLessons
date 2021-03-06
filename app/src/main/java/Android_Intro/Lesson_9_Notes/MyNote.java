@@ -1,11 +1,9 @@
 package Android_Intro.Lesson_9_Notes;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class MyNote implements Parcelable {
+public class MyNote implements Serializable {
     private String noteName;
     private String noteDescription;
     private String theme;
@@ -13,26 +11,6 @@ public class MyNote implements Parcelable {
     private Date date;
     private String id;
 
-
-    protected MyNote(Parcel in) {
-        noteName = in.readString();
-        noteDescription = in.readString();
-        theme = in.readString();
-        img = in.readInt();
-        id = in.readString();
-    }
-
-    public static final Creator<MyNote> CREATOR = new Creator<MyNote>() {
-        @Override
-        public MyNote createFromParcel(Parcel in) {
-            return new MyNote(in);
-        }
-
-        @Override
-        public MyNote[] newArray(int size) {
-            return new MyNote[size];
-        }
-    };
 
     public int getImg() {
         return img;
@@ -82,17 +60,4 @@ public class MyNote implements Parcelable {
         this.id = id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(noteName);
-        dest.writeString(noteDescription);
-        dest.writeString(theme);
-        dest.writeInt(img);
-        dest.writeString(id);
-    }
 }

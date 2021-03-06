@@ -37,7 +37,7 @@ public class AddNoteFragment extends Fragment {
         Fragment fragment = new AddNoteFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
-        bundle.putParcelable(ss.getDataToAddNote(), model);
+        bundle.putSerializable(ss.getDataToAddNote(), model);
         fragment.setArguments(bundle);
         return fragment;
     }

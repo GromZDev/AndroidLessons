@@ -40,7 +40,7 @@ public class NoteDescriptionFragment extends Fragment {
         Fragment fragment = new NoteDescriptionFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
-        bundle.putParcelable(ss.getMyNoteData(), model);
+        bundle.putSerializable(ss.getMyNoteData(), model);
         fragment.setArguments(bundle);
         return fragment;
     }

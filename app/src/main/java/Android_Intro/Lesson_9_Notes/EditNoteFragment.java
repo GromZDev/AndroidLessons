@@ -27,7 +27,7 @@ public class EditNoteFragment extends Fragment {
         Fragment fragment = new EditNoteFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
-        bundle.putParcelable(ss.getMyNoteDataToEdit(), model);
+        bundle.putSerializable(ss.getMyNoteDataToEdit(), model);
         fragment.setArguments(bundle);
         return fragment;
     }
