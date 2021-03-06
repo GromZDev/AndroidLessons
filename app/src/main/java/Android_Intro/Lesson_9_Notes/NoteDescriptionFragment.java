@@ -140,22 +140,22 @@ public class NoteDescriptionFragment extends Fragment {
         }
 
         Button back = view.findViewById(R.id.back);
-        back.setOnClickListener(v -> {
-            if (getFragmentManager() != null){
-                SettingsStorage ss = new SettingsStorage();
-                newData = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
-                MyNote data = new MyNote(newData.getNoteName(),
-                        descriptionView.getText().toString(), themeView.getText().toString(), newData.getImg(), newData.getDate());
-
-
-                Fragment fragment = NoteScreenFragment.newInstance(data);
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, fragment, "TAG")
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+//        back.setOnClickListener(v -> {
+//            if (getFragmentManager() != null){
+//                SettingsStorage ss = new SettingsStorage();
+//                newData = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
+//                MyNote data = new MyNote(newData.getNoteName(),
+//                        descriptionView.getText().toString(), themeView.getText().toString(), newData.getImg(), newData.getDate());
+//
+//
+//                Fragment fragment = NoteScreenFragment.newInstance(data);
+//                requireActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.fragment_container, fragment, "TAG")
+//                        .addToBackStack(null)
+//                        .commit();
+//            }
+//        });
 
         // ========================= Устанавливаем DatePicker Dialog ========================
         setDatePickerDialog();

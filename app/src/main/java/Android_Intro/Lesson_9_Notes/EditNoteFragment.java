@@ -73,16 +73,16 @@ public class EditNoteFragment extends Fragment {
     }
 
     private void sendDataToDescriptionFragment(int image) {
-        SettingsStorage ss = new SettingsStorage();
-        MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
-        MyNote myEditedNote = new MyNote(myNote.getNoteName(),
-                editDescription.getText().toString(), editTheme.getText().toString(), image, myNote.getDate());
-        Fragment fragment = NoteDescriptionFragment.newInstance(myEditedNote); // Упаковали данные заодно!!!
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
+//        SettingsStorage ss = new SettingsStorage();
+//        MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
+//        MyNote myEditedNote = new MyNote(myNote.getNoteName(),
+//                editDescription.getText().toString(), editTheme.getText().toString(), image, myNote.getDate());
+//        Fragment fragment = NoteDescriptionFragment.newInstance(myEditedNote); // Упаковали данные заодно!!!
+//        requireActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.fragment_container, fragment)
+//                .addToBackStack(null)
+//                .commit();
 
     }
 
