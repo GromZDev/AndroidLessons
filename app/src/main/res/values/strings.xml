@@ -34,6 +34,7 @@
     <string name="input_note_theme">Input Note Theme</string>
     <string name="input_note_description">Input Note Description</string>
     <string name="save">Save</string>
+    <string name="add_note_button">Add Note Button</string>
 
 
 </resources>
