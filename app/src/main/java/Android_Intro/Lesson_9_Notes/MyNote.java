@@ -6,19 +6,12 @@ import android.os.Parcelable;
 import java.util.Date;
 
 public class MyNote implements Parcelable {
-    private final String noteName;
-    private final String noteDescription;
-    private final String theme;
-    private final int img;
-    private final Date date;
-
-    public MyNote(String noteName, String noteDescription, String theme, int img, Date date) {
-        this.noteName = noteName;
-        this.noteDescription = noteDescription;
-        this.theme = theme;
-        this.img = img;
-        this.date = date;
-    }
+    private String noteName;
+    private String noteDescription;
+    private String theme;
+    private int img;
+    private Date date;
+    private String id;
 
 
     protected MyNote(Parcel in) {
@@ -26,7 +19,7 @@ public class MyNote implements Parcelable {
         noteDescription = in.readString();
         theme = in.readString();
         img = in.readInt();
-        date = new Date(in.readLong());
+        id = in.readString();
     }
 
     public static final Creator<MyNote> CREATOR = new Creator<MyNote>() {
@@ -61,17 +54,45 @@ public class MyNote implements Parcelable {
         return date;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setNoteName(String noteName) {
+        this.noteName = noteName;
+    }
+
+    public void setNoteDescription(String noteDescription) {
+        this.noteDescription = noteDescription;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(noteName);
-        parcel.writeString(noteDescription);
-        parcel.writeString(theme);
-        parcel.writeInt(img);
-        parcel.writeLong(date.getTime());
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(noteName);
+        dest.writeString(noteDescription);
+        dest.writeString(theme);
+        dest.writeInt(img);
+        dest.writeString(id);
     }
 }
