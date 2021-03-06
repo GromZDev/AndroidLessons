@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -33,11 +34,12 @@ import java.util.List;
 
 public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback {
 
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
     private final List<MyNote> noteList = new ArrayList<>();
     private RecyclerView noteRecyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
+    private FloatingActionButton addNoteButton;
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new NoteScreenFragment();
@@ -197,7 +199,18 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 //================================ Сетим RecyclerView =========================
         initNoteListByRecyclerView(view);
 //=============================================================================
+        addNoteButton = view.findViewById(R.id.fb_notes_add);
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        addNoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddNoteFragment();
+            }
+        });
     }
 
     private void initNoteListByRecyclerView(@NonNull View view) {
@@ -279,6 +292,15 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 
     private void replaceFragment(@NonNull MyNote model) {
         Fragment fragment = NoteDescriptionFragment.newInstance(model); // Упаковали данные заодно!!!
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void goToAddNoteFragment() {
+        Fragment fragment = AddNoteFragment.newInstance(null); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
