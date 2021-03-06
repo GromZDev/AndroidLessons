@@ -30,6 +30,10 @@
     <string name="add_new_note">Add new Note</string>
     <string name="clear_all_notes">Clear All Notes</string>
     <string name="delete_this_note">Delete this Note</string>
+    <string name="input_note_name">Input Note Name</string>
+    <string name="input_note_theme">Input Note Theme</string>
+    <string name="input_note_description">Input Note Description</string>
+    <string name="save">Save</string>
 
 
 </resources>

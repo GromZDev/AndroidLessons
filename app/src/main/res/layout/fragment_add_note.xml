@@ -11,7 +11,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input Note Name"
+        android:hint="@string/input_note_name"
         android:layout_margin="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -25,7 +25,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input Note Theme"
+        android:hint="@string/input_note_theme"
         android:layout_margin="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -40,7 +40,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input Note Description"
+        android:hint="@string/input_note_description"
         android:layout_margin="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -49,5 +49,14 @@
             android:layout_height="wrap_content"
             android:minLines="4" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/back"
+        style="@style/MyButtons"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/save" />
 
 </LinearLayout>
