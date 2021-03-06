@@ -13,7 +13,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 
 public class AddNoteFragment extends Fragment {
@@ -23,8 +31,9 @@ public class AddNoteFragment extends Fragment {
     protected EditText editNoteThemeText;
     protected EditText editNoteDescText;
     protected MaterialButton buttonSaveNote;
+    protected FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance(); // Получаем БД
 
-    public static Fragment newInstance(MyNote model) {
+    public static Fragment newInstance(@Nullable MyNote model) {
         Fragment fragment = new AddNoteFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
@@ -71,13 +80,40 @@ public class AddNoteFragment extends Fragment {
         });
     }
 
+    // =========================== Добавляем запись (заметку) в таблицу =====================
     private void saveDataToDB(@Nullable String name,
                               @Nullable String theme,
                               @Nullable String desc) {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
-            getActivity().onBackPressed();
+            final String id = UUID.randomUUID().toString(); // Генерим рандомный id
+            final Map<String, Object> map = new HashMap<>();
+            map.put("id", id);
+            map.put("name", name);
+            map.put("theme", theme);
+            map.put("desc", desc);
+
+            firebaseFirestore.collection(Constants.TABLE_NAME) // Имя таблицы
+                    .document(id) // Нужен для того, чтобы вытащить заметку по id из БД.
+                    // док если мы делаем set. Если add то не нужен
+                    .set(map) // set либо добавляет, либо обновляет!
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(requireContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(requireContext(), "FAIL", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+            //  getActivity().onBackPressed();
         } else {
             Toast.makeText(requireContext(), "Please input all fields!", Toast.LENGTH_SHORT).show();
         }
     }
+    //========================================================================================
 }
