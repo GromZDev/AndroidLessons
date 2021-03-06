@@ -18,5 +18,9 @@ public class SettingsStorage {
         return "my_note_data_to_main";
     }
 
+    public String getDataToAddNote() {
+        return "my_note_data_to_add_note";
+    }
+
 
 }
