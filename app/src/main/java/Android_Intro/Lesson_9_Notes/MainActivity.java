@@ -22,11 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_container, NOTE_SCREEN_FRAGMENT);
-//        fragmentTransaction.commit();
-
     }
 
 }

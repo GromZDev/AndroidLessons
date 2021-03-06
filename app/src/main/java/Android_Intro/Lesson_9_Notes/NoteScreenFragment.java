@@ -198,17 +198,6 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         initNoteListByRecyclerView(view);
 //=============================================================================
 
-//                if (getArguments() != null) {
-//            SettingsStorage ss = new SettingsStorage();
-//            NoteScreenFragment list = (NoteScreenFragment) getFragmentManager().findFragmentByTag("TAG");
-//            MyNote note3 = (MyNote) getArguments().getParcelable(ss.getDataToMain());
-//            list.noteList.set(0, note3);
-//
-//
-//
-//
-//        }
-
     }
 
     private void initNoteListByRecyclerView(@NonNull View view) {
