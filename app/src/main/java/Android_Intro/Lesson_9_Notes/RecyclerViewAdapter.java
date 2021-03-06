@@ -38,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public MyNoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View noteView = LayoutInflater.from(mContext).inflate(R.layout.item_note, parent, false);
+        View noteView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false);
         return new MyNoteViewHolder(noteView, callback);
     }
 
@@ -95,10 +95,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @SuppressLint("SimpleDateFormat")
         public void onBind(int position, MyNote model) {
-            imageView_Note.setImageResource(model.getImg());
+         //   imageView_Note.setImageResource(model.getImg());
             textView_NoteName.setText(model.getNoteName());
             textView_NoteTheme.setText(model.getTheme());
-            textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(model.getDate()));
+        //    textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(model.getDate()));
             textView_NoteName.setOnClickListener(v -> {
                 if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                     callback.onOnItemClicked(getAdapterPosition());

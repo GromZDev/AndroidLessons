@@ -24,8 +24,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,14 +43,15 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private Toolbar toolbar;
     private final List<MyNote> noteList = new ArrayList<>();
     private RecyclerView noteRecyclerView;
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this);
     private FloatingActionButton addNoteButton;
+    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new NoteScreenFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
-        bundle.putParcelable(ss.getDataToMain(), model);
+        bundle.putSerializable(ss.getDataToMain(), model);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -211,6 +217,9 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 goToAddNoteFragment();
             }
         });
+// =============================== Сетим список заметок из БД =======================
+        getNotesFromDB();
+// ==================================================================================
     }
 
     private void initNoteListByRecyclerView(@NonNull View view) {
@@ -220,8 +229,8 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 getResources().getDimensionPixelSize(R.dimen.layout_marginStartAndEnd),
                 getResources().getDimensionPixelSize(R.dimen.layout_marginBottom)));
 
-     //   noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this); //19.54
+        noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
+     //   recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this); //19.54
         noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Или new LinearLayoutManager(noteRecyclerView.getContext())
         noteRecyclerView.setAdapter(recyclerViewAdapter);
@@ -308,4 +317,28 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 .commit();
     }
 
+// =============================== Сетим список заметок из БД =======================
+    private void getNotesFromDB() {
+        firebaseFirestore.collection(Constants.TABLE_NAME)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.getResult() !=null){
+                            List<MyNote> items = task.getResult().toObjects(MyNote.class); // Вернет нам готовый список
+                            noteList.clear();
+                            noteList.addAll(items);
+                            recyclerViewAdapter.notifyDataSetChanged();
+                         //   Toast.makeText(getActivity(), "Getting from DB is Success", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Getting from DB is Failure!!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+// ==================================================================================
 }
