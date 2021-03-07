@@ -1,5 +1,6 @@
 package Android_Intro.Lesson_10_Notes.Notes_Details;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
 import Android_Intro.Lesson_10_Notes.MyNotes.PictureIndexConverter;
@@ -74,7 +79,10 @@ public class AddNoteFragment extends Fragment implements MyNoteFireStoreDetailCa
                 final String name = editNoteNameText.getText().toString();
                 final String theme = editNoteThemeText.getText().toString();
                 final String desc = editNoteDescText.getText().toString();
-                saveDataToDB(name, theme, desc, img);
+
+                @SuppressLint("SimpleDateFormat")
+                Date date = Calendar.getInstance().getTime();
+                saveDataToDB(name, theme, desc, img, date);
             }
         });
     }
@@ -83,9 +91,10 @@ public class AddNoteFragment extends Fragment implements MyNoteFireStoreDetailCa
     private void saveDataToDB(@Nullable String name,
                               @Nullable String theme,
                               @Nullable String desc,
-                              int img) {
+                              int img,
+                              Date date) {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
-            repository.setNote(UUID.randomUUID().toString(), name, theme, desc, img);
+            repository.setNote(UUID.randomUUID().toString(), name, theme, desc, img, date);
             //  getActivity().onBackPressed();
         } else {
             showToast("Please input all fields!");

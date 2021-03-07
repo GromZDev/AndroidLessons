@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
@@ -100,7 +101,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageView_Note.setImageResource(model.getImg());
             textView_NoteName.setText(model.getNoteName());
             textView_NoteTheme.setText(model.getTheme());
-        //    textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(model.getDate()));
+            textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").format(model.getDate()));
             textView_NoteName.setOnClickListener(v -> {
                 if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                     callback.onOnItemClicked(getAdapterPosition());

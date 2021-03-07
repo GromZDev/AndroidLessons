@@ -6,6 +6,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,8 @@ public class NoteDetailRepositoryImpl implements NoteDetailRepository {
             @NonNull String name,
             @NonNull String theme,
             @NonNull String description,
-            int img) {
+            int img,
+            Date date) {
 
         //   final String id = UUID.randomUUID().toString(); // Генерим рандомный id
         final Map<String, Object> map = new HashMap<>();
@@ -35,6 +37,7 @@ public class NoteDetailRepositoryImpl implements NoteDetailRepository {
         map.put("theme", theme);
         map.put("desc", description);
         map.put("img", img);
+        map.put("date", date);
         firebaseFirestore.collection(Constants.TABLE_NAME) // Имя таблицы
                 .document(name) // Нужен для того, чтобы вытащить заметку по Имени из БД.
                 // док если мы делаем set. Если add то не нужен

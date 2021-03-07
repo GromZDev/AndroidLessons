@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -37,10 +38,12 @@ public class NotesRepositoryImpl implements NotesRepository {
                             for (QueryDocumentSnapshot doc: task.getResult()) {
                              //   int indexPic = PictureIndexConverter.randomPictureIndex(); // Это, если все время рандомную картинку показывать
                                 long indexPic = (long) doc.get("img"); // Тут берем уже сохраненную в БД картинку
+                                Timestamp timeStamp = (Timestamp)doc.get("date");
                                 MyNote model = new MyNote(doc.getString("name"),
                                         doc.getString("theme"),
                                         doc.getString("desc"),
-                                        PictureIndexConverter.getPictureByIndex((int) indexPic)
+                                        PictureIndexConverter.getPictureByIndex((int) indexPic),
+                                        timeStamp.toDate()
 
                                 );
                                 list.add(model);

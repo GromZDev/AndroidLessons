@@ -11,11 +11,12 @@ public class MyNote implements Serializable {
     private Date date;
     private String id;
 
-    public MyNote(String noteName, String theme, String noteDescription, int img) {
+    public MyNote(String noteName, String theme, String noteDescription, int img, Date date) {
         this.noteName = noteName;
         this.theme = theme;
         this.noteDescription = noteDescription;
         this.img = img;
+        this.date = date;
     }
 
     public int getImg() {
