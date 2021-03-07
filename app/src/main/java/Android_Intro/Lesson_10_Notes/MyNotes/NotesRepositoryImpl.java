@@ -6,8 +6,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Android_Intro.Lesson_10_Notes.Constants;
@@ -30,9 +32,19 @@ public class NotesRepositoryImpl implements NotesRepository {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<MyNote> list = new ArrayList<>();
                         if (task.getResult() != null) {
-                            List<MyNote> items = task.getResult().toObjects(MyNote.class); // Вернет нам готовый список
-                            noteCallback.onSuccessNotes(items);
+                            for (QueryDocumentSnapshot doc: task.getResult()) {
+
+                                MyNote model = new MyNote(doc.getString("name"),
+                                        doc.getString("theme"),
+                                        doc.getString("desc"));
+                                list.add(model);
+
+                            }
+                            noteCallback.onSuccessNotes(list);
+//                            List<MyNote> items = task.getResult().toObjects(MyNote.class); // Вернет нам готовый список
+//                            noteCallback.onSuccessNotes(items);
                         }
                     }
                 })
@@ -45,9 +57,9 @@ public class NotesRepositoryImpl implements NotesRepository {
     }
 
     @Override
-    public void onDeleteClicked(@NonNull String id) {
+    public void onDeleteClicked(@NonNull String name) {
         firebaseFirestore.collection(Constants.TABLE_NAME)
-                .document(id)
+                .document(name)
                 .delete();
     }
 }

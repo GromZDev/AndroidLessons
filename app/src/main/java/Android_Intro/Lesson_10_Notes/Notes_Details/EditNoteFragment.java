@@ -25,6 +25,7 @@ import Android_Intro.Lesson_10_Notes.SettingsStorage;
 public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailCallback {
 
     protected View viewEditNote;
+    protected EditText editName;
     protected EditText editTheme;
     protected EditText editDescription;
     protected MaterialButton buttonConfirm;
@@ -56,6 +57,7 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        editName = view.findViewById(R.id.edit_Name);
         editTheme = view.findViewById(R.id.edit_Theme);
         editDescription = view.findViewById(R.id.edit_Description);
 
@@ -63,8 +65,9 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
             SettingsStorage ss = new SettingsStorage();
             myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteDataToEdit());
 
-            editDescription.setText(myNote.getNoteDescription());
+            editName.setText(myNote.getNoteName());
             editTheme.setText(myNote.getTheme());
+            editDescription.setText(myNote.getNoteDescription());
 
         }
 
@@ -82,7 +85,7 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
     }
 
     private void sendDataToDescriptionFragment(int image) {
-        final String name = myNote.getNoteName();
+        final String name = editName.getText().toString();
         final String theme = editTheme.getText().toString();
         final String desc = editDescription.getText().toString();
         saveDataToDB(name, theme, desc);

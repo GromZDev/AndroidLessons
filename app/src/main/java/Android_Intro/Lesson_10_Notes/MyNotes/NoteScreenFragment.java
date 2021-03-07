@@ -232,7 +232,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         MyNote myNote = noteList.get(position);
 
         if (item.getItemId() == R.id.action_delete) {
-            repository.onDeleteClicked(myNote.getId());
+            repository.onDeleteClicked(myNote.getNoteName());
             noteList.remove(position);
             recyclerViewAdapter.notifyItemRemoved(position);
             return true;

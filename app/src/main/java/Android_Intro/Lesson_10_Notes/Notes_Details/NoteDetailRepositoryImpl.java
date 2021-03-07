@@ -34,7 +34,7 @@ public class NoteDetailRepositoryImpl implements NoteDetailRepository {
         map.put("theme", theme);
         map.put("desc", description);
         firebaseFirestore.collection(Constants.TABLE_NAME) // Имя таблицы
-                .document(id) // Нужен для того, чтобы вытащить заметку по id из БД.
+                .document(name) // Нужен для того, чтобы вытащить заметку по Имени из БД.
                 // док если мы делаем set. Если add то не нужен
                 .set(map) // set либо добавляет, либо обновляет!
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
