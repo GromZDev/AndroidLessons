@@ -75,7 +75,7 @@ public class AddNoteFragment extends Fragment implements MyNoteFireStoreDetailCa
             @Override
             public void onClick(View v) {
                 // Берем рандомную картинку для сохранения в БД:
-                final int img = PictureIndexConverter.getPictureByIndex(PictureIndexConverter.randomPictureIndex());
+                final int img = PictureIndexConverter.randomPictureIndex();
                 final String name = editNoteNameText.getText().toString();
                 final String theme = editNoteThemeText.getText().toString();
                 final String desc = editNoteDescText.getText().toString();

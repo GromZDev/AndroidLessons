@@ -5,7 +5,7 @@ import java.util.Random;
 import Android_Intro.Lesson_10_Notes.R;
 
 public class PictureIndexConverter {
-    private static Random rnd = new Random();
+   // private static Random rnd = new Random();
     private static Object syncObj = new Object();
 
     private static int[] picIndex = {R.drawable.fallout_1,
@@ -21,6 +21,7 @@ public class PictureIndexConverter {
 
     public static int randomPictureIndex(){
         synchronized (syncObj){
+            Random rnd = new Random();
             return rnd.nextInt(picIndex.length);
         }
     }
