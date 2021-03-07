@@ -7,6 +7,7 @@ public interface NoteDetailRepository {
     void setNote(@NonNull String id,
                  @NonNull String name,
                  @NonNull String theme,
-                 @NonNull String description
+                 @NonNull String description,
+                 int img
     );
 }

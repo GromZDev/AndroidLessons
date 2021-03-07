@@ -25,7 +25,8 @@ public class NoteDetailRepositoryImpl implements NoteDetailRepository {
             @NonNull String id,
             @NonNull String name,
             @NonNull String theme,
-            @NonNull String description) {
+            @NonNull String description,
+            int img) {
 
         //   final String id = UUID.randomUUID().toString(); // Генерим рандомный id
         final Map<String, Object> map = new HashMap<>();
@@ -33,6 +34,7 @@ public class NoteDetailRepositoryImpl implements NoteDetailRepository {
         map.put("name", name);
         map.put("theme", theme);
         map.put("desc", description);
+        map.put("img", img);
         firebaseFirestore.collection(Constants.TABLE_NAME) // Имя таблицы
                 .document(name) // Нужен для того, чтобы вытащить заметку по Имени из БД.
                 // док если мы делаем set. Если add то не нужен

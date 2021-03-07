@@ -97,7 +97,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @SuppressLint("SimpleDateFormat")
         public void onBind(int position, MyNote model) {
-         //   imageView_Note.setImageResource(model.getImg());
+            imageView_Note.setImageResource(model.getImg());
             textView_NoteName.setText(model.getNoteName());
             textView_NoteTheme.setText(model.getTheme());
         //    textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(model.getDate()));

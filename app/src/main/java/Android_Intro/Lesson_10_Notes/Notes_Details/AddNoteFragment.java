@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import java.util.UUID;
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.MyNotes.PictureIndexConverter;
 import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
@@ -68,10 +69,12 @@ public class AddNoteFragment extends Fragment implements MyNoteFireStoreDetailCa
         buttonSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Берем рандомную картинку для сохранения в БД:
+                final int img = PictureIndexConverter.getPictureByIndex(PictureIndexConverter.randomPictureIndex());
                 final String name = editNoteNameText.getText().toString();
                 final String theme = editNoteThemeText.getText().toString();
                 final String desc = editNoteDescText.getText().toString();
-                saveDataToDB(name, theme, desc);
+                saveDataToDB(name, theme, desc, img);
             }
         });
     }
@@ -79,9 +82,10 @@ public class AddNoteFragment extends Fragment implements MyNoteFireStoreDetailCa
     // =========================== Добавляем запись (заметку) в таблицу =====================
     private void saveDataToDB(@Nullable String name,
                               @Nullable String theme,
-                              @Nullable String desc) {
+                              @Nullable String desc,
+                              int img) {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
-            repository.setNote(UUID.randomUUID().toString(), name, theme, desc);
+            repository.setNote(UUID.randomUUID().toString(), name, theme, desc, img);
             //  getActivity().onBackPressed();
         } else {
             showToast("Please input all fields!");

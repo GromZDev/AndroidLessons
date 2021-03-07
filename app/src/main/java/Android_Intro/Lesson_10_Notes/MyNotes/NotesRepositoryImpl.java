@@ -35,10 +35,14 @@ public class NotesRepositoryImpl implements NotesRepository {
                         List<MyNote> list = new ArrayList<>();
                         if (task.getResult() != null) {
                             for (QueryDocumentSnapshot doc: task.getResult()) {
-
+                             //   int indexPic = PictureIndexConverter.randomPictureIndex(); // Это, если все время рандомную картинку показывать
+                                long indexPic = (long) doc.get("img"); // Тут берем уже сохраненную в БД картинку
                                 MyNote model = new MyNote(doc.getString("name"),
                                         doc.getString("theme"),
-                                        doc.getString("desc"));
+                                        doc.getString("desc"),
+                                        PictureIndexConverter.getPictureByIndex((int) indexPic)
+
+                                );
                                 list.add(model);
 
                             }

@@ -131,7 +131,7 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
             SettingsStorage ss = new SettingsStorage();
             MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
                 if (myNote !=null) {
-                    repository.setNote(myNote.getId(), myNote.getNoteName(), myNote.getTheme(), myNote.getNoteDescription());
+                    repository.setNote(myNote.getId(), myNote.getNoteName(), myNote.getTheme(), myNote.getNoteDescription(), myNote.getImg());
                 }
          //   descriptionView.setText(myNote.getNoteDescription());
 

@@ -18,6 +18,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.UUID;
 
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.MyNotes.PictureIndexConverter;
 import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
@@ -30,6 +31,7 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
     protected EditText editDescription;
     protected MaterialButton buttonConfirm;
     protected MyNote myNote;
+    protected int image;
 
     private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this);
 
@@ -71,32 +73,34 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
 
         }
 
-        int image = myNote.getImg(); // Для передачи! Берем родную картинку и передаем ее обратно! (Менять пока не будем)
+     //   image = myNote.getImg(); // Для передачи! Берем родную картинку и передаем ее обратно! (Менять пока не будем)
+            image = PictureIndexConverter.getIndexByPicture(myNote.getImg());
 
         buttonConfirm = view.findViewById(R.id.confirm_button);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendDataToDescriptionFragment(image);
+                saveNoteData(image);
 
             }
         });
 
     }
 
-    private void sendDataToDescriptionFragment(int image) {
+    private void saveNoteData(int image) {
         final String name = editName.getText().toString();
         final String theme = editTheme.getText().toString();
         final String desc = editDescription.getText().toString();
-        saveDataToDB(name, theme, desc);
+        saveDataToDB(name, theme, desc, image);
 
     }
 
     private void saveDataToDB(@Nullable String name,
                               @Nullable String theme,
-                              @Nullable String desc) {
+                              @Nullable String desc,
+                              int img) {
         if (!TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
-            repository.setNote(UUID.randomUUID().toString(), name, theme, desc);
+            repository.setNote(UUID.randomUUID().toString(), name, theme, desc, img);
             //  getActivity().onBackPressed();
         } else {
             showToast("Please input all fields!");
