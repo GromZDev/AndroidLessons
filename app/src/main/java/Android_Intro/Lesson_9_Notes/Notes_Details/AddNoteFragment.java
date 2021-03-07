@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_9_Notes.Notes_Details;
 
 import android.os.Bundle;
 
@@ -12,26 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
+import Android_Intro.Lesson_9_Notes.Model.MyNote;
+import Android_Intro.Lesson_9_Notes.R;
+import Android_Intro.Lesson_9_Notes.SettingsStorage;
 
 
-public class AddNoteFragment extends Fragment {
+public class AddNoteFragment extends Fragment implements MyNoteFireStoreDetailCallback {
 
     protected View addNoteView;
     protected EditText editNoteNameText;
     protected EditText editNoteThemeText;
     protected EditText editNoteDescText;
     protected MaterialButton buttonSaveNote;
-    protected FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance(); // Получаем БД
+
+    private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this); // Получаем репозиторий
 
     public static Fragment newInstance(@Nullable MyNote model) {
         Fragment fragment = new AddNoteFragment();
@@ -85,35 +81,27 @@ public class AddNoteFragment extends Fragment {
                               @Nullable String theme,
                               @Nullable String desc) {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
-            final String id = UUID.randomUUID().toString(); // Генерим рандомный id
-            final Map<String, Object> map = new HashMap<>();
-            map.put("id", id);
-            map.put("name", name);
-            map.put("theme", theme);
-            map.put("desc", desc);
-
-            firebaseFirestore.collection(Constants.TABLE_NAME) // Имя таблицы
-                    .document(id) // Нужен для того, чтобы вытащить заметку по id из БД.
-                    // док если мы делаем set. Если add то не нужен
-                    .set(map) // set либо добавляет, либо обновляет!
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(requireContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(requireContext(), "FAIL", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-
+            repository.setNote(UUID.randomUUID().toString(), name, theme, desc);
             //  getActivity().onBackPressed();
         } else {
-            Toast.makeText(requireContext(), "Please input all fields!", Toast.LENGTH_SHORT).show();
+            showToast("Please input all fields!");
         }
+    }
+
+    private void showToast(@Nullable String message) {
+        if (message != null) {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onSuccess(@Nullable String message) {
+        showToast(message);
+    }
+
+    @Override
+    public void onError(@Nullable String message) {
+        showToast(message);
     }
     //========================================================================================
 }

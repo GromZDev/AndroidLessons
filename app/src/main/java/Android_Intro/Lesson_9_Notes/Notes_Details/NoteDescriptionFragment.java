@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_9_Notes.Notes_Details;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -24,8 +24,12 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import Android_Intro.Lesson_9_Notes.Model.MyNote;
+import Android_Intro.Lesson_9_Notes.R;
+import Android_Intro.Lesson_9_Notes.SettingsStorage;
 
-public class NoteDescriptionFragment extends Fragment {
+
+public class NoteDescriptionFragment extends Fragment implements MyNoteFireStoreDetailCallback {
 
     protected View viewFragment;
 
@@ -35,6 +39,7 @@ public class NoteDescriptionFragment extends Fragment {
     protected TextView dateView;
     protected DatePickerDialog.OnDateSetListener dateSetListener;
     protected MyNote newData;
+    private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this); // Получаем репозиторий
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new NoteDescriptionFragment();
@@ -125,37 +130,24 @@ public class NoteDescriptionFragment extends Fragment {
         if (getArguments() != null) {
             SettingsStorage ss = new SettingsStorage();
             MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
+                if (myNote !=null) {
+                    repository.setNote(myNote.getId(), myNote.getNoteName(), myNote.getTheme(), myNote.getNoteDescription());
+                }
+         //   descriptionView.setText(myNote.getNoteDescription());
 
-            descriptionView.setText(myNote.getNoteDescription());
+         //   imageNoteDescription.setImageResource(myNote.getImg());
 
-            imageNoteDescription.setImageResource(myNote.getImg());
+         //   themeView.setText(myNote.getTheme());
 
-            themeView.setText(myNote.getTheme());
-
-            @SuppressLint("SimpleDateFormat")
-            String date = new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(myNote.getDate());
-            // Берём дату, установленную при инициации заметок!!!
-            dateView.setText(date);
+//            @SuppressLint("SimpleDateFormat")
+//            String date = new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(myNote.getDate());
+//            // Берём дату, установленную при инициации заметок!!!
+//            dateView.setText(date);
 
         }
 
         Button back = view.findViewById(R.id.back);
-//        back.setOnClickListener(v -> {
-//            if (getFragmentManager() != null){
-//                SettingsStorage ss = new SettingsStorage();
-//                newData = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
-//                MyNote data = new MyNote(newData.getNoteName(),
-//                        descriptionView.getText().toString(), themeView.getText().toString(), newData.getImg(), newData.getDate());
-//
-//
-//                Fragment fragment = NoteScreenFragment.newInstance(data);
-//                requireActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.fragment_container, fragment, "TAG")
-//                        .addToBackStack(null)
-//                        .commit();
-//            }
-//        });
+
 
         // ========================= Устанавливаем DatePicker Dialog ========================
         setDatePickerDialog();
@@ -189,4 +181,13 @@ public class NoteDescriptionFragment extends Fragment {
         };
     }
 
+    @Override
+    public void onSuccess(@Nullable String message) {
+
+    }
+
+    @Override
+    public void onError(@Nullable String message) {
+
+    }
 }
