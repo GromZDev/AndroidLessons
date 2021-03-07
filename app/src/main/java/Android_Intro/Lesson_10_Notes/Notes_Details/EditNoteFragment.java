@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.Notes_Details;
+package Android_Intro.Lesson_10_Notes.Notes_Details;
 
 import android.os.Bundle;
 
@@ -17,9 +17,9 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.UUID;
 
-import Android_Intro.Lesson_9_Notes.Model.MyNote;
-import Android_Intro.Lesson_9_Notes.R;
-import Android_Intro.Lesson_9_Notes.SettingsStorage;
+import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.R;
+import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
 
 public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailCallback {

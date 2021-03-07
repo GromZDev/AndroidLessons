@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.MyNotes.Adapter;
+package Android_Intro.Lesson_10_Notes.MyNotes.Adapter;
 
 public interface MyNoteAdapterCallback {
 

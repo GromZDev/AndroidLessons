@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.Notes_Details;
+package Android_Intro.Lesson_10_Notes.Notes_Details;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
-import Android_Intro.Lesson_9_Notes.MyNotes.NoteScreenFragment;
-import Android_Intro.Lesson_9_Notes.R;
+import Android_Intro.Lesson_10_Notes.MyNotes.NoteScreenFragment;
+import Android_Intro.Lesson_10_Notes.R;
 
 
 public class AboutAppFragment extends Fragment {

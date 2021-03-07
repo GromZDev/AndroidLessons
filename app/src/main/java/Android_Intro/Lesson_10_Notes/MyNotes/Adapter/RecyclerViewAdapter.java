@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.MyNotes.Adapter;
+package Android_Intro.Lesson_10_Notes.MyNotes.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,8 +15,8 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
-import Android_Intro.Lesson_9_Notes.Model.MyNote;
-import Android_Intro.Lesson_9_Notes.R;
+import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.R;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyNoteViewHolder> {
 

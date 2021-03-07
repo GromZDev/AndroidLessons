@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.Notes_Details;
+package Android_Intro.Lesson_10_Notes.Notes_Details;
 
 import androidx.annotation.Nullable;
 

@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.MyNotes;
+package Android_Intro.Lesson_10_Notes.MyNotes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -30,15 +30,15 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-import Android_Intro.Lesson_9_Notes.Notes_Details.AboutAppFragment;
-import Android_Intro.Lesson_9_Notes.Notes_Details.AddNoteFragment;
-import Android_Intro.Lesson_9_Notes.Model.MyNote;
-import Android_Intro.Lesson_9_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
-import Android_Intro.Lesson_9_Notes.MyNotes.Adapter.MyNoteDecorator;
-import Android_Intro.Lesson_9_Notes.Notes_Details.EditNoteFragment;
-import Android_Intro.Lesson_9_Notes.R;
-import Android_Intro.Lesson_9_Notes.MyNotes.Adapter.RecyclerViewAdapter;
-import Android_Intro.Lesson_9_Notes.SettingsStorage;
+import Android_Intro.Lesson_10_Notes.Notes_Details.AboutAppFragment;
+import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteFragment;
+import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
+import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteDecorator;
+import Android_Intro.Lesson_10_Notes.Notes_Details.EditNoteFragment;
+import Android_Intro.Lesson_10_Notes.R;
+import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.RecyclerViewAdapter;
+import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
 public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback {
 

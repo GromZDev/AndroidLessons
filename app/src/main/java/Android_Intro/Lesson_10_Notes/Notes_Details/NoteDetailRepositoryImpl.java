@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.Notes_Details;
+package Android_Intro.Lesson_10_Notes.Notes_Details;
 
 import androidx.annotation.NonNull;
 
@@ -9,7 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import Android_Intro.Lesson_9_Notes.Constants;
+import Android_Intro.Lesson_10_Notes.Constants;
 
 public class NoteDetailRepositoryImpl implements NoteDetailRepository {
 

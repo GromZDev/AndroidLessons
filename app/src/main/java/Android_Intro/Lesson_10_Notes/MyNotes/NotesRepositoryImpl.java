@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes.MyNotes;
+package Android_Intro.Lesson_10_Notes.MyNotes;
 
 import androidx.annotation.NonNull;
 
@@ -10,8 +10,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-import Android_Intro.Lesson_9_Notes.Constants;
-import Android_Intro.Lesson_9_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.Constants;
+import Android_Intro.Lesson_10_Notes.Model.MyNote;
 
 // Класс для запросов к БД
 public class NotesRepositoryImpl implements NotesRepository {
