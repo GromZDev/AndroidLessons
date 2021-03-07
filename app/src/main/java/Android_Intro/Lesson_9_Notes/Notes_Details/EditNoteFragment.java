@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_9_Notes.Notes_Details;
 
 import android.os.Bundle;
 
@@ -6,22 +6,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
-import java.util.Calendar;
+
+import java.util.UUID;
+
+import Android_Intro.Lesson_9_Notes.Model.MyNote;
+import Android_Intro.Lesson_9_Notes.R;
+import Android_Intro.Lesson_9_Notes.SettingsStorage;
 
 
-public class EditNoteFragment extends Fragment {
+public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailCallback {
 
     protected View viewEditNote;
     protected EditText editTheme;
     protected EditText editDescription;
     protected MaterialButton buttonConfirm;
     protected MyNote myNote;
+
+    private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this);
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new EditNoteFragment();
@@ -52,7 +61,7 @@ public class EditNoteFragment extends Fragment {
 
         if (getArguments() != null) {
             SettingsStorage ss = new SettingsStorage();
-            myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
+            myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteDataToEdit());
 
             editDescription.setText(myNote.getNoteDescription());
             editTheme.setText(myNote.getTheme());
@@ -73,18 +82,38 @@ public class EditNoteFragment extends Fragment {
     }
 
     private void sendDataToDescriptionFragment(int image) {
-//        SettingsStorage ss = new SettingsStorage();
-//        MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteDataToEdit());
-//        MyNote myEditedNote = new MyNote(myNote.getNoteName(),
-//                editDescription.getText().toString(), editTheme.getText().toString(), image, myNote.getDate());
-//        Fragment fragment = NoteDescriptionFragment.newInstance(myEditedNote); // Упаковали данные заодно!!!
-//        requireActivity().getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.fragment_container, fragment)
-//                .addToBackStack(null)
-//                .commit();
+        final String name = myNote.getNoteName();
+        final String theme = editTheme.getText().toString();
+        final String desc = editDescription.getText().toString();
+        saveDataToDB(name, theme, desc);
 
     }
 
+    private void saveDataToDB(@Nullable String name,
+                              @Nullable String theme,
+                              @Nullable String desc) {
+        if (!TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
+            repository.setNote(UUID.randomUUID().toString(), name, theme, desc);
+            //  getActivity().onBackPressed();
+        } else {
+            showToast("Please input all fields!");
+        }
+    }
 
+    private void showToast(@Nullable String message) {
+        if (message != null) {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onSuccess(@Nullable String message) {
+        showToast(message);
+    }
+
+    @Override
+    public void onError(@Nullable String message) {
+        showToast(message);
+    }
 }
