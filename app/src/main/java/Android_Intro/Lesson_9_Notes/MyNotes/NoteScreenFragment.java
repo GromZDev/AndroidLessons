@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_9_Notes.MyNotes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -24,20 +24,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Comparator;
 import java.util.List;
 
-public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback {
+import Android_Intro.Lesson_9_Notes.Notes_Details.AboutAppFragment;
+import Android_Intro.Lesson_9_Notes.Notes_Details.AddNoteFragment;
+import Android_Intro.Lesson_9_Notes.Model.MyNote;
+import Android_Intro.Lesson_9_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
+import Android_Intro.Lesson_9_Notes.MyNotes.Adapter.MyNoteDecorator;
+import Android_Intro.Lesson_9_Notes.Notes_Details.EditNoteFragment;
+import Android_Intro.Lesson_9_Notes.R;
+import Android_Intro.Lesson_9_Notes.MyNotes.Adapter.RecyclerViewAdapter;
+import Android_Intro.Lesson_9_Notes.SettingsStorage;
+
+public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -45,7 +48,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private RecyclerView noteRecyclerView;
     private final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this);
     private FloatingActionButton addNoteButton;
-    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private final NotesRepository repository = new NotesRepositoryImpl(this);
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new NoteScreenFragment();
@@ -60,32 +63,6 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
         setHasOptionsMenu(true); // активация меню
         super.onCreate(savedInstanceState);
-
-     //   initNoteList();
-
-    }
-
-    private void initNoteList() {
-//        noteList.add(new MyNote("Note Num01", "Note Description1", "Тема заметки 1", R.drawable.fallout_1, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num02", "Note Description2", "Тема заметки 2", R.drawable.fallout_6, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num03", "Note Description3", "Тема заметки 3", R.drawable.fallout_8, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num04", "Note Description4", "Тема заметки 4", R.drawable.fallout_5, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num05", "Note Description5", "Тема заметки 5", R.drawable.fallout_3, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num06", "Note Description6", "Тема заметки 6", R.drawable.fallout_4, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num07", "Note Description7", "Тема заметки 7", R.drawable.fallout_7, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num08", "Note Description8", "Тема заметки 8", R.drawable.fallout_2, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num09", "Note Description9", "Тема заметки 9", R.drawable.fallout_8, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num10", "Note Description10", "Тема заметки 10", R.drawable.fallout_4, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num11", "Note Description11", "Тема заметки 11", R.drawable.fallout_3, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num12", "Note Description12", "Тема заметки 12", R.drawable.fallout_1, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num13", "Note Description13", "Тема заметки 13", R.drawable.fallout_9, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num14", "Note Description14", "Тема заметки 14", R.drawable.fallout_2, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num15", "Note Description15", "Тема заметки 15", R.drawable.fallout_4, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num16", "Note Description16", "Тема заметки 16", R.drawable.fallout_5, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num17", "Note Description17", "Тема заметки 17", R.drawable.fallout_8, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num18", "Note Description18", "Тема заметки 18", R.drawable.fallout_6, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num19", "Note Description19", "Тема заметки 19", R.drawable.fallout_9, Calendar.getInstance().getTime()));
-//        noteList.add(new MyNote("Note Num20", "Note Description20", "Тема заметки 20", R.drawable.fallout_7, Calendar.getInstance().getTime()));
     }
 
     @Override
@@ -218,7 +195,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
             }
         });
 // =============================== Сетим список заметок из БД =======================
-        getNotesFromDB();
+        repository.requestNotes();
 // ==================================================================================
     }
 
@@ -230,7 +207,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 getResources().getDimensionPixelSize(R.dimen.layout_marginBottom)));
 
         noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
-     //   recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this); //19.54
+        //   recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this); //19.54
         noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Или new LinearLayoutManager(noteRecyclerView.getContext())
         noteRecyclerView.setAdapter(recyclerViewAdapter);
@@ -250,13 +227,17 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+// =========================== Удаляем заметку из БД ==========================
         int position = recyclerViewAdapter.getContextMenuPosition();
+        MyNote myNote = noteList.get(position);
+
         if (item.getItemId() == R.id.action_delete) {
+            repository.onDeleteClicked(myNote.getId());
             noteList.remove(position);
             recyclerViewAdapter.notifyItemRemoved(position);
             return true;
         }
-
+//=============================================================================
         return super.onContextItemSelected(item);
     }
 
@@ -273,25 +254,18 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     // ========== Имплементим метод, берём позицию и переходим по клику конкретной заметки =============
     @Override
     public void onOnItemClicked(int position) {
-        //   MyNote myNote = noteList.get(position);
-        //   Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
 
         MyNote myNote = noteList.get(position);
         replaceFragment(myNote);
+        //TODO
     }
 
     @Override
     public void insertNewNote(int position) {
-//        int size = noteList.size();
-//        noteList.add(position, new MyNote("Note Num" + (size + 1),
-//                "Note Description" + (size + 1),
-//                "Тема заметки " + (size + 1), R.drawable.fallout_1, Calendar.getInstance().getTime()));
-
     }
 
     @Override
     public void sortMyNotes() {
-        noteList.sort(Comparator.comparing(MyNote::getNoteName));
     }
 
     @Override
@@ -300,7 +274,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     }
 
     private void replaceFragment(@NonNull MyNote model) {
-        Fragment fragment = NoteDescriptionFragment.newInstance(model); // Упаковали данные заодно!!!
+        Fragment fragment = EditNoteFragment.newInstance(model); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -317,28 +291,25 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 .commit();
     }
 
-// =============================== Сетим список заметок из БД =======================
-    private void getNotesFromDB() {
-        firebaseFirestore.collection(Constants.TABLE_NAME)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.getResult() !=null){
-                            List<MyNote> items = task.getResult().toObjects(MyNote.class); // Вернет нам готовый список
-                            noteList.clear();
-                            noteList.addAll(items);
-                            recyclerViewAdapter.notifyDataSetChanged();
-                         //   Toast.makeText(getActivity(), "Getting from DB is Success", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), "Getting from DB is Failure!!!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+    // =============================== Сетим список заметок из БД =======================
+    @Override
+    public void onSuccessNotes(@NonNull List<MyNote> items) {
+        noteList.clear();
+        noteList.addAll(items);
+        recyclerViewAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onErrorNotes(@Nullable String message) {
+        showToast(message);
+    }
+
+    private void showToast(@Nullable String message) {
+        if (message != null) {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 // ==================================================================================
 }
