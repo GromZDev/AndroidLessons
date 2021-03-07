@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_9_Notes.MyNotes.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
+
+import Android_Intro.Lesson_9_Notes.Model.MyNote;
+import Android_Intro.Lesson_9_Notes.R;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyNoteViewHolder> {
 

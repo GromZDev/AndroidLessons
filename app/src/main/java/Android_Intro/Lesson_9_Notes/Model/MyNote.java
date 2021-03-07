@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_9_Notes.Model;
 
 import java.io.Serializable;
 import java.util.Date;
