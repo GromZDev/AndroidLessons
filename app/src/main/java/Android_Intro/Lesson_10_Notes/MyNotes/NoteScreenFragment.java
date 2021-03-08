@@ -36,6 +36,7 @@ import Android_Intro.Lesson_10_Notes.Model.MyNote;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteDecorator;
 import Android_Intro.Lesson_10_Notes.Notes_Details.EditNoteFragment;
+import Android_Intro.Lesson_10_Notes.Notes_Details.NoteDescriptionFragment;
 import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.RecyclerViewAdapter;
 import Android_Intro.Lesson_10_Notes.SettingsStorage;
@@ -274,7 +275,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     }
 
     private void replaceFragment(@NonNull MyNote model) {
-        Fragment fragment = EditNoteFragment.newInstance(model); // Упаковали данные заодно!!!
+        Fragment fragment = NoteDescriptionFragment.newInstance(model); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -282,7 +283,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 .commit();
     }
 
-    private void goToAddNoteFragment() {
+    private void goToAddNoteFragment() { // Переходим во фрагмент добавления новой заметки
         Fragment fragment = AddNoteFragment.newInstance(null); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,15 +22,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.MyNotes.MyNotesFireStoreCallback;
+import Android_Intro.Lesson_10_Notes.MyNotes.NoteScreenFragment;
+import Android_Intro.Lesson_10_Notes.MyNotes.NotesRepository;
+import Android_Intro.Lesson_10_Notes.MyNotes.NotesRepositoryImpl;
+import Android_Intro.Lesson_10_Notes.MyNotes.PictureIndexConverter;
 import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
 
-public class NoteDescriptionFragment extends Fragment implements MyNoteFireStoreDetailCallback {
+public class NoteDescriptionFragment extends Fragment implements MyNoteFireStoreDetailCallback{
 
     protected View viewFragment;
 
@@ -38,8 +48,11 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
     protected TextView themeView;
     protected TextView dateView;
     protected DatePickerDialog.OnDateSetListener dateSetListener;
-    protected MyNote newData;
-    private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this); // Получаем репозиторий
+    protected MyNote myNote;
+    protected int image;
+    protected Date date;
+    private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this);
+
 
     public static Fragment newInstance(@NonNull MyNote model) {
         Fragment fragment = new NoteDescriptionFragment();
@@ -89,8 +102,10 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
     //================================== Переходим во фрагмент редактора данных ====================
     private void goToEditDataFragment() {
         SettingsStorage ss = new SettingsStorage();
-        MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
-        Fragment fragment = EditNoteFragment.newInstance(myNote); // Упаковали данные заодно!!!
+        MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
+        MyNote myNewNote = new MyNote(myNote.getNoteName(), themeView.getText().toString(),
+                descriptionView.getText().toString(), myNote.getImg(), myNote.getDate());
+        Fragment fragment = EditNoteFragment.newInstance(myNewNote); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -127,31 +142,83 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
         themeView = view.findViewById(R.id.note_description_theme);
         dateView = view.findViewById(R.id.note_description_date);
 
+
         if (getArguments() != null) {
             SettingsStorage ss = new SettingsStorage();
-            MyNote myNote = (MyNote) getArguments().getParcelable(ss.getMyNoteData());
-                if (myNote !=null) {
-                    repository.setNote(myNote.getId(), myNote.getNoteName(), myNote.getTheme(), myNote.getNoteDescription(), myNote.getImg(), myNote.getDate());
-                }
-         //   descriptionView.setText(myNote.getNoteDescription());
+            myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
 
-         //   imageNoteDescription.setImageResource(myNote.getImg());
+            descriptionView.setText(myNote.getNoteDescription());
 
-         //   themeView.setText(myNote.getTheme());
+            image = PictureIndexConverter.getIndexByPicture(myNote.getImg()); // Заблочить
+            imageNoteDescription.setImageResource(myNote.getImg()); // Разблочить
 
-//            @SuppressLint("SimpleDateFormat")
-//            String date = new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(myNote.getDate());
-//            // Берём дату, установленную при инициации заметок!!!
-//            dateView.setText(date);
+            themeView.setText(myNote.getTheme());
+
+            @SuppressLint("SimpleDateFormat")
+            String date = new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").format(myNote.getDate());
+            // Берём дату, установленную при инициации заметок!!!
+            dateView.setText(date);
 
         }
 
-        Button back = view.findViewById(R.id.back);
+        image = myNote.getImg();
 
+        Button back = view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveNoteData(image);
+
+
+                goToMainFragment();
+            }
+        });
 
         // ========================= Устанавливаем DatePicker Dialog ========================
         setDatePickerDialog();
         //===================================================================================
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private void saveNoteData(int image) {
+        final String name = myNote.getNoteName();
+        final String theme = themeView.getText().toString();
+        final String desc = descriptionView.getText().toString();
+
+        String stringDate = dateView.getText().toString();
+        try {
+            date = new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").parse(stringDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        saveDataToDB(name, theme, desc, image, date);
+
+        myNote = new MyNote(name,theme, desc, image, date);
+    }
+
+    private void saveDataToDB(@NonNull String name,
+                              @NonNull String theme,
+                              @NonNull String desc,
+                              int image, @NonNull
+                                      Date date) {
+        if (!TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
+            repository.setNote(UUID.randomUUID().toString(), name, theme, desc, image, date);
+            //  getActivity().onBackPressed();
+        } else {
+            Toast.makeText(requireContext(), "Something go wrong.....", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void goToMainFragment() {
+        SettingsStorage ss = new SettingsStorage();
+        MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteDataToEdit());
+        Fragment fragment = NoteScreenFragment.newInstance(myNote); // Упаковали данные заодно!!!
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void setDatePickerDialog() {
@@ -175,7 +242,7 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
             String newDate = dayOfMonth + "-" + month + "-" + year;
 
             @SuppressLint("SimpleDateFormat")
-            String date = new SimpleDateFormat(" =||= hh:mm:ss").format(calendar.getTime());
+            String date = new SimpleDateFormat(" =||= HH:mm:ss").format(calendar.getTime());
 
             dateView.setText(newDate.concat(date));
         };

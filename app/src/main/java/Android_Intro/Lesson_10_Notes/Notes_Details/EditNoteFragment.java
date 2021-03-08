@@ -34,6 +34,7 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
     protected MyNote myNote;
     protected int image;
     protected Date date;
+    protected MyNote newNote;
 
     private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this);
 
@@ -61,7 +62,6 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        editName = view.findViewById(R.id.edit_Name);
         editTheme = view.findViewById(R.id.edit_Theme);
         editDescription = view.findViewById(R.id.edit_Description);
 
@@ -69,14 +69,14 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
             SettingsStorage ss = new SettingsStorage();
             myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteDataToEdit());
 
-            editName.setText(myNote.getNoteName());
             editTheme.setText(myNote.getTheme());
             editDescription.setText(myNote.getNoteDescription());
-
+            image = PictureIndexConverter.getIndexByPicture(myNote.getImg());
+         //   image = myNote.getImg();
         }
 
-        //   image = myNote.getImg(); // Для передачи! Берем родную картинку и передаем ее обратно! (Менять пока не будем)
-        image = PictureIndexConverter.getIndexByPicture(myNote.getImg());
+
+
         date = myNote.getDate();
 
         buttonConfirm = view.findViewById(R.id.confirm_button);
@@ -85,13 +85,30 @@ public class EditNoteFragment extends Fragment implements MyNoteFireStoreDetailC
             public void onClick(View v) {
                 saveNoteData(image, date);
 
+                newNote = new MyNote(myNote.getNoteName(), editTheme.getText().toString(), editDescription.getText().toString(),
+                        image, date);
+                goBackToNoteDescriptionFragment();
+
             }
         });
 
     }
 
+    private void goBackToNoteDescriptionFragment() {
+        SettingsStorage ss = new SettingsStorage();
+        MyNote nottte = (MyNote) getArguments().getSerializable(ss.getMyNoteDataToEdit());
+        MyNote noteToDescription = new MyNote(nottte.getNoteName(), editTheme.getText().toString(), editDescription.getText().toString(),
+                image, nottte.getDate());
+        Fragment fragment = NoteDescriptionFragment.newInstance(noteToDescription); // Упаковали данные заодно!!!
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     private void saveNoteData(int image, Date date) {
-        final String name = editName.getText().toString();
+        final String name = myNote.getNoteName();
         final String theme = editTheme.getText().toString();
         final String desc = editDescription.getText().toString();
         saveDataToDB(name, theme, desc, image, date);
