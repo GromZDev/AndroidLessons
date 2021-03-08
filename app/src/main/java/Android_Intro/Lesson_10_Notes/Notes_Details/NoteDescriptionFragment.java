@@ -22,24 +22,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
+import Android_Intro.Lesson_10_Notes.Constants;
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
-import Android_Intro.Lesson_10_Notes.MyNotes.MyNotesFireStoreCallback;
 import Android_Intro.Lesson_10_Notes.MyNotes.NoteScreenFragment;
-import Android_Intro.Lesson_10_Notes.MyNotes.NotesRepository;
-import Android_Intro.Lesson_10_Notes.MyNotes.NotesRepositoryImpl;
 import Android_Intro.Lesson_10_Notes.MyNotes.PictureIndexConverter;
 import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
 
-public class NoteDescriptionFragment extends Fragment implements MyNoteFireStoreDetailCallback{
+public class NoteDescriptionFragment extends Fragment implements MyNoteFireStoreDetailCallback {
 
     protected View viewFragment;
 
@@ -48,10 +50,10 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
     protected TextView themeView;
     protected TextView dateView;
     protected DatePickerDialog.OnDateSetListener dateSetListener;
-    protected MyNote myNote;
-    protected int image;
+    protected int newImage;
     protected Date date;
     private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this);
+    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
 
     public static Fragment newInstance(@NonNull MyNote model) {
@@ -142,35 +144,19 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
         themeView = view.findViewById(R.id.note_description_theme);
         dateView = view.findViewById(R.id.note_description_date);
 
+// ==================== Сетим полученные из БД данные ====================
+        initMyNoteData();
+// ==================== ============================= ====================
 
-        if (getArguments() != null) {
-            SettingsStorage ss = new SettingsStorage();
-            myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
-
-            descriptionView.setText(myNote.getNoteDescription());
-
-            image = PictureIndexConverter.getIndexByPicture(myNote.getImg()); // Заблочить
-            imageNoteDescription.setImageResource(myNote.getImg()); // Разблочить
-
-            themeView.setText(myNote.getTheme());
-
-            @SuppressLint("SimpleDateFormat")
-            String date = new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").format(myNote.getDate());
-            // Берём дату, установленную при инициации заметок!!!
-            dateView.setText(date);
-
-        }
-
-        image = myNote.getImg();
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveNoteData(image);
-
+                saveNoteData();
 
                 goToMainFragment();
+
             }
         });
 
@@ -179,11 +165,50 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
         //===================================================================================
     }
 
+    private void initMyNoteData() {
+        SettingsStorage ss = new SettingsStorage();
+        MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
+        firebaseFirestore.collection(Constants.TABLE_NAME).document(myNote.getNoteName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot queryDocumentSnapshots) {
+                        if (queryDocumentSnapshots.exists()) {
+                            String theme = queryDocumentSnapshots.getString("theme");
+                            String desc = queryDocumentSnapshots.getString("desc");
+                            long indexPic = (long) queryDocumentSnapshots.get("img");
+
+                            newImage = PictureIndexConverter.getPictureByIndex((int) indexPic);
+                            SettingsStorage ss = new SettingsStorage();
+                            MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
+                            String date = new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").format(myNote.getDate());
+
+                            themeView.setText(theme);
+                            descriptionView.setText(desc);
+                            imageNoteDescription.setImageResource(newImage);
+                            dateView.setText(date);
+                        } else {
+                            Toast.makeText(requireContext(), "Smth goes wrong!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+
     @SuppressLint("SimpleDateFormat")
-    private void saveNoteData(int image) {
+    private void saveNoteData() {
+        SettingsStorage ss = new SettingsStorage();
+        MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
         final String name = myNote.getNoteName();
-        final String theme = themeView.getText().toString();
-        final String desc = descriptionView.getText().toString();
+        final String theme = myNote.getTheme();
+        final String desc = myNote.getNoteDescription();
+        int image = PictureIndexConverter.getIndexByPicture(myNote.getImg());
+        // int image = myNote.getImg();
 
         String stringDate = dateView.getText().toString();
         try {
@@ -194,7 +219,7 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
 
         saveDataToDB(name, theme, desc, image, date);
 
-        myNote = new MyNote(name,theme, desc, image, date);
+        //  myNote = new MyNote(name,theme, desc, image, date);
     }
 
     private void saveDataToDB(@NonNull String name,
