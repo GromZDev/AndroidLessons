@@ -51,7 +51,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private FloatingActionButton addNoteButton;
     private final NotesRepository repository = new NotesRepositoryImpl(this);
 
-    public static Fragment newInstance(@NonNull MyNote model) {
+    public static Fragment newInstance(@Nullable MyNote model) {
         Fragment fragment = new NoteScreenFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
@@ -258,7 +258,6 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 
         MyNote myNote = noteList.get(position);
         replaceFragment(myNote);
-        //TODO
     }
 
     @Override
