@@ -98,6 +98,7 @@ public class AuthenticationFragment extends Fragment {
 
     private void initGoogleSign() {
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -127,6 +128,7 @@ public class AuthenticationFragment extends Fragment {
         try {
             GoogleSignInAccount account =
                     task.getResult(ApiException.class);
+            Log.w(TAG, ">>>>>>>>>>>>>>>>>>>>  signInResult: Confirmed");
 // Регистрация прошла успешно
             disableSign();
             updateUI(account.getEmail());
