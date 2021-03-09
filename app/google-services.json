@@ -9,10 +9,26 @@
       "client_info": {
         "mobilesdk_app_id": "1:880391382372:android:f041820777ed1663f04671",
         "android_client_info": {
-          "package_name": "Android_Intro.Lesson_10_Notes"
+          "package_name": "Android_Intro.Lesson_6_Notes"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "880391382372-367j64bb31678h0bkr8j63ur1qvs38h6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "Android_Intro.Lesson_6_Notes",
+            "certificate_hash": "7793b079fda2c14dc28d9ce02cb2809082d4b234"
+          }
+        },
+        {
+          "client_id": "880391382372-dcfgtok5hfo42dvo1mceeae963j33nee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "Android_Intro.Lesson_6_Notes",
+            "certificate_hash": "eebe90b72a6680010d400b0c57e7003906490a25"
+          }
+        },
         {
           "client_id": "880391382372-o4cpmt7j87h0n0518j9vj7tnaalokbfg.apps.googleusercontent.com",
           "client_type": 3
