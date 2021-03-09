@@ -22,9 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
@@ -55,12 +52,12 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
     private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this);
     private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
-
-    public static Fragment newInstance(@NonNull MyNote model) {
+    public static Fragment newInstance(@NonNull MyNote model, int value) {
         Fragment fragment = new NoteDescriptionFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
         bundle.putSerializable(ss.getMyNoteData(), model);
+        bundle.putInt("INT_PIC", value);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -150,14 +147,11 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
 
 
         Button back = view.findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveNoteData();
+        back.setOnClickListener(v -> {
+            saveNoteData();
 
-                goToMainFragment();
+            goToMainFragment();
 
-            }
         });
 
         // ========================= Устанавливаем DatePicker Dialog ========================
@@ -170,33 +164,28 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
         MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
         firebaseFirestore.collection(Constants.TABLE_NAME).document(myNote.getNoteName())
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot queryDocumentSnapshots) {
-                        if (queryDocumentSnapshots.exists()) {
-                            String theme = queryDocumentSnapshots.getString("theme");
-                            String desc = queryDocumentSnapshots.getString("desc");
-                            long indexPic = (long) queryDocumentSnapshots.get("img");
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (queryDocumentSnapshots.exists()) {
+                        String theme = queryDocumentSnapshots.getString("theme");
+                        String desc = queryDocumentSnapshots.getString("desc");
+                        long indexPic = (long) queryDocumentSnapshots.get("img");
 
-                            newImage = PictureIndexConverter.getPictureByIndex((int) indexPic);
-                            SettingsStorage ss = new SettingsStorage();
-                            MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
-                            String date = new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").format(myNote.getDate());
+                        newImage = PictureIndexConverter.getPictureByIndex((int) indexPic);
+                        SettingsStorage ss1 = new SettingsStorage();
+                        MyNote myNote1 = (MyNote) getArguments().getSerializable(ss1.getMyNoteData());
+                        @SuppressLint("SimpleDateFormat")
+                        String date = new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").format(myNote1.getDate());
 
-                            themeView.setText(theme);
-                            descriptionView.setText(desc);
-                            imageNoteDescription.setImageResource(newImage);
-                            dateView.setText(date);
-                        } else {
-                            Toast.makeText(requireContext(), "Smth goes wrong!", Toast.LENGTH_SHORT).show();
-                        }
+                        themeView.setText(theme);
+                        descriptionView.setText(desc);
+                        imageNoteDescription.setImageResource(newImage);
+                        dateView.setText(date);
+                    } else {
+                        Toast.makeText(requireContext(), "Something goes wrong!", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                .addOnFailureListener(e -> {
 
-                    }
                 });
     }
 
@@ -204,11 +193,12 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
     private void saveNoteData() {
         SettingsStorage ss = new SettingsStorage();
         MyNote myNote = (MyNote) getArguments().getSerializable(ss.getMyNoteData());
+
         final String name = myNote.getNoteName();
-        final String theme = myNote.getTheme();
-        final String desc = myNote.getNoteDescription();
-        int image = PictureIndexConverter.getIndexByPicture(myNote.getImg());
-        // int image = myNote.getImg();
+        final String theme = themeView.getText().toString();
+        final String desc = descriptionView.getText().toString();
+
+        int image = getArguments().getInt("INT_PIC"); // Получаем прокинутую картинку чтобы она не сбивалась!
 
         String stringDate = dateView.getText().toString();
         try {
@@ -219,7 +209,6 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
 
         saveDataToDB(name, theme, desc, image, date);
 
-        //  myNote = new MyNote(name,theme, desc, image, date);
     }
 
     private void saveDataToDB(@NonNull String name,
@@ -229,7 +218,6 @@ public class NoteDescriptionFragment extends Fragment implements MyNoteFireStore
                                       Date date) {
         if (!TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
             repository.setNote(UUID.randomUUID().toString(), name, theme, desc, image, date);
-            //  getActivity().onBackPressed();
         } else {
             Toast.makeText(requireContext(), "Something go wrong.....", Toast.LENGTH_SHORT).show();
         }

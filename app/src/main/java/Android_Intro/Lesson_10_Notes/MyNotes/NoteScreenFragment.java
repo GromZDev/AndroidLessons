@@ -35,7 +35,6 @@ import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteFragment;
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteDecorator;
-import Android_Intro.Lesson_10_Notes.Notes_Details.EditNoteFragment;
 import Android_Intro.Lesson_10_Notes.Notes_Details.NoteDescriptionFragment;
 import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.RecyclerViewAdapter;
@@ -44,12 +43,12 @@ import Android_Intro.Lesson_10_Notes.SettingsStorage;
 public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback {
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
     private final List<MyNote> noteList = new ArrayList<>();
     private RecyclerView noteRecyclerView;
     private final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this);
     private FloatingActionButton addNoteButton;
     private final NotesRepository repository = new NotesRepositoryImpl(this);
+    private int transferNotePicture; // Для прокидывания текущей картинки, чтобы при редактировании не сбивалась
 
     public static Fragment newInstance(@Nullable MyNote model) {
         Fragment fragment = new NoteScreenFragment();
@@ -117,7 +116,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     }
 
     private void initiateSideNavMenu(View v) {
-        toolbar = toolbarInitiation(v);
+        Toolbar toolbar = toolbarInitiation(v);
 
         drawerLayout = v.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout,
@@ -189,12 +188,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        addNoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToAddNoteFragment();
-            }
-        });
+        addNoteButton.setOnClickListener(v -> goToAddNoteFragment());
 // =============================== Сетим список заметок из БД =======================
         repository.requestNotes();
 // ==================================================================================
@@ -257,6 +251,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     public void onOnItemClicked(int position) {
 
         MyNote myNote = noteList.get(position);
+        transferNotePicture = PictureIndexConverter.getIndexByPicture(myNote.getImg());
         replaceFragment(myNote);
     }
 
@@ -274,7 +269,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     }
 
     private void replaceFragment(@NonNull MyNote model) {
-        Fragment fragment = NoteDescriptionFragment.newInstance(model); // Упаковали данные заодно!!!
+        Fragment fragment = NoteDescriptionFragment.newInstance(model, transferNotePicture); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -283,7 +278,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     }
 
     private void goToAddNoteFragment() { // Переходим во фрагмент добавления новой заметки
-        Fragment fragment = AddNoteFragment.newInstance(null); // Упаковали данные заодно!!!
+        Fragment fragment = AddNoteFragment.newInstance(null);
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
