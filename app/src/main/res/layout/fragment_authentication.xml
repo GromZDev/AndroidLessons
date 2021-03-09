@@ -1,0 +1,40 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MyNotes.AuthenticationFragment">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:text="@string/please_connect_to_your_account"
+    android:textSize="@dimen/main_text_size"
+    android:layout_marginBottom="@dimen/TOP_margin"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/sign_in_button"/>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="200dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/go_to_my_notes"
+        style="@style/MyButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="@string/go_to_myNotes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
