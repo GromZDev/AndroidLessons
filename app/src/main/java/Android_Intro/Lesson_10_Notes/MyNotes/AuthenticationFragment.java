@@ -1,6 +1,5 @@
 package Android_Intro.Lesson_10_Notes.MyNotes;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -24,7 +24,6 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
 
-import Android_Intro.Lesson_10_Notes.MainActivity;
 import Android_Intro.Lesson_10_Notes.R;
 
 public class AuthenticationFragment extends Fragment {
@@ -38,22 +37,13 @@ public class AuthenticationFragment extends Fragment {
 
     private static final int RC_SIGN_IN = 40404;
     private TextView emailView;
+    private TextView connectedWith;
+    private TextView connectGoogle;
+    LinearLayout fl;
 
 
     public static AuthenticationFragment newInstance() {
         return new AuthenticationFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        MainActivity activity = (MainActivity) context;
     }
 
     @Override
@@ -62,36 +52,28 @@ public class AuthenticationFragment extends Fragment {
 
         authView = inflater.inflate(R.layout.fragment_authentication, container, false);
 
-        initGoogleSign();
-        initView(authView);
-        enableSign();
-
-
-
-        return authView;
-    }
-
-    private void initView(View authView) {
-        signInButton = authView.findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goSignIn();
-            }
-        });
+        connectedWith = authView.findViewById(R.id.connected_with);
+        connectGoogle = authView.findViewById(R.id.text_view_connection);
         emailView = authView.findViewById(R.id.email);
         goToNotes = authView.findViewById(R.id.go_to_my_notes);
 
-        goToNotes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = NoteScreenFragment.newInstance(null);
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
+        signInButton = authView.findViewById(R.id.sign_in_button);
+
+        fl = authView.findViewById(R.id.textLayout);
+        return authView;
+    }
+
+    private void initView() {
+
+        signInButton.setOnClickListener(view -> goSignIn());
+
+        goToNotes.setOnClickListener(view -> {
+            Fragment fragment = NoteScreenFragment.newInstance(null);
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
     }
@@ -103,13 +85,14 @@ public class AuthenticationFragment extends Fragment {
                 .build();
 
         googleSignInClient = GoogleSignIn.getClient(Objects.requireNonNull(getContext()), googleSignInOptions);
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initGoogleSign();
+        initView();
+        enableSign();
     }
 
     @Override
@@ -153,6 +136,9 @@ public class AuthenticationFragment extends Fragment {
     private void disableSign() {
         signInButton.setEnabled(false);
         goToNotes.setEnabled(true);
+        connectedWith.setEnabled(true);
+        connectGoogle.setEnabled(false);
+        fl.setEnabled(true);
     }
 
     private void updateUI(String email) {
@@ -167,7 +153,9 @@ public class AuthenticationFragment extends Fragment {
     private void enableSign() {
         signInButton.setEnabled(true);
         goToNotes.setEnabled(false);
+        connectedWith.setEnabled(false);
+        connectGoogle.setEnabled(true);
+        fl.setEnabled(false);
     }
-
 
 }
