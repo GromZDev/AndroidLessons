@@ -39,7 +39,7 @@ public class AuthenticationFragment extends Fragment {
     private TextView emailView;
     private TextView connectedWith;
     private TextView connectGoogle;
-    LinearLayout fl;
+    private LinearLayout fl;
     private MaterialButton signOutButton;
 
 
@@ -74,7 +74,6 @@ public class AuthenticationFragment extends Fragment {
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
                     .commit();
         });
 

@@ -19,7 +19,7 @@
     <string name="share_this_app">Share this App</string>
     <string name="feedback">Feedback</string>
     <string name="second_menu">Useful actions</string>
-    <string name="home_page">Home Page</string>
+    <string name="auth_page">Auth Page</string>
     <string name="my_note_image">MyNote image</string>
     <string name="item_description_image">Item Description Image</string>
     <string name="edit_note">Edit Note</string>

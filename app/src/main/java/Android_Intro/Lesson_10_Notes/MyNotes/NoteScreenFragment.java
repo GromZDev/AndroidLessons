@@ -139,8 +139,12 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @SuppressLint("NonConstantResourceId")
     private boolean clickOnNavigateFragment(int id) {
         switch (id) {
-            case R.id.side_home:
-                Toast.makeText(getActivity(), "Going to Home Page", Toast.LENGTH_SHORT).show();
+            case R.id.side_auth:
+                Fragment fragment = AuthenticationFragment.newInstance();
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
                 return true;
             case R.id.side_menu_settings:
                 Toast.makeText(getActivity(), "Going to Settings App", Toast.LENGTH_SHORT).show();
