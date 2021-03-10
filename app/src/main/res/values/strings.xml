@@ -41,6 +41,7 @@
     <string name="please_connect_to_your_account">Please connect to your account</string>
     <string name="go_to_myNotes">GO to MyNotes</string>
     <string name="you_connected_via">You connected via:</string>
+    <string name="sign_out">Sign Out</string>
 
 
 </resources>

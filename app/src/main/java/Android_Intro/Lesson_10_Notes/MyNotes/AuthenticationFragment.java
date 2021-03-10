@@ -40,6 +40,7 @@ public class AuthenticationFragment extends Fragment {
     private TextView connectedWith;
     private TextView connectGoogle;
     LinearLayout fl;
+    private MaterialButton signOutButton;
 
 
     public static AuthenticationFragment newInstance() {
@@ -58,6 +59,7 @@ public class AuthenticationFragment extends Fragment {
         goToNotes = authView.findViewById(R.id.go_to_my_notes);
 
         signInButton = authView.findViewById(R.id.sign_in_button);
+        signOutButton = authView.findViewById(R.id.sign_out_button);
 
         fl = authView.findViewById(R.id.textLayout);
         return authView;
@@ -93,6 +95,16 @@ public class AuthenticationFragment extends Fragment {
         initGoogleSign();
         initView();
         enableSign();
+
+        signOutButton.setOnClickListener(view1 -> signOut());
+    }
+
+    private void signOut() {
+        googleSignInClient.signOut()
+                .addOnCompleteListener(task -> {
+                    updateUI("");
+                    enableSign();
+                });
     }
 
     @Override
@@ -114,6 +126,7 @@ public class AuthenticationFragment extends Fragment {
             Log.w(TAG, ">>>>>>>>>>>>>>>>>>>>  signInResult: Confirmed");
 // Регистрация прошла успешно
             disableSign();
+            assert account != null;
             updateUI(account.getEmail());
         } catch (ApiException e) {
             Log.w(TAG, ">>>>>>>>>>>>>>>>>>>>  signInResult:failed code=" + e.getStatusCode());
@@ -139,9 +152,10 @@ public class AuthenticationFragment extends Fragment {
         connectedWith.setEnabled(true);
         connectGoogle.setEnabled(false);
         fl.setEnabled(true);
+        signOutButton.setVisibility(View.VISIBLE);
     }
 
-    private void updateUI(String email) {
+    protected void updateUI(String email) {
         emailView.setText(email);
     }
 
@@ -150,12 +164,13 @@ public class AuthenticationFragment extends Fragment {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void enableSign() {
+    protected void enableSign() {
         signInButton.setEnabled(true);
         goToNotes.setEnabled(false);
         connectedWith.setEnabled(false);
         connectGoogle.setEnabled(true);
         fl.setEnabled(false);
+        signOutButton.setVisibility(View.INVISIBLE);
     }
 
 }
