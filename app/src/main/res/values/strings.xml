@@ -43,5 +43,10 @@
     <string name="you_connected_via">You connected via:</string>
     <string name="sign_out">Sign Out</string>
 
+    <string name="dialog_title">Attention!</string>
+    <string name="dialog_body">Hey Bro! Are you sure? Think wisely please…</string>
+    <string name="sure">Sure! )</string>
+    <string name="no_way">No Way</string>
+
 
 </resources>

@@ -12,4 +12,5 @@
     <color name="toolbar_bg">#F2A000</color>
     <color name="item_note_end_bg">#BFE84F</color>
     <color name="description_note_bg">#F4EFE5</color>
+    <color name="dialog_body">#EAE88F</color>
 </resources>

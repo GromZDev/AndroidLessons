@@ -1,13 +1,16 @@
 package Android_Intro.Lesson_10_Notes.MyNotes;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -16,12 +19,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +35,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import Android_Intro.Lesson_10_Notes.Notes_Details.AboutAppFragment;
 import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteFragment;
@@ -231,13 +238,34 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         MyNote myNote = noteList.get(position);
 
         if (item.getItemId() == R.id.action_delete) {
-            repository.onDeleteClicked(myNote.getNoteName());
-            noteList.remove(position);
-            recyclerViewAdapter.notifyItemRemoved(position);
+            setCustomAlertDialog();
+
+
+//            repository.onDeleteClicked(myNote.getNoteName());
+//            noteList.remove(position);
+//            recyclerViewAdapter.notifyItemRemoved(position);
             return true;
         }
 //=============================================================================
         return super.onContextItemSelected(item);
+    }
+
+    private void setCustomAlertDialog() {
+        // ========== Сетим AlertDialog наш кастомный ==========
+        ConstraintLayout layout = Objects.requireNonNull(getView()).findViewById(R.id.dialog_layout_container);
+        AlertDialog.Builder builderDeleteDialog = new AlertDialog.Builder(requireContext(), R.style.AlertDialogDeleteStyle);
+
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete_item, layout);
+        builderDeleteDialog.setView(dialogView);
+        ((TextView) dialogView.findViewById(R.id.dialog_text_title)).setText(getResources().getString(R.string.dialog_title));
+        ((TextView) dialogView.findViewById(R.id.tv_body_dialog)).setText(getResources().getString(R.string.dialog_body));
+        ((TextView) dialogView.findViewById(R.id.tv_body_dialog)).setTextSize(24);
+        ((TextView) dialogView.findViewById(R.id.tv_body_dialog)).setGravity(Gravity.CENTER);
+        ((ImageView) dialogView.findViewById(R.id.dialog_delete_icon)).setImageResource(R.drawable.ic_dialog_delete_warning);
+        ((ImageView) dialogView.findViewById(R.id.dialog_delete_icon)).setColorFilter(Color.parseColor("#5B5654"));
+
+        AlertDialog alertDialog = builderDeleteDialog.create();
+        alertDialog.show();
     }
 
     //=========================================================================
