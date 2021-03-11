@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -56,6 +57,8 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private FloatingActionButton addNoteButton;
     private final NotesRepository repository = new NotesRepositoryImpl(this);
     private int transferNotePicture; // Для прокидывания текущей картинки, чтобы при редактировании не сбивалась
+    private int notePosition = 0; // Для AlertDialog
+    private MyNote myNoteToDelete; // Для AlertDialog
 
     public static Fragment newInstance(@Nullable MyNote model) {
         Fragment fragment = new NoteScreenFragment();
@@ -235,15 +238,11 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 // =========================== Удаляем заметку из БД ==========================
         int position = recyclerViewAdapter.getContextMenuPosition();
-        MyNote myNote = noteList.get(position);
+        myNoteToDelete = noteList.get(position);
+        notePosition = position;
 
         if (item.getItemId() == R.id.action_delete) {
-            setCustomAlertDialog();
-
-
-//            repository.onDeleteClicked(myNote.getNoteName());
-//            noteList.remove(position);
-//            recyclerViewAdapter.notifyItemRemoved(position);
+            setCustomAlertDialog(); // ========== Сетим AlertDialog наш кастомный ==========
             return true;
         }
 //=============================================================================
@@ -264,8 +263,30 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         ((ImageView) dialogView.findViewById(R.id.dialog_delete_icon)).setImageResource(R.drawable.ic_dialog_delete_warning);
         ((ImageView) dialogView.findViewById(R.id.dialog_delete_icon)).setColorFilter(Color.parseColor("#5B5654"));
 
-        AlertDialog alertDialog = builderDeleteDialog.create();
+        MaterialButton buttonNo = dialogView.findViewById(R.id.dialog_button_no);
+        MaterialButton buttonYes = dialogView.findViewById(R.id.dialog_button_yes);
+
+        final AlertDialog alertDialog = builderDeleteDialog.create();
+
+        buttonActions(buttonNo, buttonYes, alertDialog);
+
         alertDialog.show();
+    }
+
+    private void buttonActions(MaterialButton buttonNo, MaterialButton buttonYes, AlertDialog alertDialog) {
+        buttonNo.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            Toast.makeText(requireContext(), "Your Note is still living ;)", Toast.LENGTH_SHORT).show();
+        });
+
+        buttonYes.setOnClickListener(v -> {
+            repository.onDeleteClicked(myNoteToDelete.getNoteName());
+            noteList.remove(notePosition);
+            recyclerViewAdapter.notifyItemRemoved(notePosition);
+
+            alertDialog.dismiss();
+            Toast.makeText(requireContext(), "Your Note has been deleted", Toast.LENGTH_SHORT).show();
+        });
     }
 
     //=========================================================================
