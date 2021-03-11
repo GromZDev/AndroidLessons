@@ -1,0 +1,77 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_layout_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:padding="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_delete_body_height"
+        android:background="@drawable/dialog_background"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/dialog_text_title"
+            style="@style/TextParam"
+            android:textColor="@color/button_stroke_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_title_background"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/dialog_delete_icon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/margin_top_noteList"
+            android:contentDescription="@string/dialog_title"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_text_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dialog_text_title"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_body_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/START_and_END_margin_Edit"
+            android:layout_marginTop="@dimen/TOP_margin"
+            android:layout_marginEnd="@dimen/START_and_END_margin_Edit"
+            android:layout_marginBottom="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_text_title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/dialog_button_yes"
+        style="@style/DialogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/dialog_button_no"
+        android:text="@string/sure"
+        android:layout_marginEnd="@dimen/START_and_END_margin_Edit"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_layout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/dialog_button_no"
+        style="@style/DialogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/START_and_END_margin_Edit"
+        android:text="@string/no_way"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_layout"
+        app:layout_constraintEnd_toStartOf="@+id/dialog_button_yes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
