@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lesson_9_Notes</string>
+    <string name="app_name">Lesson_10_Notes</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>
     <string name="sort_my_notes">Sort My Notes</string>
@@ -19,17 +19,29 @@
     <string name="share_this_app">Share this App</string>
     <string name="feedback">Feedback</string>
     <string name="second_menu">Useful actions</string>
-    <string name="home_page">Home Page</string>
+    <string name="auth_page">Auth Page</string>
     <string name="my_note_image">MyNote image</string>
     <string name="item_description_image">Item Description Image</string>
     <string name="edit_note">Edit Note</string>
 
     <string name="confirm">Confirm</string>
+    <string name="edit_name">Edit Name:</string>
     <string name="edit_theme">Edit Theme:</string>
     <string name="edit_description">Edit Description:</string>
     <string name="add_new_note">Add new Note</string>
     <string name="clear_all_notes">Clear All Notes</string>
     <string name="delete_this_note">Delete this Note</string>
+    <string name="input_note_name">Input Note Name</string>
+    <string name="input_note_theme">Input Note Theme</string>
+    <string name="input_note_description">Input Note Description</string>
+    <string name="save">Save</string>
+    <string name="add_note_button">Add Note Button</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_connect_to_your_account">Please connect to your account</string>
+    <string name="go_to_myNotes">GO to MyNotes</string>
+    <string name="you_connected_via">You connected via:</string>
+    <string name="sign_out">Sign Out</string>
 
 
 </resources>

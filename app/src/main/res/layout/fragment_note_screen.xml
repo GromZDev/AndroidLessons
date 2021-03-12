@@ -1,17 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linear_layout_note"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NoteScreenFragment">
+    tools:context=".MyNotes.NoteScreenFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/menu_toolbar_fragment_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Lesson_9_Notes.AppBarOverlay">
+        android:theme="@style/Theme.Lesson_9_Notes.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_main_fragment"
@@ -23,17 +26,26 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/list_of_notes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_Notes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyclerView_Notes">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/TOP_margin_secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_toolbar_fragment_note">
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fb_notes_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/add_note_button"
+        android:src="@drawable/ic_baseline_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

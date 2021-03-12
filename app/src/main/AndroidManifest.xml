@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="Android_Intro.Lesson_9_Notes">
+    package="Android_Intro.Lesson_10_Notes">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lesson_9_Notes.NoActionBar">
-        <activity android:name="Android_Intro.Lesson_9_Notes.MainActivity">
+        <activity android:name="Android_Intro.Lesson_10_Notes.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

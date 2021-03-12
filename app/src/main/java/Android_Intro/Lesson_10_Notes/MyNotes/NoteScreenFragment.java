@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_10_Notes.MyNotes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -24,26 +24,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Comparator;
 import java.util.List;
 
-public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback {
+import Android_Intro.Lesson_10_Notes.Notes_Details.AboutAppFragment;
+import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteFragment;
+import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
+import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteDecorator;
+import Android_Intro.Lesson_10_Notes.Notes_Details.NoteDescriptionFragment;
+import Android_Intro.Lesson_10_Notes.R;
+import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.RecyclerViewAdapter;
+import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
+public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback {
+
+    private DrawerLayout drawerLayout;
     private final List<MyNote> noteList = new ArrayList<>();
     private RecyclerView noteRecyclerView;
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this);
+    private FloatingActionButton addNoteButton;
+    private final NotesRepository repository = new NotesRepositoryImpl(this);
+    private int transferNotePicture; // Для прокидывания текущей картинки, чтобы при редактировании не сбивалась
 
-    public static Fragment newInstance(@NonNull MyNote model) {
+    public static Fragment newInstance(@Nullable MyNote model) {
         Fragment fragment = new NoteScreenFragment();
         Bundle bundle = new Bundle();
         SettingsStorage ss = new SettingsStorage();
-        bundle.putParcelable(ss.getDataToMain(), model);
+        bundle.putSerializable(ss.getDataToMain(), model);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -52,32 +63,6 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     public void onCreate(@Nullable Bundle savedInstanceState) { // Активируем верхнее меню
         setHasOptionsMenu(true); // активация меню
         super.onCreate(savedInstanceState);
-
-        initNoteList();
-
-    }
-
-    private void initNoteList() {
-        noteList.add(new MyNote("Note Num01", "Note Description1", "Тема заметки 1", R.drawable.fallout_1, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num02", "Note Description2", "Тема заметки 2", R.drawable.fallout_6, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num03", "Note Description3", "Тема заметки 3", R.drawable.fallout_8, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num04", "Note Description4", "Тема заметки 4", R.drawable.fallout_5, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num05", "Note Description5", "Тема заметки 5", R.drawable.fallout_3, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num06", "Note Description6", "Тема заметки 6", R.drawable.fallout_4, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num07", "Note Description7", "Тема заметки 7", R.drawable.fallout_7, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num08", "Note Description8", "Тема заметки 8", R.drawable.fallout_2, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num09", "Note Description9", "Тема заметки 9", R.drawable.fallout_8, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num10", "Note Description10", "Тема заметки 10", R.drawable.fallout_4, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num11", "Note Description11", "Тема заметки 11", R.drawable.fallout_3, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num12", "Note Description12", "Тема заметки 12", R.drawable.fallout_1, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num13", "Note Description13", "Тема заметки 13", R.drawable.fallout_9, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num14", "Note Description14", "Тема заметки 14", R.drawable.fallout_2, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num15", "Note Description15", "Тема заметки 15", R.drawable.fallout_4, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num16", "Note Description16", "Тема заметки 16", R.drawable.fallout_5, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num17", "Note Description17", "Тема заметки 17", R.drawable.fallout_8, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num18", "Note Description18", "Тема заметки 18", R.drawable.fallout_6, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num19", "Note Description19", "Тема заметки 19", R.drawable.fallout_9, Calendar.getInstance().getTime()));
-        noteList.add(new MyNote("Note Num20", "Note Description20", "Тема заметки 20", R.drawable.fallout_7, Calendar.getInstance().getTime()));
     }
 
     @Override
@@ -131,7 +116,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     }
 
     private void initiateSideNavMenu(View v) {
-        toolbar = toolbarInitiation(v);
+        Toolbar toolbar = toolbarInitiation(v);
 
         drawerLayout = v.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout,
@@ -154,8 +139,12 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @SuppressLint("NonConstantResourceId")
     private boolean clickOnNavigateFragment(int id) {
         switch (id) {
-            case R.id.side_home:
-                Toast.makeText(getActivity(), "Going to Home Page", Toast.LENGTH_SHORT).show();
+            case R.id.side_auth:
+                Fragment fragment = AuthenticationFragment.newInstance();
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
                 return true;
             case R.id.side_menu_settings:
                 Toast.makeText(getActivity(), "Going to Settings App", Toast.LENGTH_SHORT).show();
@@ -197,7 +186,16 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
 //================================ Сетим RecyclerView =========================
         initNoteListByRecyclerView(view);
 //=============================================================================
+        addNoteButton = view.findViewById(R.id.fb_notes_add);
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        addNoteButton.setOnClickListener(v -> goToAddNoteFragment());
+// =============================== Сетим список заметок из БД =======================
+        repository.requestNotes();
+// ==================================================================================
     }
 
     private void initNoteListByRecyclerView(@NonNull View view) {
@@ -208,7 +206,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 getResources().getDimensionPixelSize(R.dimen.layout_marginBottom)));
 
         noteRecyclerView.setHasFixedSize(true); // Выше производительность если все элементы списка одинаковые по размеру!
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this); //19.54
+        //   recyclerViewAdapter = new RecyclerViewAdapter(getContext(), noteList, this, this); //19.54
         noteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Или new LinearLayoutManager(noteRecyclerView.getContext())
         noteRecyclerView.setAdapter(recyclerViewAdapter);
@@ -228,13 +226,17 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+// =========================== Удаляем заметку из БД ==========================
         int position = recyclerViewAdapter.getContextMenuPosition();
+        MyNote myNote = noteList.get(position);
+
         if (item.getItemId() == R.id.action_delete) {
+            repository.onDeleteClicked(myNote.getNoteName());
             noteList.remove(position);
             recyclerViewAdapter.notifyItemRemoved(position);
             return true;
         }
-
+//=============================================================================
         return super.onContextItemSelected(item);
     }
 
@@ -251,25 +253,18 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     // ========== Имплементим метод, берём позицию и переходим по клику конкретной заметки =============
     @Override
     public void onOnItemClicked(int position) {
-        //   MyNote myNote = noteList.get(position);
-        //   Toast.makeText(requireContext(), myNote.getNoteName(), Toast.LENGTH_SHORT).show();
 
         MyNote myNote = noteList.get(position);
+        transferNotePicture = PictureIndexConverter.getIndexByPicture(myNote.getImg());
         replaceFragment(myNote);
     }
 
     @Override
     public void insertNewNote(int position) {
-        int size = noteList.size();
-        noteList.add(position, new MyNote("Note Num" + (size + 1),
-                "Note Description" + (size + 1),
-                "Тема заметки " + (size + 1), R.drawable.fallout_1, Calendar.getInstance().getTime()));
-
     }
 
     @Override
     public void sortMyNotes() {
-        noteList.sort(Comparator.comparing(MyNote::getNoteName));
     }
 
     @Override
@@ -278,7 +273,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     }
 
     private void replaceFragment(@NonNull MyNote model) {
-        Fragment fragment = NoteDescriptionFragment.newInstance(model); // Упаковали данные заодно!!!
+        Fragment fragment = NoteDescriptionFragment.newInstance(model, transferNotePicture); // Упаковали данные заодно!!!
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -286,4 +281,34 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 .commit();
     }
 
+    private void goToAddNoteFragment() { // Переходим во фрагмент добавления новой заметки
+        Fragment fragment = AddNoteFragment.newInstance(null);
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    // =============================== Сетим список заметок из БД =======================
+    @Override
+    public void onSuccessNotes(@NonNull List<MyNote> items) {
+        noteList.clear();
+        noteList.addAll(items);
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onErrorNotes(@Nullable String message) {
+        showToast(message);
+    }
+
+    private void showToast(@Nullable String message) {
+        if (message != null) {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+// ==================================================================================
 }

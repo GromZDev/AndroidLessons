@@ -1,4 +1,4 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_10_Notes.MyNotes.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,6 +15,9 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import Android_Intro.Lesson_10_Notes.Model.MyNote;
+import Android_Intro.Lesson_10_Notes.R;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyNoteViewHolder> {
 
@@ -38,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public MyNoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View noteView = LayoutInflater.from(mContext).inflate(R.layout.item_note, parent, false);
+        View noteView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false);
         return new MyNoteViewHolder(noteView, callback);
     }
 
@@ -98,7 +101,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageView_Note.setImageResource(model.getImg());
             textView_NoteName.setText(model.getNoteName());
             textView_NoteTheme.setText(model.getTheme());
-            textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= hh:mm:ss").format(model.getDate()));
+            textView_NoteDate.setText(new SimpleDateFormat("dd-MM-yyyy =||= HH:mm:ss").format(model.getDate()));
             textView_NoteName.setOnClickListener(v -> {
                 if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                     callback.onOnItemClicked(getAdapterPosition());

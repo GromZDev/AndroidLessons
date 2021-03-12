@@ -1,9 +1,12 @@
-package Android_Intro.Lesson_9_Notes;
+package Android_Intro.Lesson_10_Notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+
+import Android_Intro.Lesson_10_Notes.MyNotes.AuthenticationFragment;
+import Android_Intro.Lesson_10_Notes.MyNotes.NoteScreenFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            Fragment fragment = new NoteScreenFragment();
+            Fragment fragment = new AuthenticationFragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)

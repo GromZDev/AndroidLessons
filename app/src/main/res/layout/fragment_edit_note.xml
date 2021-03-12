@@ -3,20 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditNoteFragment">
+    tools:context=".Notes_Details.EditNoteFragment">
 
     <TextView
-        style="@style/TextParam"
-        android:background="@drawable/item_note_bg"
         android:id="@+id/theme_textView_edit"
+        style="@style/TextParam"
         android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:text="@string/edit_theme"
         android:layout_marginTop="@dimen/TOP_margin_secondary"
+        android:background="@drawable/item_note_bg"
+        android:text="@string/edit_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_Theme"
@@ -24,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/START_and_END_margin_Edit"
-        android:layout_marginEnd="@dimen/START_and_END_margin_Edit"
         android:layout_marginTop="@dimen/TOP_margin"
+        android:layout_marginEnd="@dimen/START_and_END_margin_Edit"
         android:autofillHints="Type Here"
         android:inputType="text"
         android:labelFor="@+id/edit_Theme"
@@ -35,24 +34,24 @@
         tools:text="Theme" />
 
     <TextView
-        style="@style/TextParam"
-        android:background="@drawable/item_note_bg"
         android:id="@+id/description_textView_edit"
+        style="@style/TextParam"
         android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:text="@string/edit_description"
         android:layout_marginTop="@dimen/TOP_margin_secondary"
+        android:background="@drawable/item_note_bg"
+        android:text="@string/edit_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_Theme"/>
+        app:layout_constraintTop_toBottomOf="@id/edit_Theme" />
 
     <EditText
         android:id="@+id/edit_Description"
         style="@style/TextParam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/TOP_margin"
         android:layout_marginStart="@dimen/START_and_END_margin_Edit"
+        android:layout_marginTop="@dimen/TOP_margin"
         android:layout_marginEnd="@dimen/START_and_END_margin_Edit"
         android:autofillHints="Description"
         android:inputType="text"
