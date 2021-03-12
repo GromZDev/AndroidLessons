@@ -37,6 +37,13 @@ public class AddNoteDialogFragment extends DialogFragment implements MyNoteFireS
 
     private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this); // Получаем репозиторий
 
+    // Интерфейс для ведомления фрагмента для вызова обновления списка заметок при добавлении
+    public interface OnAddedNote {
+        void onAdded(boolean onAdded);
+    }
+
+    public OnAddedNote onAddedNote;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +83,7 @@ public class AddNoteDialogFragment extends DialogFragment implements MyNoteFireS
             if (isSaved) {
                 Toast.makeText(mContext, "NewNote successfully Saved", Toast.LENGTH_SHORT).show();
                 isSaved = false;
-
+                onAddedNote.onAdded(true); // Ставим тру для уведомления фрагмента о том, что у нас добавилась заметка
             }
 
             Objects.requireNonNull(getDialog()).dismiss(); // Отключаем диалог
@@ -87,6 +94,11 @@ public class AddNoteDialogFragment extends DialogFragment implements MyNoteFireS
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
+        try {
+            onAddedNote = (OnAddedNote) getTargetFragment(); // Уведомление фрагмента через интерфейс
+        } catch (ClassCastException e) {
+            Log.e("Interface OnAddedNote", "onAttach: " + e.getMessage());
+        }
 // При присоединении (открытии диалога) присваиваем контекст для передачи в onDetach чтобы не крашился
         mContext = context;
     }

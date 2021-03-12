@@ -49,7 +49,7 @@ import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.RecyclerViewAdapter;
 import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
-public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback {
+public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback, AddNoteDialogFragment.OnAddedNote {
 
     private DrawerLayout drawerLayout;
     private final List<MyNote> noteList = new ArrayList<>();
@@ -68,6 +68,14 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         bundle.putSerializable(ss.getDataToMain(), model);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    // Интерфейс для уведомления репозитория при добавлении новой заметки через диалог-фрагмент
+    public void onAdded(boolean onAdded) {
+        if (onAdded) {
+            repository.requestNotes();
+        }
     }
 
     @Override
@@ -217,6 +225,7 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private void goToAddNoteDialogFragment() {
         AddNoteDialogFragment dialogFragment = new AddNoteDialogFragment();
         assert getFragmentManager() != null;
+        dialogFragment.setTargetFragment(NoteScreenFragment.this, 1);
         dialogFragment.show(getFragmentManager(), "MyNoteCustomDialog");
     }
 
