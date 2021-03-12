@@ -31,5 +31,27 @@
         <item name="android:background">@drawable/description_note_bg</item>
     </style>
 
+    <style name="DialogButton" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/button_stroke_color</item>
+        <item name="fontFamily">@font/walter_turncoat</item>
+        <item name="backgroundTint">@color/toolbar_bg</item>
+        <item name="android:background">@drawable/dialog_button_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="AlertDialogDeleteStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
+    <style name="DialogFragmentTextInput" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/walter_turncoat</item>
+        <item name="android:textColor">@color/button_stroke_color</item>
+        <item name="android:background">@drawable/text_input_dialog_fragment</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
 
 </resources>

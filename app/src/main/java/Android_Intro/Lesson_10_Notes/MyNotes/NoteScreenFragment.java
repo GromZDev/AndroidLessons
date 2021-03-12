@@ -1,13 +1,16 @@
 package Android_Intro.Lesson_10_Notes.MyNotes;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -16,21 +19,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import Android_Intro.Lesson_10_Notes.Notes_Details.AboutAppFragment;
+import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteDialogFragment;
 import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteFragment;
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
@@ -40,7 +49,7 @@ import Android_Intro.Lesson_10_Notes.R;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.RecyclerViewAdapter;
 import Android_Intro.Lesson_10_Notes.SettingsStorage;
 
-public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback {
+public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallback, MyNotesFireStoreCallback, AddNoteDialogFragment.OnAddedNote {
 
     private DrawerLayout drawerLayout;
     private final List<MyNote> noteList = new ArrayList<>();
@@ -49,6 +58,8 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     private FloatingActionButton addNoteButton;
     private final NotesRepository repository = new NotesRepositoryImpl(this);
     private int transferNotePicture; // Для прокидывания текущей картинки, чтобы при редактировании не сбивалась
+    private int notePosition = 0; // Для AlertDialog
+    private MyNote myNoteToDelete; // Для AlertDialog
 
     public static Fragment newInstance(@Nullable MyNote model) {
         Fragment fragment = new NoteScreenFragment();
@@ -57,6 +68,14 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
         bundle.putSerializable(ss.getDataToMain(), model);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    // Интерфейс для уведомления репозитория при добавлении новой заметки через диалог-фрагмент
+    public void onAdded(boolean onAdded) {
+        if (onAdded) {
+            repository.requestNotes();
+        }
     }
 
     @Override
@@ -192,10 +211,22 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        addNoteButton.setOnClickListener(v -> goToAddNoteFragment());
+        addNoteButton.setOnClickListener(v ->
+//                goToAddNoteFragment() // Добавляем заметку во фрагменте
+                        goToAddNoteDialogFragment() // Добавляем заметку в диалоге-фрагменте
+        );
+
+
 // =============================== Сетим список заметок из БД =======================
         repository.requestNotes();
 // ==================================================================================
+    }
+
+    private void goToAddNoteDialogFragment() {
+        AddNoteDialogFragment dialogFragment = new AddNoteDialogFragment();
+        assert getFragmentManager() != null;
+        dialogFragment.setTargetFragment(NoteScreenFragment.this, 1);
+        dialogFragment.show(getFragmentManager(), "MyNoteCustomDialog");
     }
 
     private void initNoteListByRecyclerView(@NonNull View view) {
@@ -228,16 +259,55 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 // =========================== Удаляем заметку из БД ==========================
         int position = recyclerViewAdapter.getContextMenuPosition();
-        MyNote myNote = noteList.get(position);
+        myNoteToDelete = noteList.get(position);
+        notePosition = position;
 
         if (item.getItemId() == R.id.action_delete) {
-            repository.onDeleteClicked(myNote.getNoteName());
-            noteList.remove(position);
-            recyclerViewAdapter.notifyItemRemoved(position);
+            setCustomAlertDialog(); // ========== Сетим AlertDialog наш кастомный ==========
             return true;
         }
 //=============================================================================
         return super.onContextItemSelected(item);
+    }
+
+    private void setCustomAlertDialog() {
+        // ========== Сетим AlertDialog наш кастомный ==========
+        ConstraintLayout layout = Objects.requireNonNull(getView()).findViewById(R.id.dialog_layout_container);
+        AlertDialog.Builder builderDeleteDialog = new AlertDialog.Builder(requireContext(), R.style.AlertDialogDeleteStyle);
+
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete_item, layout);
+        builderDeleteDialog.setView(dialogView);
+        ((TextView) dialogView.findViewById(R.id.dialog_text_title)).setText(getResources().getString(R.string.dialog_title));
+        ((TextView) dialogView.findViewById(R.id.tv_body_dialog)).setText(getResources().getString(R.string.dialog_body));
+        ((TextView) dialogView.findViewById(R.id.tv_body_dialog)).setTextSize(24);
+        ((TextView) dialogView.findViewById(R.id.tv_body_dialog)).setGravity(Gravity.CENTER);
+        ((ImageView) dialogView.findViewById(R.id.dialog_delete_icon)).setImageResource(R.drawable.ic_dialog_delete_warning);
+        ((ImageView) dialogView.findViewById(R.id.dialog_delete_icon)).setColorFilter(Color.parseColor("#5B5654"));
+
+        MaterialButton buttonNo = dialogView.findViewById(R.id.dialog_button_no);
+        MaterialButton buttonYes = dialogView.findViewById(R.id.dialog_button_yes);
+
+        final AlertDialog alertDialog = builderDeleteDialog.create();
+
+        buttonActions(buttonNo, buttonYes, alertDialog);
+
+        alertDialog.show();
+    }
+
+    private void buttonActions(MaterialButton buttonNo, MaterialButton buttonYes, AlertDialog alertDialog) {
+        buttonNo.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            Toast.makeText(requireContext(), "Your Note is still living ;)", Toast.LENGTH_SHORT).show();
+        });
+
+        buttonYes.setOnClickListener(v -> {
+            repository.onDeleteClicked(myNoteToDelete.getNoteName());
+            noteList.remove(notePosition);
+            recyclerViewAdapter.notifyItemRemoved(notePosition);
+
+            alertDialog.dismiss();
+            Toast.makeText(requireContext(), "Your Note has been deleted", Toast.LENGTH_SHORT).show();
+        });
     }
 
     //=========================================================================
@@ -281,14 +351,14 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 .commit();
     }
 
-    private void goToAddNoteFragment() { // Переходим во фрагмент добавления новой заметки
-        Fragment fragment = AddNoteFragment.newInstance(null);
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
+//    private void goToAddNoteFragment() {
+//        Fragment fragment = AddNoteFragment.newInstance(null);
+//        requireActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.fragment_container, fragment)
+//                .addToBackStack(null)
+//                .commit();
+//    }
 
     // =============================== Сетим список заметок из БД =======================
     @Override

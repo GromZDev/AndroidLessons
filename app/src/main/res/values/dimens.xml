@@ -13,5 +13,6 @@
     <dimen name="layout_marginBottom">12dp</dimen>
 
     <dimen name="START_and_END_margin_Edit">20dp</dimen>
+    <dimen name="dialog_delete_body_height">320dp</dimen>
 
 </resources>
