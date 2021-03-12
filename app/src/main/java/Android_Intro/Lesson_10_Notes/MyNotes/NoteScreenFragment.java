@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Objects;
 
 import Android_Intro.Lesson_10_Notes.Notes_Details.AboutAppFragment;
+import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteDialogFragment;
 import Android_Intro.Lesson_10_Notes.Notes_Details.AddNoteFragment;
 import Android_Intro.Lesson_10_Notes.Model.MyNote;
 import Android_Intro.Lesson_10_Notes.MyNotes.Adapter.MyNoteAdapterCallback;
@@ -202,10 +203,21 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        addNoteButton.setOnClickListener(v -> goToAddNoteFragment());
+        addNoteButton.setOnClickListener(v ->
+//                goToAddNoteFragment() // Добавляем заметку во фрагменте
+                        goToAddNoteDialogFragment() // Добавляем заметку в диалоге-фрагменте
+        );
+
+
 // =============================== Сетим список заметок из БД =======================
         repository.requestNotes();
 // ==================================================================================
+    }
+
+    private void goToAddNoteDialogFragment() {
+        AddNoteDialogFragment dialogFragment = new AddNoteDialogFragment();
+        assert getFragmentManager() != null;
+        dialogFragment.show(getFragmentManager(), "MyNoteCustomDialog");
     }
 
     private void initNoteListByRecyclerView(@NonNull View view) {
@@ -330,14 +342,14 @@ public class NoteScreenFragment extends Fragment implements MyNoteAdapterCallbac
                 .commit();
     }
 
-    private void goToAddNoteFragment() { // Переходим во фрагмент добавления новой заметки
-        Fragment fragment = AddNoteFragment.newInstance(null);
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
+//    private void goToAddNoteFragment() {
+//        Fragment fragment = AddNoteFragment.newInstance(null);
+//        requireActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.fragment_container, fragment)
+//                .addToBackStack(null)
+//                .commit();
+//    }
 
     // =============================== Сетим список заметок из БД =======================
     @Override

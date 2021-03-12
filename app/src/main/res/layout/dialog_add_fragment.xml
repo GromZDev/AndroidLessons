@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/DialogFragmentTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/input_note_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_note_name"
+            android:background="@color/transparent_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/DialogFragmentTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/input_note_theme">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_note_theme"
+            android:background="@color/transparent_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/DialogFragmentTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/input_note_description">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_note_description"
+            android:background="@color/transparent_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="5" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_new_note"
+        style="@style/MyButtons"
+        android:layout_width="372dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"
+        android:text="@string/save" />
+
+</LinearLayout>

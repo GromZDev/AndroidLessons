@@ -13,4 +13,6 @@
     <color name="item_note_end_bg">#BFE84F</color>
     <color name="description_note_bg">#F4EFE5</color>
     <color name="dialog_body">#EAE88F</color>
+    <color name="text_input_dialog_fragment_background_start">#8FD645</color>
+    <color name="text_input_dialog_fragment_background_end">#C9DF47</color>
 </resources>
