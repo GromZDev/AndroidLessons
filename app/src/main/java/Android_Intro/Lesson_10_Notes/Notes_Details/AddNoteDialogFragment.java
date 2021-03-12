@@ -33,6 +33,7 @@ public class AddNoteDialogFragment extends DialogFragment implements MyNoteFireS
     protected EditText editNoteDescText;
     protected MaterialButton buttonSaveNote;
     protected Context mContext; // Для передачи контекста при закрытии диалога
+    protected boolean isSaved = false;
 
     private final NoteDetailRepository repository = new NoteDetailRepositoryImpl(this); // Получаем репозиторий
 
@@ -72,6 +73,12 @@ public class AddNoteDialogFragment extends DialogFragment implements MyNoteFireS
             @SuppressLint("SimpleDateFormat")
             Date date = Calendar.getInstance().getTime();
             saveDataToDB(name, theme, desc, img, date);
+            if (isSaved) {
+                Toast.makeText(mContext, "NewNote successfully Saved", Toast.LENGTH_SHORT).show();
+                isSaved = false;
+
+            }
+
             Objects.requireNonNull(getDialog()).dismiss(); // Отключаем диалог
         });
     }
@@ -88,11 +95,7 @@ public class AddNoteDialogFragment extends DialogFragment implements MyNoteFireS
     public void onDetach() {
         // При присоединении (открытии диалога) присваиваем контекст фрагмента диалогу чтобы не крашился
         super.onDetach();
-        try {
-            Toast.makeText(mContext, "NewNote successfully Saved", Toast.LENGTH_SHORT).show();
-        } catch (ClassCastException e) {
-            Log.e("AddNoteDialogFragment", "onAttach: " + e.getMessage());
-        }
+
         mContext = null;
     }
 
@@ -104,6 +107,7 @@ public class AddNoteDialogFragment extends DialogFragment implements MyNoteFireS
                               Date date) {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(theme) && !TextUtils.isEmpty(desc)) {
             repository.setNote(UUID.randomUUID().toString(), name, theme, desc, img, date);
+            isSaved = true;
         } else {
             showToast();
         }
